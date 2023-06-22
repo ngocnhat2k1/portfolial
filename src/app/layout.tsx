@@ -1,13 +1,15 @@
 import MotionLazyContainer from '@/components/animate/MotionLazyContainer'
 import './globals.css'
-import { Roboto } from 'next/font/google';
+import { Montserrat } from 'next/font/google'
 import { Inter } from 'next/font/google'
+import NavBar from '@/components/navbar/NavBar'
 
 const inter = Inter({ subsets: ['latin'] })
-const roboto = Roboto({
+const montserrat = Montserrat({
   weight: ['400', '500', '700'],
   subsets: ['vietnamese'],
-});
+  variable: '--font-montserrat',
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -21,9 +23,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} flex min-h-screen flex-col`}>
+      <body className={`${montserrat.className} flex min-h-screen flex-col`}>
         <MotionLazyContainer>{children}</MotionLazyContainer>
       </body>
     </html>
-  );
+  )
 }
