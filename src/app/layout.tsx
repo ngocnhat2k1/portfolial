@@ -1,7 +1,13 @@
+import MotionLazyContainer from '@/components/animate/MotionLazyContainer'
 import './globals.css'
+import { Roboto } from 'next/font/google';
 import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
+  subsets: ['vietnamese'],
+});
 
 export const metadata = {
   title: 'Create Next App',
@@ -15,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={`${roboto.className} flex min-h-screen flex-col`}>
+        <MotionLazyContainer>{children}</MotionLazyContainer>
+      </body>
     </html>
-  )
+  );
 }
