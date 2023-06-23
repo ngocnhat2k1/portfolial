@@ -36,7 +36,7 @@ const HomePage = () => {
                 target="_blank"
               >
                 Resume
-                <LinkArrow className="w-7 pl-1 pb-1 inline-block" />
+                <LinkArrow className="!w-7 pl-1 pb-1 inline-block" />
               </Link>
               <Link
                 href="mailto:ngocnhat2k1@gmail.com"
