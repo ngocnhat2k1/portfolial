@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
- const {fontFamily} = require('tailwindcss/defaultTheme')
+const { fontFamily } = require('tailwindcss/defaultTheme')
 
 module.exports = {
   content: [
@@ -14,13 +14,17 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      colors : {
-        'primary' : '#1D7874',
-        'secondary' : '#679289',
-        'dark' : '#071E22',
-        'warning' : '#F4C095',
-        'danger' : '#EE2E31',
-      }
+      colors: {
+        'primary': '#1D7874',
+        'secondary': '#679289',
+        'dark': '#071E22',
+        'light': '#F5F5F5',
+        'warning': '#F4C095',
+        'danger': '#EE2E31',
+      },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+      },
     },
   },
   plugins: [],

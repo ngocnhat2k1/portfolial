@@ -15,8 +15,8 @@ const ItemNavBar = ({ name, href }: Props) => {
 
   return (
     <m.div
-      className={`hover:bg-primary hover:text-white mx-auto px-8 rounded-full ease-in 
-      ${active ? 'bg-secondary text-white' : ''} `}
+      className={`hover:bg-primary hover:text-white mx-auto px-8 rounded-full ease-in hover:opacity-75
+      ${active ? 'bg-primary text-white' : ''} `}
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.8 }}
     >
