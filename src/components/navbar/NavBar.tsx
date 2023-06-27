@@ -5,6 +5,7 @@ import Link from 'next/link'
 import React from 'react'
 import Logo from './Logo'
 import ItemNavBar from './ItemNavBar'
+import { m } from 'framer-motion'
 
 const ItemNavBars = [
   {
@@ -34,20 +35,20 @@ function NavBar({}: Props) {
   }
 
   return (
-    <header className="h-full px-44 py-8 font-medium flex justify-between align-middle leading-[44px] items-center lg:px-20 ">
+    <header className="h-full py-8 font-medium flex justify-between align-middle leading-[44px] items-center px-8 sm:px-12 md:px-20 lg:px-32 xl:px-44  ">
       <div>
         <Logo />
       </div>
       <div>
-        <nav className="grid-cols-4 gap-1 h-fit grid lg:hidden ">
+        <nav className="grid-cols-4 gap-1 h-fit hidden lg:grid ">
           {ItemNavBars.map((item, index) => (
             <ItemNavBar key={index} name={item.name} href={item.href} />
           ))}
         </nav>
       </div>
       {isOpen && (
-        <div
-          className="min-w-[70vw] hidden flex-col justify-between items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:flex
+        <m.div
+          className="min-w-[70vw] flex flex-col justify-between items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden
       bg-light/90 dark:bg-dark/90 dark:text-light rounded-2xl gap-2 z-10 "
         >
           <nav>
@@ -61,10 +62,10 @@ function NavBar({}: Props) {
               />
             ))}
           </nav>
-        </div>
+        </m.div>
       )}
       <button
-        className="justify-center items-center flex-col gap-1  hidden lg:flex"
+        className="justify-center items-center flex-col gap-1  flex lg:hidden"
         onClick={handleClick}
       >
         <span

@@ -3,7 +3,7 @@ import HomePage from './components/HomePage'
 
 export default function Home() {
   return (
-    <div className="w-full h-full inline-block z-0 bg-light px-32 pb-16 ">
+    <div className="w-full h-auto inline-block z-0 bg-light  ">
       <HomePage />
       <HireMe />
     </div>

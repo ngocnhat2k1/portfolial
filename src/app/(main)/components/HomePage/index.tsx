@@ -10,19 +10,25 @@ import { LinkArrow } from '@/components/icons/icons'
 
 const HomePage = () => {
   return (
-    <main className=" flex items-center text-dark w-full ">
-      <MotionContainer>
+    <MotionContainer>
+      <m.div
+        className=" w-[80%] block mx-auto md:hidden"
+        variants={varFade({ durationIn: 0.7 }).inRight}
+      >
+        <Image alt="" src={HomeImage} priority />
+      </m.div>
+      <div className=" flex items-center text-dark  ">
         <div className="flex items-center justify-between w-full flex-row">
-          <div className="w-[60%] p-12">
+          <div className="w-[100%] p-12 md:w-[60%]">
             <m.h1
               variants={varFade({ durationIn: 0.7 }).inDown}
-              className="text-6xl font-bold"
+              className=" text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-bold"
             >
               Turning Vision Into Reality With Code And Design.
             </m.h1>
             <m.p
               variants={varFade({ durationIn: 0.7 }).inLeft}
-              className="py-8"
+              className="py-8 xs:text-xs sm:text-sm md:text-base lg:text-lg"
             >
               As a skilled front-end developer, I am dedicated to turning ideas
               into innovative web applications. Explore my latest projects and
@@ -52,14 +58,14 @@ const HomePage = () => {
           </div>
 
           <m.div
-            className="w-[40%]"
+            className="w-[40%] hidden md:block "
             variants={varFade({ durationIn: 0.7 }).inRight}
           >
             <Image alt="" src={HomeImage} priority />
           </m.div>
         </div>
-      </MotionContainer>
-    </main>
+      </div>
+    </MotionContainer>
   )
 }
 
