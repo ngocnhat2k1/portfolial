@@ -6,6 +6,8 @@ import React from 'react'
 import Logo from './Logo'
 import ItemNavBar from './ItemNavBar'
 import { m } from 'framer-motion'
+import useThemeSwitcher from '@/hook/useThemeSwitcher'
+import { MoonIcon, SunIcon } from '../icons/icons'
 
 const ItemNavBars = [
   {
@@ -30,8 +32,14 @@ type Props = {}
 
 function NavBar({}: Props) {
   const [isOpen, setIsOpen] = React.useState(false)
+  const [theme, setTheme] = useThemeSwitcher()
   const handleClick = () => {
     setIsOpen(!isOpen)
+    if (!isOpen) {
+      document.body.style.overflowY = 'hidden'
+    } else {
+      document.body.style.overflowY = 'auto'
+    }
   }
 
   return (
@@ -46,10 +54,22 @@ function NavBar({}: Props) {
           ))}
         </nav>
       </div>
+
+      <button
+        onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+        className="hidden lg:block"
+      >
+        {theme === 'dark' ? (
+          <SunIcon className="fill-dark" />
+        ) : (
+          <MoonIcon className="fill-dark" />
+        )}
+      </button>
+
       {isOpen && (
         <m.div
           className="min-w-[70vw] flex flex-col justify-between items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden
-      bg-light/90 dark:bg-dark/90 dark:text-light rounded-2xl gap-2 z-10 "
+      bg-light/90 dark:bg-dark/90 dark:text-light rounded-2xl gap-2 z-10 overflow-y-hidden "
         >
           <nav>
             {ItemNavBars.map((item, index) => (
@@ -62,6 +82,16 @@ function NavBar({}: Props) {
               />
             ))}
           </nav>
+          <button
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            className="block lg:hidden"
+          >
+            {theme === 'dark' ? (
+              <SunIcon className="fill-dark" />
+            ) : (
+              <MoonIcon className="fill-dark" />
+            )}
+          </button>
         </m.div>
       )}
       <button
@@ -69,17 +99,17 @@ function NavBar({}: Props) {
         onClick={handleClick}
       >
         <span
-          className={`bg-light dark:bg-dark inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
+          className={`dark:bg-light bg-dark inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
             isOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-0.5'
           }`}
         ></span>
         <span
-          className={`bg-light dark:bg-dark inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
+          className={`dark:bg-light bg-dark inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
             isOpen ? 'opacity-0' : 'opacity-100'
           }`}
         ></span>
         <span
-          className={`bg-light dark:bg-dark inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
+          className={`dark:bg-light bg-dark inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
             isOpen ? '-rotate-45 -translate-y-1.5 ' : 'translate-y-0.5'
           }`}
         ></span>
