@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.className} flex min-h-screen flex-col bg-light`}
+        className={`${montserrat.className} flex min-h-screen flex-col  dark:bg-dark dark:text-light transition-colors bg-light`}
       >
         <MotionLazyContainer>{children}</MotionLazyContainer>
       </body>

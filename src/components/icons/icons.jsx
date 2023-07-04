@@ -1,12 +1,9 @@
 import { type } from 'os'
 import * as React from 'react'
 
-type PropsIcon = {
-  className?: string
-  onClick?: () => void
-}
 
-export const GithubIcon = ({ className, ...rest }: PropsIcon) => (
+
+export const GithubIcon = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -23,7 +20,7 @@ export const GithubIcon = ({ className, ...rest }: PropsIcon) => (
   </svg>
 )
 
-export const FacebookIcon = ({ className, ...rest }: PropsIcon) => (
+export const FacebookIcon = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="3.5em"
@@ -44,7 +41,7 @@ export const FacebookIcon = ({ className, ...rest }: PropsIcon) => (
 )
 
 // #0A66C2
-export const LinkedInIcon = ({ className, ...rest }: PropsIcon) => (
+export const LinkedInIcon = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="1em"
@@ -65,7 +62,7 @@ export const LinkedInIcon = ({ className, ...rest }: PropsIcon) => (
   </svg>
 )
 
-export const SunIcon = ({ className, ...rest }: PropsIcon) => (
+export const SunIcon = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -105,7 +102,7 @@ export const SunIcon = ({ className, ...rest }: PropsIcon) => (
         d="M7 6 C7 12.08 11.92 17 18 17 C18.53 17 19.05 16.96 19.56 16.89 C17.95 19.36 15.17 21 12 21 C7.03 21 3 16.97 3 12 C3 8.83 4.64 6.05 7.11 4.44 C7.04 4.95 7 5.47 7 6 Z"
         opacity="0"
       >
-        {/* <set attributeName="opacity" begin="0.5s" to="1" /> */}
+        <set attributeName="opacity" begin="0.5s" to="1" />
       </path>
     </g>
     <g fill="currentColor" fillOpacity="0">
@@ -231,7 +228,7 @@ export const SunIcon = ({ className, ...rest }: PropsIcon) => (
       fill="currentColor"
       mask="url(#lineMdSunnyFilledLoopToMoonFilledLoopTransition1)"
     >
-      {/* <set attributeName="opacity" begin="0.5s" to="0" /> */}
+      <set attributeName="opacity" begin="0.5s" to="0" />
       <animate
         fill="freeze"
         attributeName="r"
@@ -241,9 +238,10 @@ export const SunIcon = ({ className, ...rest }: PropsIcon) => (
       />
     </circle>
   </svg>
-)
+);
 
-export const MoonIcon = ({ className, ...rest }: PropsIcon) => (
+
+export const MoonIcon = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -328,7 +326,7 @@ export const MoonIcon = ({ className, ...rest }: PropsIcon) => (
       strokeWidth="2"
     >
       <path d="M7 6 C7 12.08 11.92 17 18 17 C18.53 17 19.05 16.96 19.56 16.89 C17.95 19.36 15.17 21 12 21 C7.03 21 3 16.97 3 12 C3 8.83 4.64 6.05 7.11 4.44 C7.04 4.95 7 5.47 7 6 Z" />
-      {/* <set attributeName="opacity" begin="0.6s" to="0" /> */}
+      <set attributeName="opacity" begin="0.6s" to="0" />
     </g>
     <mask id="lineMdMoonFilledToSunnyFilledLoopTransition0">
       <circle cx="12" cy="12" r="12" fill="#fff" />
@@ -387,7 +385,7 @@ export const MoonIcon = ({ className, ...rest }: PropsIcon) => (
       mask="url(#lineMdMoonFilledToSunnyFilledLoopTransition0)"
       opacity="0"
     >
-      {/* <set attributeName="opacity" begin="0.6s" to="1" /> */}
+      <set attributeName="opacity" begin="0.6s" to="1" />
       <animate
         fill="freeze"
         attributeName="r"
@@ -399,7 +397,7 @@ export const MoonIcon = ({ className, ...rest }: PropsIcon) => (
   </svg>
 )
 
-export const LinkArrow = ({ className, ...rest }: PropsIcon) => (
+export const LinkArrow = ({ className, ...rest }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={24}
@@ -420,7 +418,7 @@ export const LinkArrow = ({ className, ...rest }: PropsIcon) => (
   </svg>
 )
 
-export const CircleText = ({ className, ...rest }: PropsIcon) => (
+export const CircleText = ({ className, fill, ...rest }) => (
   <svg
     version="1.0"
     xmlns="http://www.w3.org/2000/svg"
@@ -433,7 +431,7 @@ export const CircleText = ({ className, ...rest }: PropsIcon) => (
   >
     <g
       transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)"
-      fill="#000000"
+      fill={fill}
       stroke="none"
     >
       <path

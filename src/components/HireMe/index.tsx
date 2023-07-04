@@ -5,7 +5,10 @@ const HireMe = () => {
   return (
     <div className="fixed bottom-20 left-4 hidden items-center justify-center overflow-hidden lg:flex">
       <div className="w-48 h-auto flex items-center justify-center relative ">
-        <CircleText className="w-[180px] fill-dark animate-spin-slow" />
+        <CircleText
+          className="w-[180px] fill-dark animate-spin-slow dark:fill-light"
+          fill={'dark:fill-light fill-dark'}
+        />
         <Link
           href="mailto:ngocnhat2k1@gmail.com"
           target="_blank"

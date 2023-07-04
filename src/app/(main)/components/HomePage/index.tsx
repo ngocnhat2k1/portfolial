@@ -17,7 +17,7 @@ const HomePage = () => {
       >
         <Image alt="" src={HomeImage} priority />
       </m.div>
-      <div className=" flex items-center text-dark  ">
+      <div className=" flex items-center light:text-dark dark:text-white  ">
         <div className="flex items-center justify-between w-full flex-row">
           <div className="w-[100%] p-12 md:w-[60%]">
             <m.h1
