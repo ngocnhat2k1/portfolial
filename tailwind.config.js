@@ -44,6 +44,9 @@ module.exports = {
 
         xs: "479px",
         // => @media (max-width: 479px) { ... }
+      },
+      backgroundImage: {
+        circularLight: "repeating-radial-gradient(rgba(0,0,0,0.4) 2px, #f5f5f5 5px, #f5f5f5 100px)",
       }
     },
   },
