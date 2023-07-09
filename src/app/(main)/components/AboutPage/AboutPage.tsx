@@ -16,17 +16,17 @@ const AboutPage = () => {
   return (
     <>
       <div className="w-fit mx-auto pt-6 pb-8">
-        <div className="w-full lg:text-5xl font-bold uppercase text-xl">
+        <div className="w-full lg:text-5xl font-bold uppercase text-xl lg:pb-8 lg:pt-2">
           <Typewriter
             options={{
-              strings: ['Welcomes to my profile !', 'be better, be complete !'],
+              strings: ['Welcomes to my profile!', 'be better, be complete!'],
               autoStart: true,
               loop: true,
             }}
           />
         </div>
       </div>
-      <div className="grid grid-flow-row grid-cols-3 gap-3">
+      <div className="grid grid-flow-row lg:grid-cols-3 grid-cols-1 gap-3">
         <div className="border-4 border-primary rounded-3xl shadow-2xl hover:scale-105 duration-300 bg-gray-300">
           <Image
             alt=""
@@ -35,8 +35,8 @@ const AboutPage = () => {
             className="p-4 rounded-3xl "
           />
         </div>
-        <div className="biography col-span-2 pl-12 text-justify">
-          <div className="px-8 text-xl font-bold text-gray-600 pb-4">
+        <div className="biography col-span-2 lg:pl-12 text-justify pt-4 lg:pt-0">
+          <div className="lg:px-8 px-2 text-xl font-bold text-gray-600 pb-4">
             BIOGRAPHY
           </div>
           <div>
@@ -59,7 +59,7 @@ const AboutPage = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-flow-col grid-col-3 py-12 px-12">
+      <div className="grid grid-flow-col grid-col-3 py-12 lg:px-12">
         {listCountUp.map((item, index) => {
           return (
             <div className="text-center" key={index}>
@@ -72,7 +72,7 @@ const AboutPage = () => {
                 suffix="+"
                 className="text-5xl font-bold "
               ></CountUp>
-              <div className="text-2xl my-6 ">{item.text}</div>
+              <div className="lg:text-2xl lg:my-6 my-2">{item.text}</div>
             </div>
           )
         })}
