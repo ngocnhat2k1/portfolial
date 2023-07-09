@@ -1,5 +1,13 @@
+import AboutPage from '../components/AboutPage/AboutPage'
+import Skills from '../components/AboutPage/Skills'
+
 const About = () => {
-  return <div>about</div>
+  return (
+    <>
+      <AboutPage />
+      <Skills />
+    </>
+  )
 }
 
 export default About
