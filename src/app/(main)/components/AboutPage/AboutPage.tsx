@@ -41,7 +41,7 @@ const AboutPage = () => {
           </div>
           <div>
             <div className="py-2">
-              Hi. I&lsquo;m <strong>Tran Ngoc Nhat</strong>, a front-end
+              Hi. I&lsquo;m <strong>Tran Ngoc Nhat</strong>, a Front-end
               developer from Viet Nam. I have a passion for web design and love
               to create for web and mobile devices. With 1 years of experience
               in the field. I am always looking for new and innovative ways to
