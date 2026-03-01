@@ -9,10 +9,17 @@ export default function MainLayout({
   return (
     <>
       <NavBar />
-      <main className="grow pt-[--header-desktop] mx-2 p-2 pb-16 xs:px-8 sm:px-16 md:px-24 lg:px-32 xl:px-40 ">
+      {/*
+        Không có padding trên main – các page tự quản lý padding.
+        Home page cần zero padding để fill đúng 100vh.
+        Các page khác (about, projects...) tự thêm trong component.
+      */}
+      <main className="xs:px-8 sm:px-16 md:px-24 lg:px-32 xl:px-40">
         {children}
       </main>
       <Footer />
     </>
   )
 }
+
+

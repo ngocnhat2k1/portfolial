@@ -11,15 +11,24 @@ export const metadata: Metadata = {
     title: 'Tran Ngoc Nhat – Frontend Team Leader',
     description:
       'Portfolio of Tran Ngoc Nhat – 3+ years Frontend Developer. Team Leader at Mona Media.',
-    images: [{ url: '/HomeImage.png', width: 1200, height: 630, alt: 'Tran Ngoc Nhat' }],
+    images: [{ url: '/og-image.jpg', width: 1035, height: 1035, alt: 'Tran Ngoc Nhat' }],
   },
 }
 
 export default function Home() {
   return (
-    <div className="w-full h-auto inline-block z-0 bg-light dark:bg-dark dark:text-white transition-colors ">
+    /*
+     * Home container: chiếm đúng phần còn lại sau header/footer
+     * height = 100vh - var(--h-header) - var(--h-footer)
+     * overflow-hidden: không cho phép scroll
+     */
+    <div
+      className="w-full relative overflow-hidden"
+      style={{ height: 'var(--h-main-content)' }}
+    >
       <HomePage />
       <HireMe />
     </div>
   )
 }
+

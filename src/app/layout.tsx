@@ -1,10 +1,7 @@
 import MotionLazyContainer from '@/components/animate/MotionLazyContainer'
 import './globals.css'
 import { Montserrat } from 'next/font/google'
-import { Inter } from 'next/font/google'
-import NavBar from '@/components/navbar/NavBar'
 
-const inter = Inter({ subsets: ['latin'] })
 const montserrat = Montserrat({
   weight: ['400', '500', '700'],
   subsets: ['vietnamese'],
@@ -48,19 +45,40 @@ export const metadata = {
   },
 }
 
+// Script inline: chạy NGAY trước khi React render, tránh flash of unstyled content
+// Đọc theme từ localStorage và set data-theme + class 'dark' trên <html>
+const INIT_THEME_SCRIPT = `
+(function() {
+  var darkThemes = ['dark', 'ocean', 'forest', 'sunset', 'cyberpunk'];
+  try {
+    var saved = localStorage.getItem('portfolio-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', saved);
+    if (darkThemes.indexOf(saved) !== -1) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch(e) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+`
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      {/* Script đặt trước body content để tránh FOUC */}
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: INIT_THEME_SCRIPT }} />
+      </head>
       <body
-        className={`${montserrat.className} flex min-h-screen flex-col  dark:bg-dark dark:text-light transition-colors bg-light`}
+        className={`${montserrat.className} flex min-h-screen flex-col transition-colors`}
+        style={{ background: 'var(--c-bg)', color: 'var(--c-text)' }}
       >
         <MotionLazyContainer>{children}</MotionLazyContainer>
       </body>
     </html>
   )
 }
-

@@ -2,19 +2,181 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================================
+   LAYOUT DIMENSION VARIABLES
+   Dùng để tính toán chiều cao chính xác cho các sections
+   ============================================================ */
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* Chiều cao header (NavBar): đo thực tế = 113px */
+  --h-header: 113px;
+  /* Chiều cao footer: đo thực tế = 72px */
+  --h-footer: 72px;
+  /* Chiều cao nội dung chính = 100vh - header - footer */
+  --h-main-content: calc(100vh - var(--h-header) - var(--h-footer));
 }
 
-@media (prefers-color-scheme:dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* --- 1. LIGHT (default) ------------------------------------ */
+[data-theme='light'],
+:root {
+  --c-primary: #1D7874;
+  --c-primary-dark: #155e5b;
+  --c-primary-content: #ffffff;
+  --c-secondary: #679289;
+  --c-accent: #F4C095;
+
+  --c-bg: #F5F5F5;
+  --c-surface: #ffffff;
+  --c-surface-2: #e8e8e8;
+  --c-border: rgba(0, 0, 0, 0.12);
+
+  --c-text: #071E22;
+  --c-text-muted: rgba(7, 30, 34, 0.55);
+  --c-text-on-primary: #ffffff;
+
+  --c-danger: #EE2E31;
+  --c-warning: #F4C095;
+
+  /* Circular background pattern */
+  --c-circular: rgba(0, 0, 0, 0.4);
+  --c-circular-stripe: #f5f5f5;
+
+  /* Shadow */
+  --shadow-primary: rgba(29, 120, 116, 0.3);
 }
+
+/* --- 2. DARK ----------------------------------------------- */
+[data-theme='dark'] {
+  --c-primary: #1D7874;
+  --c-primary-dark: #155e5b;
+  --c-primary-content: #ffffff;
+  --c-secondary: #679289;
+  --c-accent: #F4C095;
+
+  --c-bg: #071E22;
+  --c-surface: #0d2e33;
+  --c-surface-2: #163b42;
+  --c-border: rgba(255, 255, 255, 0.1);
+
+  --c-text: #F5F5F5;
+  --c-text-muted: rgba(245, 245, 245, 0.55);
+  --c-text-on-primary: #ffffff;
+
+  --c-danger: #ff4d50;
+  --c-warning: #F4C095;
+
+  --c-circular: rgba(255, 255, 255, 0.5);
+  --c-circular-stripe: #1b1b1b;
+
+  --shadow-primary: rgba(29, 120, 116, 0.25);
+}
+
+/* --- 3. OCEAN ---------------------------------------------- */
+[data-theme='ocean'] {
+  --c-primary: #0096C7;
+  --c-primary-dark: #0077a3;
+  --c-primary-content: #ffffff;
+  --c-secondary: #48CAE4;
+  --c-accent: #ADE8F4;
+
+  --c-bg: #03045E;
+  --c-surface: #0d1b8a;
+  --c-surface-2: #1527a8;
+  --c-border: rgba(72, 202, 228, 0.18);
+
+  --c-text: #CAF0F8;
+  --c-text-muted: rgba(202, 240, 248, 0.55);
+  --c-text-on-primary: #ffffff;
+
+  --c-danger: #ff6b6b;
+  --c-warning: #FFD166;
+
+  --c-circular: rgba(72, 202, 228, 0.4);
+  --c-circular-stripe: #03045E;
+
+  --shadow-primary: rgba(0, 150, 199, 0.35);
+}
+
+/* --- 4. FOREST --------------------------------------------- */
+[data-theme='forest'] {
+  --c-primary: #52B788;
+  --c-primary-dark: #3d8e68;
+  --c-primary-content: #ffffff;
+  --c-secondary: #74C69D;
+  --c-accent: #D8F3DC;
+
+  --c-bg: #1B4332;
+  --c-surface: #2D6A4F;
+  --c-surface-2: #40916C;
+  --c-border: rgba(82, 183, 136, 0.18);
+
+  --c-text: #D8F3DC;
+  --c-text-muted: rgba(216, 243, 220, 0.55);
+  --c-text-on-primary: #fff;
+
+  --c-danger: #FF6B6B;
+  --c-warning: #FFD166;
+
+  --c-circular: rgba(82, 183, 136, 0.4);
+  --c-circular-stripe: #1B4332;
+
+  --shadow-primary: rgba(82, 183, 136, 0.35);
+}
+
+/* --- 5. SUNSET --------------------------------------------- */
+[data-theme='sunset'] {
+  --c-primary: #E76F51;
+  --c-primary-dark: #c9542d;
+  --c-primary-content: #ffffff;
+  --c-secondary: #F4A261;
+  --c-accent: #E9C46A;
+
+  --c-bg: #264653;
+  --c-surface: #2A5F70;
+  --c-surface-2: #2A9D8F;
+  --c-border: rgba(231, 111, 81, 0.18);
+
+  --c-text: #F4F1DE;
+  --c-text-muted: rgba(244, 241, 222, 0.55);
+  --c-text-on-primary: #ffffff;
+
+  --c-danger: #E63946;
+  --c-warning: #E9C46A;
+
+  --c-circular: rgba(231, 111, 81, 0.4);
+  --c-circular-stripe: #264653;
+
+  --shadow-primary: rgba(231, 111, 81, 0.35);
+}
+
+/* --- 6. CYBERPUNK ------------------------------------------ */
+[data-theme='cyberpunk'] {
+  --c-primary: #F72585;
+  --c-primary-dark: #bd1965;
+  --c-primary-content: #ffffff;
+  --c-secondary: #7209B7;
+  --c-accent: #4CC9F0;
+
+  --c-bg: #10002B;
+  --c-surface: #240046;
+  --c-surface-2: #3A015C;
+  --c-border: rgba(247, 37, 133, 0.2);
+
+  --c-text: #E0AAFF;
+  --c-text-muted: rgba(224, 170, 255, 0.55);
+  --c-text-on-primary: #ffffff;
+
+  --c-danger: #FF2D55;
+  --c-warning: #FFE66D;
+
+  --c-circular: rgba(247, 37, 133, 0.5);
+  --c-circular-stripe: #10002B;
+
+  --shadow-primary: rgba(247, 37, 133, 0.4);
+}
+
+/* ============================================================
+   BASE RESETS
+   ============================================================ */
 
 * {
   margin: 0;
@@ -28,38 +190,30 @@ html {
   scroll-behavior: smooth;
 }
 
-/* The typing effect */
-.typewriter {
-  overflow: hidden;
-  /* Ensures the content is not revealed until the animation */
-  border-right: .15em solid orange;
-  /* The typwriter cursor */
-  white-space: nowrap;
-  /* Keeps the content on a single line */
-  margin: 0 auto;
-  /* Gives that scrolling effect as the typing happens */
-  letter-spacing: .15em;
-  /* Adjust as needed */
-  animation:
-    typing 3.5s steps(40),
-    blink-caret .75s step-end infinite;
-}
+/* ============================================================
+   TYPEWRITER EFFECT
+   ============================================================ */
 
 @keyframes typing {
-  from {
-    width: 0
-  }
+  from { width: 0 }
 }
 
-/* The typewriter cursor effect */
 @keyframes blink-caret {
-  from, to {
-    border-color: transparent
-  }
-
-  50% {
-    border-color: #1D7874;
-  }
+  from, to { border-color: transparent }
+  50% { border-color: var(--c-primary) }
 }
 
-/* The typing effect */
+/* ============================================================
+   THEME SWITCHER TRANSITIONS – mượt mà khi đổi theme
+   ============================================================ */
+*, *::before, *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 250ms;
+  transition-timing-function: ease;
+}
+
+/* Loại trừ animation elements khỏi transition */
+.no-theme-transition,
+.no-theme-transition * {
+  transition: none !important;
+}
