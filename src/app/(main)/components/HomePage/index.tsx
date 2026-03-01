@@ -7,7 +7,7 @@ import Image from 'next/image'
 import HomeImage from '../../../../public/HomeImage.png'
 import Link from 'next/link'
 import { LinkArrow } from '@/components/icons/icons'
-import Typewriter from "typewriter-effect";
+import Typewriter from 'typewriter-effect'
 
 const HomePage = () => {
   return (
@@ -27,24 +27,29 @@ const HomePage = () => {
             >
               <Typewriter
                 options={{
-                    strings: "  Turning Vision Into Reality With Code And Design.",
-                    autoStart: true,
-                    delay: 100,
-                  }}
-            />
+                  strings: [
+                    'Turning Vision Into Reality With Code And Design.',
+                    'Frontend Team Leader & Software Engineer.',
+                  ],
+                  autoStart: true,
+                  loop: true,
+                  delay: 80,
+                }}
+              />
             </m.h1>
             <m.p
               variants={varFade({ durationIn: 0.7 }).inLeft}
               className="py-8 xs:text-xs sm:text-sm md:text-base lg:text-lg"
             >
-               As a skilled front-end developer, I am dedicated to turning ideas
-              into innovative web applications. Explore my latest projects and
-              articles, showcasing my expertise in React.js, NextJS and web
-              development.
+              Frontend Developer with 3+ years of experience specializing in the
+              React/Next.js ecosystem. Experienced in building high-performance
+              e-commerce platforms, complex Admin Dashboards (ERP), and
+              E-learning systems. Currently serving as Frontend Team Leader at
+              Mona Media.
             </m.p>
             <m.div variants={varFade({ durationIn: 0.7 }).inUp}>
               <Link
-                href="/resume.pdf"
+                href="/resume-v2.pdf"
                 className="w-8 h-2 py-4 px-4 border-2 border-primary bg-primary text-light rounded-md mr-4 hover:bg-transparent hover:text-primary font-bold ease-in duration-300 "
                 target="_blank"
                 passHref

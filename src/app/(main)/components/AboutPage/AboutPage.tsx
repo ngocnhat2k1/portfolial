@@ -7,10 +7,11 @@ import AvatarAbout from '../../../../public/avatarAbout.png'
 import CountUp from 'react-countup'
 
 const AboutPage = () => {
+  // Số liệu thực tế từ CV: 3+ năm = 36+ tháng kinh nghiệm
   const listCountUp = [
-    { number: 12, text: 'Month of Exprience' },
-    { number: 5, text: 'Project Completed' },
-    { number: 3, text: 'Satisfied Clients' },
+    { number: 36, text: 'Months of Experience' },
+    { number: 10, text: 'Projects Completed' },
+    { number: 5, text: 'Satisfied Clients' },
   ]
 
   return (
@@ -19,7 +20,7 @@ const AboutPage = () => {
         <div className="w-full lg:text-5xl font-bold uppercase text-xl lg:pb-8 lg:pt-2">
           <Typewriter
             options={{
-              strings: ['Welcomes to my profile!', 'be better, be complete!'],
+              strings: ['Welcome to my profile!', 'Be better, be complete!'],
               autoStart: true,
               loop: true,
             }}
@@ -41,20 +42,24 @@ const AboutPage = () => {
           </div>
           <div>
             <div className="py-2">
-              Hi. I&lsquo;m <strong>Tran Ngoc Nhat</strong>, a front-end
-              developer from Viet Nam. I have a passion for web design and love
-              to create for web and mobile devices. With 1 years of experience
-              in the field. I am always looking for new and innovative ways to
-              bring my client&apos;s visions to life.
+              Hi. I&lsquo;m <strong>Tran Ngoc Nhat</strong>, a Frontend
+              Developer &amp; Team Leader from Ho Chi Minh City, Vietnam. With
+              3+ years of hands-on experience specializing in the React/Next.js
+              ecosystem, I have a passion for building high-performance web
+              applications and leading development teams.
+            </div>
+            <div className="py-2">
+              I have experience building high-performance e-commerce platforms,
+              complex Admin Dashboards (ERP), and E-learning systems. Currently
+              serving as Frontend Team Leader at <strong>Mona Media</strong>, I
+              manage task distribution, conduct code reviews, and drive product
+              quality with a strong product mindset.
             </div>
             <div className="py-2">
               I believe that design is about more than just making things look
               pretty – it&apos;s about solving problems and creating intuitive,
-              enjoyable experiences for users.
-            </div>
-            <div className="py-2">
-              I look forward to the opportunity to bring my skills and passion
-              to your next project.
+              enjoyable experiences for users. I look forward to the opportunity
+              to bring my skills and passion to your next project.
             </div>
           </div>
         </div>
