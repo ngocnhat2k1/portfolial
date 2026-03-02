@@ -28,7 +28,7 @@ function NavBar({}: Props) {
   }
 
   return (
-    <header className="h-full py-8 font-medium flex justify-between align-middle leading-[44px] items-center px-8 sm:px-12 md:px-20 lg:px-32 xl:px-44">
+    <header className="h-full py-4 lg:py-8 font-medium flex justify-between align-middle leading-[44px] items-center px-8 sm:px-12 md:px-20 lg:px-32 xl:px-44">
       {/* Logo */}
       <div>
         <Logo />
@@ -43,62 +43,74 @@ function NavBar({}: Props) {
         </nav>
       </div>
 
-      {/* Desktop ThemePicker */}
-      <div className="hidden lg:flex items-center">
-        <ThemePicker />
-      </div>
-
       {/* Mobile menu */}
       {isOpen && (
-        <m.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.95 }}
-          className="min-w-[70vw] flex flex-col justify-between items-center fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:hidden rounded-2xl gap-2 z-10 overflow-y-hidden py-8"
-          style={{ background: 'var(--c-surface)' }}
-        >
-          <nav>
-            {ItemNavBars.map((item, index) => (
-              <ItemNavBar
-                key={index}
-                name={item.name}
-                href={item.href}
-                css="my-6 min-w-[40vw] text-center"
-                toggle={handleClick}
-              />
-            ))}
-          </nav>
-          {/* Theme picker trong mobile menu */}
-          <div className="mt-4">
-            <ThemePicker />
-          </div>
-        </m.div>
+        <>
+          {/* overlay  */}
+          <div
+            onClick={handleClick}
+            className="fixed w-full h-full top-0 left-0 z-10 "
+            style={{
+              inset: 0,
+              backgroundColor: 'rgba(0, 0, 0, 0.1)',
+              backdropFilter: 'blur(4px)',
+              transition: 'opacity 0.3s ease',
+            }}
+          ></div>
+          <m.div
+            initial={{
+              opacity: 0,
+              scale: 0.95,
+              translateX: '-50%',
+              translateY: '-50%',
+            }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="min-w-[70vw] flex flex-col justify-between items-center fixed top-1/2 left-1/2 lg:hidden rounded-2xl gap-2 z-10 overflow-y-hidden py-8"
+            style={{ background: 'var(--c-surface)' }}
+          >
+            <nav>
+              {ItemNavBars.map((item, index) => (
+                <ItemNavBar
+                  key={index}
+                  name={item.name}
+                  href={item.href}
+                  css="my-6 min-w-[40vw] text-center"
+                  toggle={handleClick}
+                />
+              ))}
+            </nav>
+          </m.div>
+        </>
       )}
-
-      {/* Hamburger Button (Mobile) */}
-      <button
-        className="justify-center items-center flex-col gap-1 flex lg:hidden"
-        onClick={handleClick}
-      >
-        <span
-          className={`inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
-            isOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-0.5'
-          }`}
-          style={{ background: 'var(--c-text)' }}
-        />
-        <span
-          className={`inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
-            isOpen ? 'opacity-0' : 'opacity-100'
-          }`}
-          style={{ background: 'var(--c-text)' }}
-        />
-        <span
-          className={`inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
-            isOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-0.5'
-          }`}
-          style={{ background: 'var(--c-text)' }}
-        />
-      </button>
+      <div className="flex items-center gap-4">
+        {/* Theme picker trong mobile menu */}
+        <ThemePicker />
+        {/* Hamburger Button (Mobile) */}
+        <button
+          className="justify-center items-center flex-col gap-1 flex lg:hidden"
+          onClick={handleClick}
+        >
+          <span
+            className={`inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
+              isOpen ? 'rotate-45 translate-y-1.5' : '-translate-y-0.5'
+            }`}
+            style={{ background: 'var(--c-text)' }}
+          />
+          <span
+            className={`inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
+              isOpen ? 'opacity-0' : 'opacity-100'
+            }`}
+            style={{ background: 'var(--c-text)' }}
+          />
+          <span
+            className={`inline-block transition-all duration-300 h-0.5 w-6 rounded-sm ${
+              isOpen ? '-rotate-45 -translate-y-1.5' : 'translate-y-0.5'
+            }`}
+            style={{ background: 'var(--c-text)' }}
+          />
+        </button>
+      </div>
     </header>
   )
 }

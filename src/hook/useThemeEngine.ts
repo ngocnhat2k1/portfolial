@@ -5,12 +5,17 @@ import { useEffect, useState, useCallback } from 'react'
 // =============================================
 // Danh sách tất cả themes có sẵn
 // =============================================
-export type ThemeName = 'light' | 'dark' | 'ocean' | 'forest' | 'sunset' | 'cyberpunk'
+export type ThemeName =
+  | 'light'
+  | 'dark'
+  | 'ocean'
+  | 'forest'
+  | 'sunset'
+  | 'cyberpunk'
 
 export interface IThemeConfig {
   name: ThemeName
   label: string
-  emoji: string
   // Màu preview để hiện trong ThemePicker (không dùng CSS var vì cần hardcode cho preview)
   previewColors: {
     bg: string
@@ -24,7 +29,6 @@ export const THEMES: IThemeConfig[] = [
   {
     name: 'light',
     label: 'Light',
-    emoji: '☀️',
     previewColors: {
       bg: '#F5F5F5',
       surface: '#ffffff',
@@ -35,7 +39,6 @@ export const THEMES: IThemeConfig[] = [
   {
     name: 'dark',
     label: 'Dark',
-    emoji: '🌙',
     previewColors: {
       bg: '#071E22',
       surface: '#0d2e33',
@@ -46,7 +49,6 @@ export const THEMES: IThemeConfig[] = [
   {
     name: 'ocean',
     label: 'Ocean',
-    emoji: '🌊',
     previewColors: {
       bg: '#03045E',
       surface: '#0d1b8a',
@@ -57,7 +59,6 @@ export const THEMES: IThemeConfig[] = [
   {
     name: 'forest',
     label: 'Forest',
-    emoji: '🌿',
     previewColors: {
       bg: '#1B4332',
       surface: '#2D6A4F',
@@ -68,7 +69,6 @@ export const THEMES: IThemeConfig[] = [
   {
     name: 'sunset',
     label: 'Sunset',
-    emoji: '🌅',
     previewColors: {
       bg: '#264653',
       surface: '#2A5F70',
@@ -79,7 +79,6 @@ export const THEMES: IThemeConfig[] = [
   {
     name: 'cyberpunk',
     label: 'Cyberpunk',
-    emoji: '🤖',
     previewColors: {
       bg: '#10002B',
       surface: '#240046',
@@ -107,7 +106,13 @@ const useThemeEngine = () => {
     root.setAttribute('data-theme', newTheme)
 
     // Tương thích ngược với darkMode class của Tailwind
-    if (newTheme === 'dark' || newTheme === 'ocean' || newTheme === 'forest' || newTheme === 'sunset' || newTheme === 'cyberpunk') {
+    if (
+      newTheme === 'dark' ||
+      newTheme === 'ocean' ||
+      newTheme === 'forest' ||
+      newTheme === 'sunset' ||
+      newTheme === 'cyberpunk'
+    ) {
       root.classList.add('dark')
     } else {
       root.classList.remove('dark')
@@ -125,10 +130,13 @@ const useThemeEngine = () => {
     setMounted(true)
   }, [applyTheme])
 
-  const setTheme = useCallback((newTheme: ThemeName) => {
-    setThemeState(newTheme)
-    applyTheme(newTheme)
-  }, [applyTheme])
+  const setTheme = useCallback(
+    (newTheme: ThemeName) => {
+      setThemeState(newTheme)
+      applyTheme(newTheme)
+    },
+    [applyTheme]
+  )
 
   const currentThemeConfig = THEMES.find((t) => t.name === theme) ?? THEMES[0]
 

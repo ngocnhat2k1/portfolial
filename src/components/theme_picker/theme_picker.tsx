@@ -17,7 +17,10 @@ const ThemePicker = () => {
   // Đóng panel khi click ra ngoài
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false)
       }
     }
@@ -27,7 +30,9 @@ const ThemePicker = () => {
 
   if (!mounted) {
     // Tránh hydration mismatch – render skeleton
-    return <div className="w-8 h-8 rounded-full bg-dark/10 dark:bg-light/10 animate-pulse" />
+    return (
+      <div className="w-8 h-8 rounded-full bg-dark/10 dark:bg-light/10 animate-pulse" />
+    )
   }
 
   return (
@@ -40,9 +45,10 @@ const ThemePicker = () => {
         className={`
           w-9 h-9 flex items-center justify-center rounded-full
           border-2 border-solid transition-all duration-300
-          ${isOpen
-            ? 'border-primary bg-primary text-white'
-            : 'border-dark/20 dark:border-light/20 hover:border-primary hover:text-primary'
+          ${
+            isOpen
+              ? 'border-primary bg-primary text-white'
+              : 'border-dark/20 dark:border-light/20 hover:border-primary hover:text-primary'
           }
         `}
       >
@@ -78,7 +84,10 @@ const ThemePicker = () => {
           >
             {/* Header */}
             <div className="px-4 py-3 border-b border-dark/10 dark:border-light/10">
-              <p className="text-xs font-bold uppercase tracking-widest" style={{ color: 'var(--c-text-muted)' }}>
+              <p
+                className="text-xs font-bold uppercase tracking-widest"
+                style={{ color: 'var(--c-text-muted)' }}
+              >
                 Choose Theme
               </p>
             </div>
@@ -97,9 +106,10 @@ const ThemePicker = () => {
                     className={`
                       relative flex items-center gap-3 w-full px-3 py-2.5 rounded-xl
                       text-left transition-all duration-200
-                      ${isActive
-                        ? 'ring-2 ring-primary bg-primary/10'
-                        : 'hover:bg-dark/5 dark:hover:bg-light/5'
+                      ${
+                        isActive
+                          ? 'ring-2 ring-primary bg-primary/10'
+                          : 'hover:bg-dark/5 dark:hover:bg-light/5'
                       }
                     `}
                   >
@@ -124,7 +134,6 @@ const ThemePicker = () => {
 
                     {/* Label */}
                     <span className="flex items-center gap-1.5 flex-1">
-                      <span className="text-sm leading-none">{t.emoji}</span>
                       <span
                         className={`text-sm font-medium ${isActive ? 'font-bold' : ''}`}
                         style={{ color: 'var(--c-text)' }}
@@ -155,7 +164,10 @@ const ThemePicker = () => {
 
             {/* Footer hint */}
             <div className="px-4 py-2 border-t border-dark/10 dark:border-light/10">
-              <p className="text-[10px]" style={{ color: 'var(--c-text-muted)' }}>
+              <p
+                className="text-[10px]"
+                style={{ color: 'var(--c-text-muted)' }}
+              >
                 Theme persisted in localStorage ✨
               </p>
             </div>

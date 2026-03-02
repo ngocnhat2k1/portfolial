@@ -16,7 +16,7 @@ const AboutPage = () => {
 
   return (
     <>
-      <div className="w-fit mx-auto pt-6 pb-8">
+      <div className="w-fit mx-auto pb-4">
         <div className="w-full lg:text-5xl font-bold uppercase text-xl lg:pb-8 lg:pt-2">
           <Typewriter
             options={{

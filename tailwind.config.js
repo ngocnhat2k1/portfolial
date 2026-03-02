@@ -10,6 +10,10 @@ module.exports = {
   // Vẫn giữ darkMode class để backward-compat, nhưng giờ dùng data-theme là chính
   darkMode: ['class', '[data-theme="dark"]'],
   theme: {
+    container: {
+      center: true,
+      padding: '1rem',
+    },
     extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
