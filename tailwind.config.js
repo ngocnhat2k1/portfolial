@@ -28,8 +28,8 @@ module.exports = {
         'secondary':        'var(--c-secondary)',
         'accent':           'var(--c-accent)',
         // Giữ tên cũ để backward-compat với code hiện tại
-        'dark':             'var(--c-bg)',
-        'light':            'var(--c-surface)',
+        'dark':             'var(--c-dark)',
+        'light':            'var(--c-light)',
         'surface':          'var(--c-surface)',
         'surface-2':        'var(--c-surface-2)',
         'theme-text':       'var(--c-text)',

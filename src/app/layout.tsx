@@ -39,7 +39,7 @@ export const metadata: Metadata = {
       'Portfolio of Tran Ngoc Nhat – Frontend Developer with 3+ years building e-commerce, ERP, and e-learning systems.',
     images: [
       {
-        url: '/HomeImage.png',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Tran Ngoc Nhat Portfolio',
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     title: 'Tran Ngoc Nhat – Frontend Team Leader',
     description:
       'Frontend Developer with 3+ years experience. Team Leader at Mona Media.',
-    images: ['/HomeImage.png'],
+    images: ['/og-image.jpg'],
   },
   verification: {
     google: 'TJlBrEMG7aJ1uM53tVNR-NGE2aJVOPKwjIluwZ9kTqM',
@@ -107,7 +107,7 @@ export default function RootLayout({
                   '@id': 'https://ngocnhat.info/#person',
                   name: 'Tran Ngoc Nhat',
                   url: 'https://ngocnhat.info',
-                  image: 'https://ngocnhat.info/HomeImage.png',
+                  image: 'https://ngocnhat.info/og-image.jpg',
                   jobTitle: 'Frontend Team Leader & Software Engineer',
                   worksFor: {
                     '@type': 'Organization',
