@@ -1,5 +1,6 @@
 import MotionLazyContainer from '@/components/animate/MotionLazyContainer'
 import { ScriptClient } from '@/components/common/script_client'
+import { IntroOverlay } from '@/components/intro'
 import './globals.css'
 import { Montserrat } from 'next/font/google'
 import { Metadata } from 'next'
@@ -129,6 +130,7 @@ export default function RootLayout({
         style={{ background: 'var(--c-bg)', color: 'var(--c-text)' }}
       >
         <ScriptClient />
+        <IntroOverlay />
         <MotionLazyContainer>{children}</MotionLazyContainer>
       </body>
     </html>

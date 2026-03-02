@@ -229,3 +229,59 @@ html {
 .no-theme-transition * {
   transition: none !important;
 }
+
+/* ============================================================
+   INTRO OVERLAY – Màn hình intro fullscreen
+   ============================================================ */
+
+/* Text đã reveal – hiển thị màu primary */
+.intro-text-revealed {
+  color: #ffffff;
+  transition: color 0.3s ease;
+}
+
+/* Text đang scramble – hiển thị màu muted với opacity thấp */
+.intro-text-encrypted {
+  color: rgba(29, 120, 116, 0.7);
+  transition: color 0.1s ease;
+}
+
+/* Container cho particles canvas */
+.intro-particles canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Enter button hover & glow */
+.intro-enter-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.intro-enter-btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(29, 120, 116, 0.4),
+    rgba(103, 146, 137, 0.2),
+    rgba(244, 192, 149, 0.3)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.intro-enter-btn:hover::before {
+  opacity: 1;
+}
+
+.intro-enter-btn:hover {
+  border-color: rgba(29, 120, 116, 0.9);
+  color: #ffffff;
+  background: rgba(29, 120, 116, 0.15);
+}
