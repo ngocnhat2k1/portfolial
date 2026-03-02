@@ -12,9 +12,12 @@ import Typewriter from 'typewriter-effect'
 const HomePage = () => {
   return (
     <MotionContainer>
-      <div className=" flex items-center flex-col-reverse gap-4 lg:flex-row light:text-dark dark:text-white  justify-between w-full ">
+      <h1 className="sr-only">
+        Tran Ngoc Nhat - Frontend Developer & Software Engineer
+      </h1>
+      <section className=" flex items-center flex-col-reverse gap-4 lg:flex-row light:text-dark dark:text-white  justify-between w-full ">
         <div className="w-[100%] md:p-12 md:w-[60%] ">
-          <m.h1
+          <m.p
             variants={varFade({ durationIn: 0.5 }).inDown}
             className=" text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-bold h-14 lg:h-48 py-3 "
           >
@@ -29,7 +32,7 @@ const HomePage = () => {
                 delay: 80,
               }}
             />
-          </m.h1>
+          </m.p>
           <m.p
             variants={varFade({ durationIn: 0.7 }).inLeft}
             className="py-8 xs:text-xs sm:text-sm md:text-base lg:text-lg"
@@ -69,7 +72,7 @@ const HomePage = () => {
         >
           <Image alt="" src={HomeImage} priority />
         </m.div>
-      </div>
+      </section>
     </MotionContainer>
   )
 }
