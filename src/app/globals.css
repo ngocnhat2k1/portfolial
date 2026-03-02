@@ -285,3 +285,35 @@ html {
   color: #ffffff;
   background: rgba(29, 120, 116, 0.15);
 }
+
+/* Responsive: mobile – stack layout */
+@media (max-width: 768px) {
+  .intro-model-container {
+    flex: 1 1 40% !important;
+    min-height: 250px !important;
+  }
+
+  .intro-text-content {
+    flex: 1 1 60% !important;
+    align-items: center !important;
+    text-align: center;
+    padding: 0 1rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .intro-model-container {
+    position: absolute !important;
+    inset: 0 !important;
+    opacity: 0.3;
+    flex: none !important;
+  }
+
+  .intro-text-content {
+    flex: none !important;
+    position: relative;
+    z-index: 3;
+    align-items: center !important;
+    text-align: center;
+  }
+}

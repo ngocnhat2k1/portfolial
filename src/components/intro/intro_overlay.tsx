@@ -6,15 +6,15 @@ import dynamic from 'next/dynamic'
 import DecryptedText from './decrypted_text'
 
 /* ============================================================
-   Lazy load Particles component – tránh SSR issues với WebGL
+   Lazy load các component nặng – tránh SSR issues với WebGL
    ============================================================ */
-const Particles = dynamic(() => import('./particles'), {
-  ssr: false,
-})
+const Particles = dynamic(() => import('./particles'), { ssr: false })
+const IntroModel = dynamic(() => import('./intro_model'), { ssr: false })
 
 /* ============================================================
    IntroOverlay – Màn hình intro fullscreen
-   Hiển thị 3D particles + text animation + nút enter
+   Hiển thị 3D model + particles + text animation + nút enter
+   Layout: Model bên trái, Text bên phải (giống trang tham khảo)
    ============================================================ */
 const IntroOverlay = () => {
   const [isVisible, setIsVisible] = useState(true)
@@ -42,7 +42,6 @@ const IntroOverlay = () => {
   // Xử lý khi nhấn nút Enter
   const handleEnter = useCallback(() => {
     setIsExiting(true)
-    // Đợi animation xong rồi ẩn hoàn toàn
     setTimeout(() => setIsVisible(false), 800)
   }, [])
 
@@ -70,9 +69,9 @@ const IntroOverlay = () => {
         >
           {/* === Particles Background === */}
           <Particles
-            particleCount={300}
+            particleCount={250}
             particleSpread={12}
-            speed={0.08}
+            speed={0.06}
             particleColors={[
               '#1D7874',
               '#679289',
@@ -81,11 +80,11 @@ const IntroOverlay = () => {
               '#48CAE4',
             ]}
             moveParticlesOnHover={true}
-            particleHoverFactor={2}
+            particleHoverFactor={1.5}
             alphaParticles={true}
-            particleBaseSize={120}
+            particleBaseSize={100}
             sizeRandomness={1.5}
-            cameraDistance={22}
+            cameraDistance={25}
             className="intro-particles"
           />
 
@@ -95,112 +94,142 @@ const IntroOverlay = () => {
               position: 'absolute',
               inset: 0,
               background:
-                'radial-gradient(ellipse at center, transparent 0%, rgba(3,0,20,0.4) 50%, rgba(3,0,20,0.85) 100%)',
+                'radial-gradient(ellipse at 35% 50%, transparent 0%, rgba(3,0,20,0.3) 40%, rgba(3,0,20,0.7) 100%)',
               pointerEvents: 'none',
             }}
           />
 
-          {/* === Content === */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={showContent ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 1, ease: 'easeOut' }}
+          {/* === Main Content – Split Layout === */}
+          <div
             style={{
               position: 'relative',
               zIndex: 2,
               display: 'flex',
-              flexDirection: 'column',
               alignItems: 'center',
-              gap: '2rem',
-              textAlign: 'center',
-              padding: '0 1.5rem',
+              justifyContent: 'center',
+              width: '100%',
+              height: '100%',
+              maxWidth: '1400px',
+              padding: '2rem',
             }}
           >
-            {/* Greeting nhỏ */}
-            <motion.p
-              initial={{ opacity: 0, y: 10 }}
-              animate={showContent ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
+            {/* --- Left: 3D Model --- */}
+            {/* <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={showContent ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 1.2, ease: 'easeOut' }}
               style={{
-                color: 'rgba(255,255,255,0.5)',
-                fontSize: '0.875rem',
-                fontWeight: 400,
-                letterSpacing: '0.3em',
-                textTransform: 'uppercase',
+                flex: '1 1 50%',
+                height: '100%',
+                minHeight: '400px',
+                position: 'relative',
               }}
+              className="intro-model-container"
             >
-              Hi, I&apos;m Ngoc Nhat
-            </motion.p>
+              <IntroModel />
+            </motion.div> */}
 
-            {/* Main heading – DecryptedText */}
-            <h1
+            {/* --- Right: Text Content --- */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={showContent ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
               style={{
-                fontSize: 'clamp(1.8rem, 5vw, 3.5rem)',
-                fontWeight: 700,
-                color: '#ffffff',
-                lineHeight: 1.2,
+                flex: '1 1 50%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '1.5rem',
+                padding: '0 2rem',
               }}
+              className="intro-text-content"
             >
-              <DecryptedText
-                text="WELCOME TO MY PORTFOLIO"
-                speed={60}
-                maxIterations={15}
-                sequential={true}
-                revealDirection="center"
-                animateOn="view"
-                characters="01<>{}[]!@#$%&*"
-                className="intro-text-revealed"
-                encryptedClassName="intro-text-encrypted"
-                parentClassName="intro-text-parent"
-              />
-            </h1>
+              {/* Greeting */}
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={showContent ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                style={{
+                  color: 'rgba(255,255,255,0.5)',
+                  fontSize: '0.875rem',
+                  fontWeight: 400,
+                  letterSpacing: '0.3em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Hi, I&apos;m Ngoc Nhat
+              </motion.p>
 
-            {/* Subtitle */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={showContent ? { opacity: 1 } : {}}
-              transition={{ duration: 1, delay: 1.5 }}
-              style={{
-                color: 'rgba(255,255,255,0.6)',
-                fontSize: 'clamp(0.875rem, 2vw, 1.125rem)',
-                maxWidth: '500px',
-                lineHeight: 1.6,
-              }}
-            >
-              Frontend Developer &bull; React/Next.js
-            </motion.p>
+              {/* Main heading – DecryptedText */}
+              <h1
+                style={{
+                  fontSize: 'clamp(1.5rem, 4vw, 3rem)',
+                  fontWeight: 700,
+                  color: '#ffffff',
+                  lineHeight: 1.2,
+                }}
+              >
+                <DecryptedText
+                  text="WELCOME TO MY PORTFOLIO!"
+                  speed={60}
+                  maxIterations={15}
+                  sequential={true}
+                  revealDirection="start"
+                  animateOn="view"
+                  characters="01<>{}[]!@#$%&*"
+                  className="intro-text-revealed"
+                  encryptedClassName="intro-text-encrypted"
+                  parentClassName="intro-text-parent"
+                />
+              </h1>
 
-            {/* Enter Button */}
-            <motion.button
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={showContent ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.8, delay: 2 }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: '0 0 40px rgba(29,120,116,0.5)',
-              }}
-              whileTap={{ scale: 0.95 }}
-              onClick={handleEnter}
-              className="intro-enter-btn"
-              style={{
-                marginTop: '1rem',
-                padding: '0.875rem 2.5rem',
-                fontSize: '1rem',
-                fontWeight: 600,
-                color: '#ffffff',
-                background: 'transparent',
-                border: '1.5px solid rgba(29,120,116,0.6)',
-                borderRadius: '50px',
-                cursor: 'pointer',
-                letterSpacing: '0.1em',
-                textTransform: 'uppercase',
-                backdropFilter: 'blur(10px)',
-                transition: 'all 0.3s ease',
-              }}
-            >
-              Visit my Portfolio
-            </motion.button>
-          </motion.div>
+              {/* Subtitle */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={showContent ? { opacity: 1 } : {}}
+                transition={{ duration: 1, delay: 1.5 }}
+                style={{
+                  color: 'rgba(255,255,255,0.6)',
+                  fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)',
+                  maxWidth: '450px',
+                  lineHeight: 1.6,
+                }}
+              >
+                Frontend Developer &bull; React/Next.js
+              </motion.p>
+
+              {/* Enter Button */}
+              <motion.button
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={showContent ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.8, delay: 2 }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: '0 0 40px rgba(29,120,116,0.5)',
+                }}
+                whileTap={{ scale: 0.95 }}
+                onClick={handleEnter}
+                className="intro-enter-btn"
+                style={{
+                  marginTop: '0.5rem',
+                  padding: '0.875rem 2.5rem',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                  color: '#ffffff',
+                  background: 'transparent',
+                  border: '1.5px solid rgba(29,120,116,0.6)',
+                  borderRadius: '50px',
+                  cursor: 'pointer',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  backdropFilter: 'blur(10px)',
+                  transition: 'all 0.3s ease',
+                }}
+              >
+                Visit my Portfolio
+              </motion.button>
+            </motion.div>
+          </div>
 
           {/* === Scroll indicator === */}
           <motion.div
@@ -255,7 +284,7 @@ const IntroOverlay = () => {
             position: 'fixed',
             inset: 0,
             zIndex: 9999,
-            background: '#030014',
+            background: 'var(--c-dark)',
           }}
         />
       )}
