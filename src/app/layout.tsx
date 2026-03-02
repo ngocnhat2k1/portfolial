@@ -1,6 +1,8 @@
 import MotionLazyContainer from '@/components/animate/MotionLazyContainer'
+import { ScriptClient } from '@/components/common/script_client'
 import './globals.css'
 import { Montserrat } from 'next/font/google'
+import { Metadata } from 'next'
 
 const montserrat = Montserrat({
   weight: ['400', '500', '700'],
@@ -8,7 +10,7 @@ const montserrat = Montserrat({
   variable: '--font-montserrat',
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: 'Tran Ngoc Nhat – Frontend Team Leader & Software Engineer',
     template: '%s | Tran Ngoc Nhat',
@@ -35,13 +37,25 @@ export const metadata = {
     title: 'Tran Ngoc Nhat – Frontend Team Leader & Software Engineer',
     description:
       'Portfolio of Tran Ngoc Nhat – Frontend Developer with 3+ years building e-commerce, ERP, and e-learning systems.',
-    images: [{ url: '/HomeImage.png', width: 1200, height: 630, alt: 'Tran Ngoc Nhat Portfolio' }],
+    images: [
+      {
+        url: '/HomeImage.png',
+        width: 1200,
+        height: 630,
+        alt: 'Tran Ngoc Nhat Portfolio',
+      },
+    ],
   },
+
   twitter: {
     card: 'summary_large_image',
     title: 'Tran Ngoc Nhat – Frontend Team Leader',
-    description: 'Frontend Developer with 3+ years experience. Team Leader at Mona Media.',
+    description:
+      'Frontend Developer with 3+ years experience. Team Leader at Mona Media.',
     images: ['/HomeImage.png'],
+  },
+  verification: {
+    google: 'TJlBrEMG7aJ1uM53tVNR-NGE2aJVOPKwjIluwZ9kTqM',
   },
 }
 
@@ -69,7 +83,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* Script đặt trước body content để tránh FOUC */}
       <head>
         <script dangerouslySetInnerHTML={{ __html: INIT_THEME_SCRIPT }} />
       </head>
@@ -77,6 +90,7 @@ export default function RootLayout({
         className={`${montserrat.className} flex min-h-screen flex-col transition-colors`}
         style={{ background: 'var(--c-bg)', color: 'var(--c-text)' }}
       >
+        <ScriptClient />
         <MotionLazyContainer>{children}</MotionLazyContainer>
       </body>
     </html>

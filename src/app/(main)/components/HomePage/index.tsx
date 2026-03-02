@@ -64,7 +64,7 @@ const HomePage = () => {
         </div>
 
         <m.div
-          className="lg:w-2/5 w-[80%] "
+          className="lg:w-2/5 w-[80%] max-w-[500px]"
           variants={varFade({ durationIn: 0.7 }).inRight}
         >
           <Image alt="" src={HomeImage} priority />
