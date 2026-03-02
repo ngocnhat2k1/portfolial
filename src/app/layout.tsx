@@ -85,6 +85,44 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: INIT_THEME_SCRIPT }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  '@id': 'https://ngocnhat.info/#website',
+                  url: 'https://ngocnhat.info',
+                  name: 'Tran Ngoc Nhat – Portfolio',
+                  description:
+                    'Frontend Developer with 3+ years of experience specializing in React/Next.js. Team Leader at Mona Media.',
+                  publisher: {
+                    '@id': 'https://ngocnhat.info/#person',
+                  },
+                },
+                {
+                  '@type': 'Person',
+                  '@id': 'https://ngocnhat.info/#person',
+                  name: 'Tran Ngoc Nhat',
+                  url: 'https://ngocnhat.info',
+                  image: 'https://ngocnhat.info/HomeImage.png',
+                  jobTitle: 'Frontend Team Leader & Software Engineer',
+                  worksFor: {
+                    '@type': 'Organization',
+                    name: 'Mona Media',
+                  },
+                  sameAs: [
+                    'https://github.com/ngocnhat2k1',
+                    'https://www.linkedin.com/in/tran-ngoc-nhat-109a06279/',
+                    'https://www.facebook.com/ngocnhat2k1',
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
       </head>
       <body
         className={`${montserrat.className} flex min-h-screen flex-col transition-colors`}

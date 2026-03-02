@@ -12,7 +12,7 @@ type PropSkill = {
 // Component hiển thị từng skill trên biểu đồ
 const Skill = ({ name, x, y }: PropSkill) => {
   return (
-    <m.div
+    <m.h3
       className="flex items-center justify-center rounded-full bg-dark dark:bg-light dark:text-black text-light py-1 px-2
       lg:py-3 lg:px-6 md:text-sm md:py-1.5 md:px-3 text-xs
       shadow-dark absolute"
@@ -23,16 +23,16 @@ const Skill = ({ name, x, y }: PropSkill) => {
       viewport={{ once: true }}
     >
       {name}
-    </m.div>
+    </m.h3>
   )
 }
 
 const Skills = (props: Props) => {
   return (
     <>
-      <div className="font-bold text-5xl lg:mt-52 w-full text-center mt-10 mb-4">
+      <h2 className="font-bold text-5xl lg:mt-52 w-full text-center mt-10 mb-4">
         Skills
-      </div>
+      </h2>
       <div className="w-full h-[40vh] relative flex items-center justify-center bg-circularLightSm dark:bg-circularDarkSm rounded-full xl:h-screen lg:h-[80vh]  lg:bg-circularLightLg lg:dark:bg-circularDarkLg md:bg-circularLightMd md:dark:bg-circularDarkMd sm:bg-circularLightSm sm:dark:bg-circularDarkSm">
         {/* Trung tâm */}
         <m.div

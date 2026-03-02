@@ -48,7 +48,7 @@ const ContactPage = () => {
         variants={varFade({ durationIn: 0.4 }).inDown}
         className="text-center mb-10"
       >
-        <h1 className="font-bold text-4xl lg:text-5xl">Get In Touch</h1>
+        <h2 className="font-bold text-4xl lg:text-5xl">Get In Touch</h2>
         <p className="mt-4 text-dark/60 dark:text-light/60 text-base lg:text-lg max-w-xl mx-auto">
           I&apos;m always open to new opportunities, collaborations, or just a
           friendly chat. Feel free to reach out via any channel below.
@@ -56,9 +56,10 @@ const ContactPage = () => {
       </m.div>
 
       {/* Contact cards */}
+      <h2 className="sr-only">Contact Information</h2>
       <div className="max-w-2xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
         {contactInfo.map((item, index) => (
-          <m.div
+          <m.article
             key={item.label}
             variants={varFade({ durationIn: 0.4 + index * 0.1 }).inUp}
             className="border-2 border-solid border-dark/20 dark:border-light/20 rounded-2xl p-5
@@ -67,9 +68,9 @@ const ContactPage = () => {
             <div className="flex items-center gap-3">
               <span className="text-2xl">{item.icon}</span>
               <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-light/50">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-dark/50 dark:text-light/50">
                   {item.label}
-                </p>
+                </h3>
                 {item.href ? (
                   <Link
                     href={item.href}
@@ -84,18 +85,18 @@ const ContactPage = () => {
                 )}
               </div>
             </div>
-          </m.div>
+          </m.article>
         ))}
       </div>
 
       {/* CTA Resume */}
-      <m.div
+      <m.section
         variants={varFade({ durationIn: 0.9 }).inUp}
         className="text-center mt-12"
       >
-        <p className="text-dark/60 dark:text-light/60 mb-4">
+        <h2 className="text-dark/60 dark:text-light/60 mb-4 font-normal text-base">
           Want to know more about my experience?
-        </p>
+        </h2>
         <Link
           href="/resume-v2.pdf"
           target="_blank"
@@ -104,7 +105,7 @@ const ContactPage = () => {
         >
           Download My Resume
         </Link>
-      </m.div>
+      </m.section>
     </MotionContainer>
   )
 }

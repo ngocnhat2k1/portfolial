@@ -104,9 +104,9 @@ const ExperienceItem = ({
 const Experience = () => {
   return (
     <>
-      <div className="font-bold text-4xl lg:text-5xl w-full text-center mt-16 mb-10">
+      <h2 className="font-bold text-4xl lg:text-5xl w-full text-center mt-16 mb-10">
         Experience & Education
-      </div>
+      </h2>
       <div className="max-w-3xl mx-auto lg:px-8 px-2">
         {experiences.map((item, index) => (
           <ExperienceItem key={item.company} item={item} index={index} />

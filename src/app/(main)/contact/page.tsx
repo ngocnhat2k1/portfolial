@@ -14,7 +14,12 @@ export const metadata: Metadata = {
 }
 
 const Contact = () => {
-  return <ContactPage />
+  return (
+    <>
+      <h1 className="sr-only">Contact Tran Ngoc Nhat - Frontend Developer</h1>
+      <ContactPage />
+    </>
+  )
 }
 
 export default Contact

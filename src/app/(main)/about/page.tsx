@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 const About = () => {
   return (
     <>
+      <h1 className="sr-only">Who is Tran Ngoc Nhat?</h1>
       <AboutPage />
       <Skills />
       <Experience />

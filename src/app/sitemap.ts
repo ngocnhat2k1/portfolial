@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ngocnhat.dev' // Thay bằng domain thật nếu có, tạm dùng ngocnhat.dev
+  const baseUrl = 'https://ngocnhat.info' // Thay bằng domain thật nếu có, tạm dùng ngocnhat.dev
 
   return [
     {
