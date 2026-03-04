@@ -163,7 +163,7 @@ export const projects: IProject[] = [
 const ProjectsPage = () => {
   return (
     <>
-      <h2 className="relative z-10 font-bold text-4xl lg:text-5xl w-full text-center mt-10 mb-16 text-[var(--c-text)]">
+      <h2 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
         My projects
       </h2>
       <BrutalScroll projects={projects} />

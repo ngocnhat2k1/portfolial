@@ -143,11 +143,11 @@ const Experience = () => {
   }, [])
 
   return (
-    <div className="relative py-16">
+    <div className="relative py-8 md:py-12 xl:py-16 overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--c-primary)] opacity-5 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
-      <h2 className="relative z-10 font-bold text-4xl lg:text-5xl w-full text-center mt-10 mb-16 text-[var(--c-text)]">
+      <h2 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
         Experience & Education
       </h2>
 

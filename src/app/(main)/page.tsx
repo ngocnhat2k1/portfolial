@@ -43,18 +43,18 @@ export default function Home() {
         <HomePage />
       </section>
 
-      <section id="about" className="pt-20">
+      <section id="about" className="pt-10 md:pt-12 xl:pt-16">
         <h1 className="sr-only">Who is Tran Ngoc Nhat?</h1>
         <AboutPage />
         <Skills />
         <Experience />
       </section>
 
-      <section id="project" className="pt-20">
+      <section id="project" className="pt-10 md:pt-12 xl:pt-16">
         <ProjectsPage />
       </section>
 
-      <section id="contact" className="pt-20">
+      <section id="contact" className="pt-10 md:pt-12 xl:pt-16">
         <h1 className="sr-only">Contact Tran Ngoc Nhat - Frontend Developer</h1>
         <ContactPage />
       </section>

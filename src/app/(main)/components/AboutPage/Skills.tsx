@@ -55,10 +55,10 @@ const skillCardsData: BentoCardProps[] = [
 const Skills = (props: Props) => {
   return (
     <>
-      <h2 className="font-bold text-5xl w-full text-center mt-10 mb-8">
+      <h2 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
         Skills & Expertise
       </h2>
-      <div className="w-full relative flex items-center justify-center py-10 min-h-[60vh]">
+      <div className="w-full relative flex items-center justify-center py-4 xl:py-10 min-h-[60vh]">
         <MagicBento
           cardsData={skillCardsData}
           glowColor="var(--c-primary)"
