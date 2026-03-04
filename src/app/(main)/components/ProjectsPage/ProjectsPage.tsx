@@ -7,11 +7,12 @@ import MotionContainer from '@/components/animate/MotionContainer'
 import { LinkArrow } from '@/components/icons/icons'
 import Link from 'next/link'
 import Image from 'next/image'
+import { BrutalScroll } from '@/components/brutal_scroll'
 
 // =============================================
 // Data: Dự án thực tế từ CV + các dự án mới
 // =============================================
-type IProject = {
+export type IProject = {
   title: string
   description: string
   tech: string[]
@@ -20,7 +21,7 @@ type IProject = {
   preview?: string // đường dẫn ảnh preview /projects/xxx.png
 }
 
-const projects: IProject[] = [
+export const projects: IProject[] = [
   {
     title: 'HydraShop',
     description:
@@ -68,7 +69,13 @@ const projects: IProject[] = [
     title: 'Kim Thanh',
     description:
       'Motorcycle parts retail e-commerce solution with product catalog, category management, and a streamlined checkout flow for an automotive parts chain.',
-    tech: ['Next.js', 'TypeScript', 'TailwindCSS', 'REST API', 'TanStack Query'],
+    tech: [
+      'Next.js',
+      'TypeScript',
+      'TailwindCSS',
+      'REST API',
+      'TanStack Query',
+    ],
     link: 'https://kimthanh.com.vn',
     category: 'E-Commerce',
     preview: '/projects/kimthanh.png',
@@ -113,12 +120,21 @@ const categoryColors: Record<string, string> = {
 }
 
 // Lấy danh sách categories duy nhất
-const allCategories = ['All', ...Array.from(new Set(projects.map((p) => p.category)))]
+const allCategories = [
+  'All',
+  ...Array.from(new Set(projects.map((p) => p.category))),
+]
 
 // =============================================
 // ProjectCard: card với ảnh preview
 // =============================================
-const ProjectCard = ({ project, index }: { project: IProject; index: number }) => {
+const ProjectCard = ({
+  project,
+  index,
+}: {
+  project: IProject
+  index: number
+}) => {
   return (
     <m.div
       variants={varFade({ durationIn: 0.4 + (index % 6) * 0.08 }).inUp}
@@ -210,46 +226,9 @@ const ProjectsPage = () => {
       : projects.filter((p) => p.category === activeCategory)
 
   return (
-    <MotionContainer>
-      {/* Heading */}
-      <m.div variants={varFade({ durationIn: 0.4 }).inDown}>
-        <div className="w-full text-center mb-2">
-          <h1 className="font-bold text-4xl lg:text-5xl">Projects</h1>
-          <p className="mt-4 text-dark/60 dark:text-light/60 text-base lg:text-lg max-w-2xl mx-auto">
-            Real-world projects shipped to production — from e-commerce platforms to ERP dashboards
-            and e-learning systems.
-          </p>
-        </div>
-      </m.div>
-
-      {/* Filter tabs */}
-      <m.div
-        variants={varFade({ durationIn: 0.5 }).inUp}
-        className="flex flex-wrap justify-center gap-2 mt-8 mb-8"
-      >
-        {allCategories.map((cat) => (
-          <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-1.5 rounded-full text-sm font-semibold border-2 transition-all duration-200
-              ${
-                activeCategory === cat
-                  ? 'bg-primary border-primary text-white'
-                  : 'border-dark/20 dark:border-light/20 hover:border-primary hover:text-primary'
-              }`}
-          >
-            {cat}
-          </button>
-        ))}
-      </m.div>
-
-      {/* Grid dự án */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {filtered.map((project, index) => (
-          <ProjectCard key={project.title} project={project} index={index} />
-        ))}
-      </div>
-    </MotionContainer>
+    <>
+      <BrutalScroll projects={projects} />
+    </>
   )
 }
 

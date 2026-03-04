@@ -113,22 +113,6 @@ const IntroOverlay = () => {
               padding: '2rem',
             }}
           >
-            {/* --- Left: 3D Model --- */}
-            {/* <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={showContent ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 1.2, ease: 'easeOut' }}
-              style={{
-                flex: '1 1 50%',
-                height: '100%',
-                minHeight: '400px',
-                position: 'relative',
-              }}
-              className="intro-model-container"
-            >
-              <IntroModel />
-            </motion.div> */}
-
             {/* --- Right: Text Content --- */}
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -142,7 +126,7 @@ const IntroOverlay = () => {
                 gap: '1.5rem',
                 padding: '0 2rem',
               }}
-              className="intro-text-content"
+              className="intro-text-content "
             >
               {/* Greeting */}
               <motion.p

@@ -289,24 +289,28 @@ html {
 /* Responsive: mobile – stack layout */
 @media (max-width: 768px) {
   .intro-model-container {
-    flex: 1 1 40% !important;
-    min-height: 250px !important;
+    flex: 1 1 50% !important;
+    min-height: 350px !important;
+    order: 2; /* Đưa model xuống dưới */
   }
 
   .intro-text-content {
-    flex: 1 1 60% !important;
+    flex: 1 1 50% !important;
     align-items: center !important;
     text-align: center;
     padding: 0 1rem !important;
+    order: 1; /* Đưa text lên trên */
   }
 }
 
 @media (max-width: 640px) {
   .intro-model-container {
-    position: absolute !important;
-    inset: 0 !important;
-    opacity: 0.3;
+    position: relative !important;
+    width: 100% !important;
+    height: 400px;
+    opacity: 1 !important;
     flex: none !important;
+    order: 2; /* Đưa model xuống dưới */
   }
 
   .intro-text-content {
@@ -315,5 +319,7 @@ html {
     z-index: 3;
     align-items: center !important;
     text-align: center;
+    order: 1; /* Đưa text lên trên */
+    margin-top: 2rem;
   }
 }
