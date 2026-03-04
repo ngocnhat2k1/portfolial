@@ -53,7 +53,7 @@ const HomePage = () => {
 
           <m.p
             variants={varFade({ durationIn: 0.7 }).inLeft}
-            className="py-6 text-[var(--c-text-muted)] text-base md:text-lg leading-relaxed max-w-2xl"
+            className="py-6 text-[var(--c-text-muted)] text-base md:text-lg leading-10 max-w-2xl"
           >
             Frontend Developer with 3+ years of experience specializing in the
             React/Next.js ecosystem. Experienced in building high-performance
