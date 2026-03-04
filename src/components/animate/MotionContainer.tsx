@@ -1,15 +1,18 @@
-import { m, MotionProps } from "framer-motion";
+import { m, MotionProps } from 'framer-motion'
 //
-import { varContainer } from "./variants";
+import { varContainer } from './variants'
 
 // ----------------------------------------------------------------------
 
-type IProps = MotionProps;
+type IProps = MotionProps
 
-export interface Props extends IProps {
-  animate?: boolean;
-  action?: boolean;
-  children: React.ReactNode;
+export interface Props
+  extends
+    IProps,
+    Omit<React.HTMLAttributes<HTMLDivElement>, keyof IProps | 'children'> {
+  animate?: boolean
+  action?: boolean
+  children: React.ReactNode
 }
 
 export default function MotionContainer({
@@ -22,13 +25,13 @@ export default function MotionContainer({
     return (
       <m.div
         initial={false}
-        animate={animate ? "animate" : "exit"}
+        animate={animate ? 'animate' : 'exit'}
         variants={varContainer()}
         {...other}
       >
         {children}
       </m.div>
-    );
+    )
   }
 
   return (
@@ -41,5 +44,5 @@ export default function MotionContainer({
     >
       {children}
     </m.div>
-  );
+  )
 }

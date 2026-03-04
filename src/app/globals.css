@@ -18,172 +18,172 @@
 /* --- 1. LIGHT (default) ------------------------------------ */
 [data-theme='light'],
 :root {
-  --c-primary: #1D7874;
-  --c-primary-dark: #155e5b;
+  --c-primary: #0ea5e9;
+  --c-primary-dark: #0284c7;
   --c-primary-content: #ffffff;
-  --c-secondary: #679289;
-  --c-accent: #F4C095;
-  --c-dark: #1b1b1b;
-  --c-light: #f5f5f5;
+  --c-secondary: #38bdf8;
+  --c-accent: #bae6fd;
+  --c-dark: #0f172a;
+  --c-light: #f8fafc;
 
-  --c-bg: #F5F5F5;
+  --c-bg: #f8fafc;
   --c-surface: #ffffff;
-  --c-surface-2: #e8e8e8;
-  --c-border: rgba(0, 0, 0, 0.12);
+  --c-surface-2: #f1f5f9;
+  --c-border: rgba(15, 23, 42, 0.1);
 
-  --c-text: #071E22;
-  --c-text-muted: rgba(7, 30, 34, 0.55);
+  --c-text: #0f172a;
+  --c-text-muted: rgba(15, 23, 42, 0.6);
   --c-text-on-primary: #ffffff;
 
-  --c-danger: #EE2E31;
-  --c-warning: #F4C095;
+  --c-danger: #ef4444;
+  --c-warning: #f59e0b;
 
   /* Circular background pattern */
-  --c-circular: rgba(0, 0, 0, 0.4);
-  --c-circular-stripe: #f5f5f5;
+  --c-circular: rgba(15, 23, 42, 0.1);
+  --c-circular-stripe: #e2e8f0;
 
   /* Shadow */
-  --shadow-primary: rgba(29, 120, 116, 0.3);
+  --shadow-primary: rgba(14, 165, 233, 0.25);
 }
 
 /* --- 2. DARK ----------------------------------------------- */
 [data-theme='dark'] {
-  --c-primary: #1D7874;
-  --c-primary-dark: #155e5b;
+  --c-primary: #38bdf8;
+  --c-primary-dark: #0284c7;
   --c-primary-content: #ffffff;
-  --c-secondary: #679289;
-  --c-accent: #F4C095;
-  --c-dark: #1b1b1b;
-  --c-light: #f5f5f5;
+  --c-secondary: #0ea5e9;
+  --c-accent: #7dd3fc;
+  --c-dark: #020617;
+  --c-light: #f8fafc;
 
-  --c-bg: #071E22;
-  --c-surface: #0d2e33;
-  --c-surface-2: #163b42;
+  --c-bg: #0f172a;
+  --c-surface: #1e293b;
+  --c-surface-2: #334155;
   --c-border: rgba(255, 255, 255, 0.1);
 
-  --c-text: #F5F5F5;
-  --c-text-muted: rgba(245, 245, 245, 0.55);
+  --c-text: #f8fafc;
+  --c-text-muted: rgba(248, 250, 252, 0.6);
   --c-text-on-primary: #ffffff;
 
-  --c-danger: #ff4d50;
-  --c-warning: #F4C095;
+  --c-danger: #f87171;
+  --c-warning: #fbbf24;
 
-  --c-circular: rgba(255, 255, 255, 0.5);
-  --c-circular-stripe: #1b1b1b;
+  --c-circular: rgba(255, 255, 255, 0.1);
+  --c-circular-stripe: #0f172a;
 
-  --shadow-primary: rgba(29, 120, 116, 0.25);
+  --shadow-primary: rgba(56, 189, 248, 0.25);
 }
 
-/* --- 3. OCEAN ---------------------------------------------- */
+/* --- 3. OCEAN (Muted Navy/Indigo) ---------------------------- */
 [data-theme='ocean'] {
-  --c-primary: #0096C7;
-  --c-primary-dark: #0077a3;
+  --c-primary: #818cf8;
+  --c-primary-dark: #4f46e5;
   --c-primary-content: #ffffff;
-  --c-secondary: #48CAE4;
-  --c-accent: #ADE8F4;
-  --c-dark: #1b1b1b;
-  --c-light: #f5f5f5;
+  --c-secondary: #6366f1;
+  --c-accent: #a5b4fc;
+  --c-dark: #020617;
+  --c-light: #e0e7ff;
 
-  --c-bg: #03045E;
-  --c-surface: #0d1b8a;
-  --c-surface-2: #1527a8;
-  --c-border: rgba(72, 202, 228, 0.18);
+  --c-bg: #0f111a;
+  --c-surface: #1a1e2e;
+  --c-surface-2: #262c40;
+  --c-border: rgba(129, 140, 248, 0.15);
 
-  --c-text: #CAF0F8;
-  --c-text-muted: rgba(202, 240, 248, 0.55);
+  --c-text: #e0e7ff;
+  --c-text-muted: rgba(224, 231, 255, 0.6);
   --c-text-on-primary: #ffffff;
 
-  --c-danger: #ff6b6b;
-  --c-warning: #FFD166;
+  --c-danger: #fb7185;
+  --c-warning: #fbbf24;
 
-  --c-circular: rgba(72, 202, 228, 0.4);
-  --c-circular-stripe: #03045E;
+  --c-circular: rgba(129, 140, 248, 0.2);
+  --c-circular-stripe: #0f111a;
 
-  --shadow-primary: rgba(0, 150, 199, 0.35);
+  --shadow-primary: rgba(129, 140, 248, 0.25);
 }
 
-/* --- 4. FOREST --------------------------------------------- */
+/* --- 4. FOREST (Soft Pine/Emerald) --------------------------- */
 [data-theme='forest'] {
-  --c-primary: #52B788;
-  --c-primary-dark: #3d8e68;
+  --c-primary: #34d399;
+  --c-primary-dark: #059669;
   --c-primary-content: #ffffff;
-  --c-secondary: #74C69D;
-  --c-accent: #D8F3DC;
-  --c-dark: #1b1b1b;
-  --c-light: #f5f5f5;
+  --c-secondary: #10b981;
+  --c-accent: #6ee7b7;
+  --c-dark: #022c22;
+  --c-light: #d1fae5;
 
-  --c-bg: #1B4332;
-  --c-surface: #2D6A4F;
-  --c-surface-2: #40916C;
-  --c-border: rgba(82, 183, 136, 0.18);
+  --c-bg: #0e1511;
+  --c-surface: #18241d;
+  --c-surface-2: #24362b;
+  --c-border: rgba(52, 211, 153, 0.15);
 
-  --c-text: #D8F3DC;
-  --c-text-muted: rgba(216, 243, 220, 0.55);
-  --c-text-on-primary: #fff;
+  --c-text: #d1fae5;
+  --c-text-muted: rgba(209, 250, 229, 0.6);
+  --c-text-on-primary: #ffffff;
 
-  --c-danger: #FF6B6B;
-  --c-warning: #FFD166;
+  --c-danger: #f87171;
+  --c-warning: #fbbf24;
 
-  --c-circular: rgba(82, 183, 136, 0.4);
-  --c-circular-stripe: #1B4332;
+  --c-circular: rgba(52, 211, 153, 0.15);
+  --c-circular-stripe: #0e1511;
 
-  --shadow-primary: rgba(82, 183, 136, 0.35);
+  --shadow-primary: rgba(52, 211, 153, 0.25);
 }
 
-/* --- 5. SUNSET --------------------------------------------- */
+/* --- 5. SUNSET (Warm Mocha/Orange) --------------------------- */
 [data-theme='sunset'] {
-  --c-primary: #E76F51;
-  --c-primary-dark: #c9542d;
+  --c-primary: #fb923c;
+  --c-primary-dark: #ea580c;
   --c-primary-content: #ffffff;
-  --c-secondary: #F4A261;
-  --c-accent: #E9C46A;
-  --c-dark: #1b1b1b;
-  --c-light: #f5f5f5;
+  --c-secondary: #f97316;
+  --c-accent: #fdba74;
+  --c-dark: #431407;
+  --c-light: #ffedd5;
 
-  --c-bg: #264653;
-  --c-surface: #2A5F70;
-  --c-surface-2: #2A9D8F;
-  --c-border: rgba(231, 111, 81, 0.18);
+  --c-bg: #1a1412;
+  --c-surface: #2a201d;
+  --c-surface-2: #3a2c28;
+  --c-border: rgba(251, 146, 60, 0.15);
 
-  --c-text: #F4F1DE;
-  --c-text-muted: rgba(244, 241, 222, 0.55);
+  --c-text: #ffedd5;
+  --c-text-muted: rgba(255, 237, 213, 0.6);
   --c-text-on-primary: #ffffff;
 
-  --c-danger: #E63946;
-  --c-warning: #E9C46A;
+  --c-danger: #f43f5e;
+  --c-warning: #fcd34d;
 
-  --c-circular: rgba(231, 111, 81, 0.4);
-  --c-circular-stripe: #264653;
+  --c-circular: rgba(251, 146, 60, 0.15);
+  --c-circular-stripe: #1a1412;
 
-  --shadow-primary: rgba(231, 111, 81, 0.35);
+  --shadow-primary: rgba(251, 146, 60, 0.25);
 }
 
-/* --- 6. CYBERPUNK ------------------------------------------ */
+/* --- 6. CYBERPUNK (Deep Plum/Purple) ------------------------- */
 [data-theme='cyberpunk'] {
-  --c-primary: #F72585;
-  --c-primary-dark: #bd1965;
+  --c-primary: #c084fc;
+  --c-primary-dark: #9333ea;
   --c-primary-content: #ffffff;
-  --c-secondary: #7209B7;
-  --c-accent: #4CC9F0;
-  --c-dark: #1b1b1b;
-  --c-light: #f5f5f5;
+  --c-secondary: #a855f7;
+  --c-accent: #d8b4fe;
+  --c-dark: #3b0764;
+  --c-light: #f3e8ff;
 
-  --c-bg: #10002B;
-  --c-surface: #240046;
-  --c-surface-2: #3A015C;
-  --c-border: rgba(247, 37, 133, 0.2);
+  --c-bg: #12091c;
+  --c-surface: #201132;
+  --c-surface-2: #301a4a;
+  --c-border: rgba(192, 132, 252, 0.15);
 
-  --c-text: #E0AAFF;
-  --c-text-muted: rgba(224, 170, 255, 0.55);
+  --c-text: #f3e8ff;
+  --c-text-muted: rgba(243, 232, 255, 0.6);
   --c-text-on-primary: #ffffff;
 
-  --c-danger: #FF2D55;
-  --c-warning: #FFE66D;
+  --c-danger: #fb7185;
+  --c-warning: #fde047;
 
-  --c-circular: rgba(247, 37, 133, 0.5);
-  --c-circular-stripe: #10002B;
+  --c-circular: rgba(192, 132, 252, 0.2);
+  --c-circular-stripe: #12091c;
 
-  --shadow-primary: rgba(247, 37, 133, 0.4);
+  --shadow-primary: rgba(192, 132, 252, 0.25);
 }
 
 /* ============================================================
@@ -207,18 +207,27 @@ html {
    ============================================================ */
 
 @keyframes typing {
-  from { width: 0 }
+  from {
+    width: 0;
+  }
 }
 
 @keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--c-primary) }
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--c-primary);
+  }
 }
 
 /* ============================================================
    THEME SWITCHER TRANSITIONS – mượt mà khi đổi theme
    ============================================================ */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   transition-property: background-color, border-color, color;
   transition-duration: 250ms;
   transition-timing-function: ease;

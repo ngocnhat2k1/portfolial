@@ -1,22 +1,27 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
 import ItemNavBar from './ItemNavBar'
 import { m } from 'framer-motion'
 import ThemePicker from '@/components/theme_picker/theme_picker'
+import { useScrollSpy } from '@/hook/useScrollSpy'
 
 const ItemNavBars = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Contact', href: '/contact' },
+  { name: 'Home', href: '#home', id: 'home' },
+  { name: 'About', href: '#about', id: 'about' },
+  { name: 'Projects', href: '#project', id: 'project' },
+  { name: 'Contact', href: '#contact', id: 'contact' },
 ]
 
 type Props = {}
 
 function NavBar({}: Props) {
   const [isOpen, setIsOpen] = React.useState(false)
+
+  // Use scroll spy to track the active section
+  const sectionIds = ItemNavBars.map((item) => item.id)
+  const activeSectionId = useScrollSpy(sectionIds)
 
   const handleClick = () => {
     setIsOpen(!isOpen)
@@ -27,8 +32,20 @@ function NavBar({}: Props) {
     }
   }
 
+  // Effect to close mobile menu on section click and route change
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflowY = 'hidden'
+    } else {
+      document.body.style.overflowY = 'auto'
+    }
+  }, [isOpen])
+
   return (
-    <header className="h-full py-4 lg:py-8 font-medium flex justify-between align-middle leading-[44px] items-center px-8 sm:px-12 md:px-20 lg:px-32 xl:px-44">
+    <header
+      className="sticky top-0 z-50 py-4 lg:py-8 font-medium flex justify-between align-middle leading-[44px] items-center px-8 sm:px-12 md:px-20 lg:px-32 xl:px-44"
+      style={{ backgroundColor: 'var(--c-surface)', opacity: 0.95 }}
+    >
       {/* Logo */}
       <div>
         <Logo />
@@ -38,7 +55,12 @@ function NavBar({}: Props) {
       <div>
         <nav className="grid-cols-4 gap-1 h-fit hidden lg:grid">
           {ItemNavBars.map((item, index) => (
-            <ItemNavBar key={index} name={item.name} href={item.href} />
+            <ItemNavBar
+              key={index}
+              name={item.name}
+              href={item.href}
+              isActive={activeSectionId === item.id}
+            />
           ))}
         </nav>
       </div>
@@ -77,6 +99,7 @@ function NavBar({}: Props) {
                   href={item.href}
                   css="my-6 min-w-[40vw] text-center"
                   toggle={handleClick}
+                  isActive={activeSectionId === item.id}
                 />
               ))}
             </nav>
@@ -84,7 +107,7 @@ function NavBar({}: Props) {
         </>
       )}
       <div className="flex items-center gap-4">
-        {/* Theme picker trong mobile menu */}
+        {/* Theme picker */}
         <ThemePicker />
         {/* Hamburger Button (Mobile) */}
         <button

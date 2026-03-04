@@ -5,13 +5,7 @@ import { useEffect, useState, useCallback } from 'react'
 // =============================================
 // Danh sách tất cả themes có sẵn
 // =============================================
-export type ThemeName =
-  | 'light'
-  | 'dark'
-  | 'ocean'
-  | 'forest'
-  | 'sunset'
-  | 'cyberpunk'
+export type ThemeName = 'dark' | 'ocean' | 'forest' | 'sunset' | 'cyberpunk'
 
 export interface IThemeConfig {
   name: ThemeName
@@ -27,69 +21,59 @@ export interface IThemeConfig {
 
 export const THEMES: IThemeConfig[] = [
   {
-    name: 'light',
-    label: 'Light',
-    previewColors: {
-      bg: '#F5F5F5',
-      surface: '#ffffff',
-      primary: '#1D7874',
-      text: '#071E22',
-    },
-  },
-  {
     name: 'dark',
     label: 'Dark',
     previewColors: {
-      bg: '#071E22',
-      surface: '#0d2e33',
-      primary: '#1D7874',
-      text: '#F5F5F5',
+      bg: '#0f172a',
+      surface: '#1e293b',
+      primary: '#38bdf8',
+      text: '#f8fafc',
     },
   },
   {
     name: 'ocean',
     label: 'Ocean',
     previewColors: {
-      bg: '#03045E',
-      surface: '#0d1b8a',
-      primary: '#0096C7',
-      text: '#CAF0F8',
+      bg: '#0f111a',
+      surface: '#1a1e2e',
+      primary: '#818cf8',
+      text: '#e0e7ff',
     },
   },
   {
     name: 'forest',
     label: 'Forest',
     previewColors: {
-      bg: '#1B4332',
-      surface: '#2D6A4F',
-      primary: '#52B788',
-      text: '#D8F3DC',
+      bg: '#0e1511',
+      surface: '#18241d',
+      primary: '#34d399',
+      text: '#d1fae5',
     },
   },
   {
     name: 'sunset',
     label: 'Sunset',
     previewColors: {
-      bg: '#264653',
-      surface: '#2A5F70',
-      primary: '#E76F51',
-      text: '#F4F1DE',
+      bg: '#1a1412',
+      surface: '#2a201d',
+      primary: '#fb923c',
+      text: '#ffedd5',
     },
   },
   {
     name: 'cyberpunk',
     label: 'Cyberpunk',
     previewColors: {
-      bg: '#10002B',
-      surface: '#240046',
-      primary: '#F72585',
-      text: '#E0AAFF',
+      bg: '#12091c',
+      surface: '#201132',
+      primary: '#c084fc',
+      text: '#f3e8ff',
     },
   },
 ]
 
 const STORAGE_KEY = 'portfolio-theme'
-const DEFAULT_THEME: ThemeName = 'light'
+const DEFAULT_THEME: ThemeName = 'dark'
 
 // =============================================
 // useThemeEngine hook

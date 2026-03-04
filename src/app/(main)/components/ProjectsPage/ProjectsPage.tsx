@@ -1,12 +1,5 @@
 'use client'
 
-import React, { useState } from 'react'
-import { m } from 'framer-motion'
-import { varFade } from '@/components/animate/variants'
-import MotionContainer from '@/components/animate/MotionContainer'
-import { LinkArrow } from '@/components/icons/icons'
-import Link from 'next/link'
-import Image from 'next/image'
 import { BrutalScroll } from '@/components/brutal_scroll'
 
 // =============================================
@@ -19,6 +12,7 @@ export type IProject = {
   link?: string
   category: string
   preview?: string // đường dẫn ảnh preview /projects/xxx.png
+  mobilePreview?: string // đường dẫn ảnh mobile /projects/xxx_mobile.png
 }
 
 export const projects: IProject[] = [
@@ -30,6 +24,7 @@ export const projects: IProject[] = [
     link: 'https://hydrashop.vn',
     category: 'E-Commerce',
     preview: '/projects/hydrashop.png',
+    mobilePreview: '/projects/hydrashop_mobile.png',
   },
   {
     title: 'Mona SkillHub',
@@ -38,6 +33,8 @@ export const projects: IProject[] = [
     tech: ['React.js', 'TypeScript', 'GSAP', 'MaterialUI', 'GraphQL'],
     link: 'https://skillhub.mona.academy',
     category: 'ERP Dashboard',
+    preview: '/projects/skillhub.png',
+    mobilePreview: '/projects/skillhub_mobile.png',
   },
   {
     title: 'Khanh Hung Academy',
@@ -46,6 +43,8 @@ export const projects: IProject[] = [
     tech: ['Next.js', 'TypeScript', 'Socket.IO', 'TanStack Query', 'SCSS'],
     link: 'https://khanhhung.academy/learn',
     category: 'E-Learning',
+    preview: '/projects/khanhhung.png',
+    mobilePreview: '/projects/khanhhung_mobile.png',
   },
   {
     title: 'Cinestar',
@@ -55,6 +54,7 @@ export const projects: IProject[] = [
     link: 'https://cinestar.com.vn',
     category: 'Booking System',
     preview: '/projects/cinestar.png',
+    mobilePreview: '/projects/cinestar_mobile.png',
   },
   {
     title: 'Bachlong Mobile',
@@ -64,6 +64,7 @@ export const projects: IProject[] = [
     link: 'https://bachlongmobile.com',
     category: 'E-Commerce',
     preview: '/projects/bachlongmobile.png',
+    mobilePreview: '/projects/bachlongmobile_mobile.png',
   },
   {
     title: 'Kim Thanh',
@@ -79,6 +80,7 @@ export const projects: IProject[] = [
     link: 'https://kimthanh.com.vn',
     category: 'E-Commerce',
     preview: '/projects/kimthanh.png',
+    mobilePreview: '/projects/kimthanh_mobile.png',
   },
   {
     title: 'Sieu Thi Nghe Nhin',
@@ -88,6 +90,7 @@ export const projects: IProject[] = [
     link: 'https://sieuthinghenhin.vn',
     category: 'E-Commerce',
     preview: '/projects/sieuthinghenhin.png',
+    mobilePreview: '/projects/sieuthinghenhin_mobile.png',
   },
   {
     title: 'Sophie Distributor',
@@ -97,6 +100,7 @@ export const projects: IProject[] = [
     link: 'https://sophiedistributor.com',
     category: 'E-Commerce',
     preview: '/projects/sophiedistributor.png',
+    mobilePreview: '/projects/sophiedistributor_mobile.png',
   },
   {
     title: 'Nhathuoc Pharceco',
@@ -105,126 +109,58 @@ export const projects: IProject[] = [
     tech: ['Next.js', 'TypeScript', 'GraphQL', 'TailwindCSS', 'TanStack Query'],
     link: 'https://nhathuocpharceco.monaweb.dev',
     category: 'E-Commerce',
+    preview: '/projects/nhathuocpharceco.png',
+    mobilePreview: '/projects/nhathuocpharceco_mobile.png',
+  },
+  {
+    title: 'Labee',
+    description: 'Modern and comprehensive web platform for Labee.',
+    tech: ['Next.js', 'React', 'TailwindCSS'],
+    link: 'https://labee.vn',
+    category: 'E-Commerce',
+    preview: '/projects/labee.png',
+    mobilePreview: '/projects/labee_mobile.png',
+  },
+  {
+    title: 'Inwine',
+    description: 'Premium wine e-commerce and distribution platform.',
+    tech: ['Next.js', 'React', 'TailwindCSS'],
+    link: 'https://inwine.vn',
+    category: 'E-Commerce',
+    preview: '/projects/inwine.png',
+    mobilePreview: '/projects/inwine_mobile.png',
+  },
+  {
+    title: 'Wiisnt',
+    description:
+      'Innovative platform matching professionals with opportunities.',
+    tech: ['Next.js', 'React', 'TailwindCSS'],
+    link: 'https://wiisnt.vn',
+    category: 'Corporate',
+    preview: '/projects/wiisnt.png',
+    mobilePreview: '/projects/wiisnt_mobile.png',
+  },
+  {
+    title: 'Yến Đảo Cần Giờ',
+    description: 'E-commerce site for premium bird nest products from Cần Giờ.',
+    tech: ['Next.js', 'React', 'TailwindCSS'],
+    link: 'https://yendaocangio.com',
+    category: 'E-Commerce',
+    preview: '/projects/yendaocangio.png',
+    mobilePreview: '/projects/yendaocangio_mobile.png',
+  },
+  {
+    title: 'Tuấn Kiệt Academy',
+    description: 'Educational platform offering diverse courses and training.',
+    tech: ['Next.js', 'React', 'TailwindCSS'],
+    link: 'https://tuankiet.academy',
+    category: 'E-Learning',
+    preview: '/projects/tuankiet.png',
+    mobilePreview: '/projects/tuankiet_mobile.png',
   },
 ]
 
-// =============================================
-// Badge màu theo category
-// =============================================
-const categoryColors: Record<string, string> = {
-  'E-Commerce': 'bg-blue-500',
-  'ERP Dashboard': 'bg-purple-500',
-  'E-Learning': 'bg-green-500',
-  'Booking System': 'bg-orange-500',
-  Personal: 'bg-gray-500',
-}
-
-// Lấy danh sách categories duy nhất
-const allCategories = [
-  'All',
-  ...Array.from(new Set(projects.map((p) => p.category))),
-]
-
-// =============================================
-// ProjectCard: card với ảnh preview
-// =============================================
-const ProjectCard = ({
-  project,
-  index,
-}: {
-  project: IProject
-  index: number
-}) => {
-  return (
-    <m.div
-      variants={varFade({ durationIn: 0.4 + (index % 6) * 0.08 }).inUp}
-      className="group border-2 border-solid border-dark/10 dark:border-light/10 rounded-2xl overflow-hidden
-        hover:border-primary dark:hover:border-primary hover:shadow-[4px_4px_0px_0px] hover:shadow-primary/30
-        transition-all duration-300 flex flex-col bg-white dark:bg-dark"
-    >
-      {/* Ảnh preview */}
-      <div className="relative w-full h-44 bg-gray-100 dark:bg-gray-800 overflow-hidden flex-shrink-0">
-        {project.preview ? (
-          <Image
-            src={project.preview}
-            alt={`${project.title} preview`}
-            fill
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
-        ) : (
-          /* Placeholder khi không có ảnh */
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/10 to-primary/30">
-            <div className="text-4xl font-bold text-primary/40 select-none">
-              {project.title.charAt(0)}
-            </div>
-          </div>
-        )}
-        {/* Badge category overlay */}
-        <span
-          className={`absolute top-3 right-3 text-xs font-semibold text-white px-2.5 py-1 rounded-full shadow-md ${categoryColors[project.category] ?? 'bg-gray-500'}`}
-        >
-          {project.category}
-        </span>
-      </div>
-
-      {/* Nội dung card */}
-      <div className="p-5 flex flex-col flex-1">
-        {/* Tiêu đề */}
-        <h3 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors duration-300">
-          {project.title}
-        </h3>
-
-        {/* Mô tả */}
-        <p className="text-sm text-dark/60 dark:text-light/60 leading-relaxed mb-4 flex-1 line-clamp-3">
-          {project.description}
-        </p>
-
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-1.5 mb-4">
-          {project.tech.slice(0, 4).map((t) => (
-            <span
-              key={t}
-              className="text-xs font-medium bg-primary/10 text-primary border border-primary/20 px-2 py-0.5 rounded-full"
-            >
-              {t}
-            </span>
-          ))}
-          {project.tech.length > 4 && (
-            <span className="text-xs font-medium text-dark/40 dark:text-light/40 px-1">
-              +{project.tech.length - 4}
-            </span>
-          )}
-        </div>
-
-        {/* Link */}
-        {project.link && (
-          <Link
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-sm font-bold text-primary hover:underline self-start mt-auto"
-          >
-            View Project
-            <LinkArrow className="!w-4 pl-0.5 pb-0.5 inline-block" />
-          </Link>
-        )}
-      </div>
-    </m.div>
-  )
-}
-
-// =============================================
-// ProjectsPage: trang chính
-// =============================================
 const ProjectsPage = () => {
-  const [activeCategory, setActiveCategory] = useState('All')
-
-  const filtered =
-    activeCategory === 'All'
-      ? projects
-      : projects.filter((p) => p.category === activeCategory)
-
   return (
     <>
       <BrutalScroll projects={projects} />

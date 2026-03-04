@@ -274,8 +274,9 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
                     <div
                       className="absolute inset-0 bg-black/80 transition-transform duration-500 group-hover:scale-105"
                       style={{
-                        backgroundImage: projects[def.projectIndex].preview
-                          ? `url(${projects[def.projectIndex].preview})`
+                        backgroundImage: projects[def.projectIndex]
+                          .mobilePreview
+                          ? `url(${projects[def.projectIndex].mobilePreview})`
                           : 'none',
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
