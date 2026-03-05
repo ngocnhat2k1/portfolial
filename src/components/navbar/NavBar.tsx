@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import Logo from './Logo'
 import ItemNavBar from './ItemNavBar'
-import { m } from 'framer-motion'
+import { m, useScroll, useMotionValueEvent } from 'framer-motion'
 import ThemePicker from '@/components/theme_picker/theme_picker'
 import { useScrollSpy } from '@/hook/useScrollSpy'
 
@@ -22,6 +22,19 @@ function NavBar({}: Props) {
   // Use scroll spy to track the active section
   const sectionIds = ItemNavBars.map((item) => item.id)
   const activeSectionId = useScrollSpy(sectionIds)
+
+  // Auto-hide header logic
+  const { scrollY } = useScroll()
+  const [hidden, setHidden] = useState(false)
+
+  useMotionValueEvent(scrollY, 'change', (latest) => {
+    const previous = scrollY.getPrevious()!
+    if (latest > previous && latest > 150) {
+      setHidden(true)
+    } else {
+      setHidden(false)
+    }
+  })
 
   const handleClick = () => {
     setIsOpen(!isOpen)
@@ -42,7 +55,13 @@ function NavBar({}: Props) {
   }, [isOpen])
 
   return (
-    <header
+    <m.header
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: '-100%' },
+      }}
+      animate={hidden ? 'hidden' : 'visible'}
+      transition={{ duration: 0.35, ease: 'easeInOut' }}
       className="sticky top-0 z-50 py-4 lg:py-8 font-medium flex justify-between align-middle leading-[44px] items-center px-8 sm:px-12 md:px-20 lg:px-32 xl:px-44"
       style={{ backgroundColor: 'var(--c-surface)', opacity: 0.95 }}
     >
@@ -134,7 +153,7 @@ function NavBar({}: Props) {
           />
         </button>
       </div>
-    </header>
+    </m.header>
   )
 }
 
