@@ -62,22 +62,44 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
   // =============================================
   useEffect(() => {
     const list: ISceneItemDef[] = []
+    const totalProject = projects.length > 0 ? projects.length : 9
 
-    // Tạo mảng projects vô tận nếu ít hơn ngẫu nhiên mảng
-    const totalItems = projects.length > 0 ? projects.length : 9
+    // Tạo mảng trung gian: xen text vào giữa các card project
+    // Cứ sau mỗi 2 card thì chèn 1 text item
+    // => tất cả projects đều được hiển thị đúng thứ tự
+    const TEXT_INTERVAL = 2 // chèn text sau mỗi N card
+    type IntermediateItem =
+      | { kind: 'card'; projectIndex: number }
+      | { kind: 'text'; textIndex: number }
 
-    for (let i = 0; i < totalItems; i++) {
-      const isText = i % 3 === 0
+    const interleaved: IntermediateItem[] = []
+    let textCounter = 0
+    for (let p = 0; p < totalProject; p++) {
+      // Chèn text trước mỗi nhóm TEXT_INTERVAL card
+      if (p % TEXT_INTERVAL === 0) {
+        interleaved.push({
+          kind: 'text',
+          textIndex: textCounter % TEXTS.length,
+        })
+        textCounter++
+      }
+      interleaved.push({ kind: 'card', projectIndex: p })
+    }
+
+    // Build scene items từ mảng trung gian
+    interleaved.forEach((item, i) => {
       list.push({
         id: `main-${i}`,
         x: (Math.random() - 0.5) * window.innerWidth * 0.8,
         y: (Math.random() - 0.5) * window.innerHeight * 0.8,
         rotZ: (Math.random() - 0.5) * 20,
         baseZ: -i * Z_GAP,
-        type: isText ? 'text' : 'card',
-        projectIndex: i % totalItems,
+        type: item.kind === 'text' ? 'text' : 'card',
+        projectIndex: item.kind === 'card' ? item.projectIndex : item.textIndex,
       })
-    }
+    })
+
+    const totalItems = interleaved.length
 
     // Stars
     for (let i = 0; i < STAR_COUNT; i++) {
@@ -95,9 +117,12 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
     setItemDefs(list)
   }, [projects.length])
 
-  // Lặp chiều sâu theo số lượng items
+  // Lặp chiều sâu theo số lượng items (card + text interleaved)
   const totalDepth = useMemo(() => {
-    const totalItems = projects.length > 0 ? projects.length : 9
+    const totalProject = projects.length > 0 ? projects.length : 9
+    const TEXT_INTERVAL = 2
+    const textCount = Math.ceil(totalProject / TEXT_INTERVAL)
+    const totalItems = totalProject + textCount
     return totalItems * Z_GAP
   }, [projects.length])
 
@@ -216,7 +241,13 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
   }, [itemDefs.length, update])
 
   return (
-    <div ref={trackRef} className="relative w-full h-[800vh] ">
+    <div
+      ref={trackRef}
+      className="relative w-full h-[800vh] "
+      // style={{
+      //   height: itemDefs.length * 350 + 'px',
+      // }}
+    >
       <div className="sticky top-0 w-full h-screen overflow-hidden">
         {/* Depth mask overlay */}
         <div
@@ -331,7 +362,7 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
                       transform: 'translate(-50%, -50%)',
                     }}
                   >
-                    {TEXTS[i % TEXTS.length]}
+                    {TEXTS[def.projectIndex % TEXTS.length]}
                   </div>
                 )}
 
