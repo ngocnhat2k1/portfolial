@@ -39,22 +39,28 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="w-full relative min-h-[var(--h-main-content)] max-lg:my-10">
-      <section id="home" className="lg:h-[var(--h-main-content)]">
+      <section
+        id="home"
+        className="container mx-auto lg:h-[var(--h-main-content)]"
+      >
         <HomePage />
       </section>
 
-      <section id="about" className="pt-10 md:pt-12 xl:pt-16">
+      <section id="about" className="container mx-auto pt-10 md:pt-12 xl:pt-16">
         <h1 className="sr-only">Who is Tran Ngoc Nhat?</h1>
         <AboutPage />
         <Skills />
         <Experience />
       </section>
 
-      <section id="project" className="pt-10 md:pt-12 xl:pt-16">
+      <section id="project" className="w-full pt-10 md:pt-12 xl:pt-16">
         <ProjectsPage />
       </section>
 
-      <section id="contact" className="pt-10 md:pt-12 xl:pt-16">
+      <section
+        id="contact"
+        className="container mx-auto pt-10 md:pt-12 xl:pt-16"
+      >
         <h1 className="sr-only">Contact Tran Ngoc Nhat - Frontend Developer</h1>
         <ContactPage />
       </section>
