@@ -1,10 +1,10 @@
 import MotionLazyContainer from '@/components/animate/MotionLazyContainer'
 import { ScriptClient } from '@/components/common/script_client'
 import { IntroOverlay } from '@/components/intro'
-import './globals.css'
-import { Montserrat } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
 import { Metadata } from 'next'
-
+import { Montserrat } from 'next/font/google'
+import './globals.css'
 const montserrat = Montserrat({
   weight: ['400', '500', '700'],
   subsets: ['vietnamese'],
@@ -132,6 +132,7 @@ export default function RootLayout({
         className={`${montserrat.className} flex min-h-screen flex-col transition-colors`}
         style={{ background: 'var(--c-bg)', color: 'var(--c-text)' }}
       >
+        <Analytics />
         <ScriptClient />
         <IntroOverlay />
         <MotionLazyContainer>{children}</MotionLazyContainer>
