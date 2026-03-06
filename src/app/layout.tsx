@@ -99,7 +99,8 @@ export default function RootLayout({
                   '@type': 'WebSite',
                   '@id': 'https://ngocnhat.info/#website',
                   url: 'https://ngocnhat.info',
-                  name: 'Tran Ngoc Nhat – Portfolio',
+                  name: 'Trần Ngọc Nhật',
+                  alternateName: 'Tran Ngoc Nhat',
                   description:
                     'Frontend Developer with 3+ years of experience specializing in React/Next.js. Team Leader at Mona Media.',
                   publisher: {

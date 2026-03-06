@@ -321,9 +321,9 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
                         <span className="font-mono text-xs text-primary border border-primary inline-block px-1.5 py-0.5 self-start uppercase backdrop-blur-md bg-black/50">
                           {projects[def.projectIndex].category}
                         </span>
-                        <h2 className="text-[2rem] md:text-3xl leading-[1.1] m-0 uppercase font-extrabold tracking-tighter text-white group-hover:text-primary transition-colors">
+                        <h3 className="text-[2rem] md:text-3xl leading-[1.1] m-0 uppercase font-extrabold tracking-tighter text-white group-hover:text-primary transition-colors">
                           {projects[def.projectIndex].title}
-                        </h2>
+                        </h3>
                       </div>
                       <span className="mt-2">
                         <img

@@ -47,7 +47,6 @@ export default function Home() {
       </section>
 
       <section id="about" className="container mx-auto pt-10 md:pt-12 xl:pt-16">
-        <h1 className="sr-only">Who is Tran Ngoc Nhat?</h1>
         <AboutPage />
         <Skills />
         <Experience />
@@ -61,7 +60,6 @@ export default function Home() {
         id="contact"
         className="container mx-auto pt-10 md:pt-12 xl:pt-16"
       >
-        <h1 className="sr-only">Contact Tran Ngoc Nhat - Frontend Developer</h1>
         <ContactPage />
       </section>
 

@@ -79,9 +79,9 @@ const ExperienceItem = ({
             >
               {isWork ? 'Work' : 'Education'}
             </span>
-            <h3 className="inline font-bold text-xl md:text-2xl text-[var(--c-text)]">
+            <h4 className="inline font-bold text-xl md:text-2xl text-[var(--c-text)]">
               {item.company}
-            </h3>
+            </h4>
           </div>
           <span className="text-sm md:text-base text-[var(--c-text-muted)] font-medium whitespace-nowrap bg-[color-mix(in_srgb,var(--c-surface-2)_40%,transparent)] px-3 py-1 rounded-md">
             {item.period}
@@ -147,9 +147,9 @@ const Experience = () => {
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--c-primary)] opacity-5 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
-      <h2 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
+      <h3 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
         Experience & Education
-      </h2>
+      </h3>
 
       <div className="relative max-w-3xl mx-auto lg:px-8 px-4 z-10">
         <div ref={containerRef} className="relative">

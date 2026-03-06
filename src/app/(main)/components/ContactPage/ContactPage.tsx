@@ -77,7 +77,7 @@ const ContactPage = () => {
         </m.div>
 
         {/* Contact cards */}
-        <h2 className="sr-only">Contact Information</h2>
+        <h3 className="sr-only">Contact Information</h3>
         <div className="max-w-3xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5">
           {contactInfo.map((item, index) => (
             <m.article
@@ -98,9 +98,9 @@ const ContactPage = () => {
                     </div>
                   </Magnet>
                   <div className="flex-1 min-w-0 ">
-                    <h3 className="text-xs font-bold uppercase tracking-wider text-[var(--c-text-muted)] mb-1">
+                    <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--c-text-muted)] mb-1">
                       {item.label}
-                    </h3>
+                    </h4>
                     {item.href ? (
                       <Link
                         href={item.href}
@@ -127,9 +127,9 @@ const ContactPage = () => {
           variants={varFade({ durationIn: 0.9 }).inUp}
           className="text-center mt-16"
         >
-          <h2 className="text-[var(--c-text-muted)] mb-6 font-normal text-base">
+          <p className="text-[var(--c-text-muted)] mb-6 font-normal text-base">
             Want to know more about my experience?
-          </h2>
+          </p>
 
           <Magnet
             padding={150}

@@ -15,13 +15,11 @@ const AboutPage = () => {
 
   return (
     <div className="w-full flex flex-col pt-10 pb-20">
-      <h2 className="sr-only">About me</h2>
-
       {/* Header Section */}
       <div className="w-full text-center pb-12">
-        <h3 className="text-xl md:text-2xl text-[var(--c-primary)] font-medium mb-2 uppercase tracking-wider">
-          Who am I?
-        </h3>
+        <h2 className="text-xl md:text-2xl text-[var(--c-primary)] font-medium mb-2 uppercase tracking-wider">
+          About Me
+        </h2>
         <div className="w-fit mx-auto">
           <div className="w-full font-bold text-3xl md:text-5xl lg:text-6xl text-[var(--c-text)]">
             <Typewriter

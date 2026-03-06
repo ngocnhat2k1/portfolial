@@ -25,9 +25,7 @@ const HomePage = () => {
         />
       </div>
 
-      <h1 className="sr-only">
-        Tran Ngoc Nhat - Frontend Developer & Software Engineer
-      </h1>
+      <h1 className="sr-only">Tran Ngoc Nhat</h1>
 
       {/* Content Overlay */}
       <section className="relative z-10 flex flex-col-reverse items-center justify-between gap-8 p-6 sm:p-8 md:p-12 lg:flex-row w-full min-h-[600px] bg-gradient-to-br from-transparent to-[color-mix(in_srgb,var(--c-surface)_60%,transparent)]">
