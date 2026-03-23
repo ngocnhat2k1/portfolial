@@ -27,15 +27,32 @@ const IntroOverlay = () => {
     return () => clearTimeout(timer)
   }, [])
 
-  // Khoá scroll khi intro đang hiển thị
+  // Khoá scroll triệt để khi intro đang hiển thị (cả desktop lẫn mobile)
   useEffect(() => {
+    const preventScroll = (e: Event) => e.preventDefault()
+
     if (isVisible) {
       document.body.style.overflow = 'hidden'
+      document.documentElement.style.overflow = 'hidden'
+      document.body.style.overscrollBehavior = 'none'
+      document.documentElement.style.overscrollBehavior = 'none'
+      // Chặn wheel và touchmove trên toàn document
+      document.addEventListener('touchmove', preventScroll, { passive: false })
+      document.addEventListener('wheel', preventScroll, { passive: false })
     } else {
       document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+      document.body.style.overscrollBehavior = ''
+      document.documentElement.style.overscrollBehavior = ''
     }
+
     return () => {
       document.body.style.overflow = ''
+      document.documentElement.style.overflow = ''
+      document.body.style.overscrollBehavior = ''
+      document.documentElement.style.overscrollBehavior = ''
+      document.removeEventListener('touchmove', preventScroll)
+      document.removeEventListener('wheel', preventScroll)
     }
   }, [isVisible])
 
