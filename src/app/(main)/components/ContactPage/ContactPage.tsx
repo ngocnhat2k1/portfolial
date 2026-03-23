@@ -54,18 +54,36 @@ const contactInfo = [
 
 const EMAIL = 'ngocnhat2k1@gmail.com'
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error'
+
 const ContactForm = () => {
   const [name, setName] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
+  const [status, setStatus] = useState<FormStatus>('idle')
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setStatus('loading')
 
-    const body = `Hi Ngọc Nhật,\n\nFrom: ${name}\n\n${message}`
-    const mailtoLink = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, subject, message }),
+      })
 
-    window.location.href = mailtoLink
+      if (res.ok) {
+        setStatus('success')
+        setName('')
+        setSubject('')
+        setMessage('')
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    }
   }
 
   return (
@@ -74,15 +92,10 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
       className="max-w-2xl mx-auto mt-12 space-y-5"
     >
-      <h3 className="text-xl font-bold text-[var(--c-text)] mb-2">
-        Send me a message
-      </h3>
+      <h3 className="text-xl font-bold text-[var(--c-text)] mb-2">Send me a message</h3>
       <p className="text-sm text-[var(--c-text-muted)] mb-6">
         Please contact me directly at{' '}
-        <Link
-          href={`mailto:${EMAIL}`}
-          className="text-[var(--c-primary)] hover:underline font-medium"
-        >
+        <Link href={`mailto:${EMAIL}`} className="text-[var(--c-primary)] hover:underline font-medium">
           {EMAIL}
         </Link>{' '}
         or through this form.
@@ -95,7 +108,6 @@ const ContactForm = () => {
         </div>
         <input
           type="text"
-          required
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
@@ -113,7 +125,7 @@ const ContactForm = () => {
           required
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          placeholder="Subject"
+          placeholder="Email subject"
           className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-[var(--c-surface-2)] border border-[var(--c-border)] text-[var(--c-text)] placeholder:text-[var(--c-text-muted)] focus:outline-none focus:border-[var(--c-primary)] focus:shadow-[0_0_0_3px_var(--shadow-primary)] transition-all duration-300 text-sm"
         />
       </div>
@@ -130,21 +142,46 @@ const ContactForm = () => {
         />
       </div>
 
+      {/* Status messages */}
+      {status === 'success' && (
+        <p className="text-sm font-medium text-green-500 text-center">
+          Message sent successfully! I&apos;ll get back to you soon.
+        </p>
+      )}
+      {status === 'error' && (
+        <p className="text-sm font-medium text-[var(--c-danger)] text-center">
+          Failed to send. Please try again or email me directly.
+        </p>
+      )}
+
       {/* Submit button */}
-      <Magnet
-        padding={100}
-        magnetStrength={3}
-        wrapperClassName="inline-block w-full"
-      >
+      <Magnet padding={100} magnetStrength={3} wrapperClassName="inline-block w-full">
         <button
           type="submit"
-          className="group relative w-full py-3.5 px-8 text-[var(--c-primary-content)] font-bold rounded-xl overflow-hidden shadow-[0_4px_20px_color-mix(in_srgb,var(--c-primary)_40%,transparent)] hover:shadow-[0_8px_30px_color-mix(in_srgb,var(--c-primary)_60%,transparent)] transition-all duration-300 outline-none cursor-pointer"
+          disabled={status === 'loading'}
+          className="group relative w-full py-3.5 px-8 text-[var(--c-primary-content)] font-bold rounded-xl overflow-hidden shadow-[0_4px_20px_color-mix(in_srgb,var(--c-primary)_40%,transparent)] hover:shadow-[0_8px_30px_color-mix(in_srgb,var(--c-primary)_60%,transparent)] transition-all duration-300 outline-none cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
         >
           <span className="absolute inset-0 bg-[var(--c-primary)] rounded-xl transition-transform duration-300"></span>
           <span className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,white_20%,transparent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           <span className="relative flex items-center justify-center gap-2">
-            <FiSend className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-            Send Message
+            {status === 'loading' ? (
+              <>
+                <svg
+                  className="w-5 h-5 animate-spin"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z" />
+                </svg>
+                Sending...
+              </>
+            ) : (
+              <>
+                <FiSend className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                Send Message
+              </>
+            )}
           </span>
         </button>
       </Magnet>
