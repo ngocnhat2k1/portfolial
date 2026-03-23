@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 50" fill="none">
+  <defs>
+    <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9"/>
+      <stop offset="100%" style="stop-color:#38bdf8"/>
+    </linearGradient>
+  </defs>
+  <!-- Code bracket left -->
+  <text x="0" y="38" font-family="monospace, 'Courier New'" font-size="32" font-weight="700" fill="url(#logoGrad)">&lt;</text>
+  <!-- Name -->
+  <text x="20" y="38" font-family="'Montserrat', sans-serif" font-size="28" font-weight="700" fill="currentColor">Ngoc Nhat</text>
+  <!-- Code bracket right with slash -->
+  <text x="168" y="38" font-family="monospace, 'Courier New'" font-size="32" font-weight="700" fill="url(#logoGrad)">/&gt;</text>
+</svg>
