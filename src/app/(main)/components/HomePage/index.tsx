@@ -7,7 +7,7 @@ import Image from 'next/image'
 import HomeImage from '../../../../public/HomeImage-2.png'
 import Link from 'next/link'
 import { LinkArrow } from '@/components/icons/icons'
-import Typewriter from 'typewriter-effect'
+import BlurText from '@/components/BlurText'
 import Squares from '@/components/Squares'
 import Magnet from '@/components/Magnet'
 
@@ -31,23 +31,24 @@ const HomePage = () => {
       <section className="relative z-10 flex flex-col-reverse items-center justify-between gap-8 p-6 sm:p-8 md:p-12 lg:flex-row w-full min-h-[600px] bg-gradient-to-br from-transparent to-[color-mix(in_srgb,var(--c-surface)_60%,transparent)]">
         {/* Text Column */}
         <div className="w-full lg:w-[55%] flex flex-col justify-center">
-          <m.div
-            variants={varFade({ durationIn: 0.5 }).inDown}
-            className="text-[var(--c-text)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold min-h-[100px] sm:min-h-[120px] lg:min-h-[140px] leading-tight"
-          >
-            <Typewriter
-              options={{
-                strings: [
-                  'Turning Vision Into Reality With Code.',
-                  'Frontend Team Leader & Software Engineer.',
-                ],
-                autoStart: true,
-                loop: true,
-                delay: 70,
-                deleteSpeed: 30,
-              }}
+          <div className="flex flex-col gap-2">
+            <BlurText
+              text="Turning Vision Into Reality"
+              delay={90}
+              direction="top"
+              animateBy="words"
+              stepDuration={0.4}
+              className="text-[var(--c-text)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
             />
-          </m.div>
+            <BlurText
+              text="With Code & Creativity."
+              delay={90}
+              direction="bottom"
+              animateBy="words"
+              stepDuration={0.4}
+              className="text-[var(--c-primary)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold leading-tight"
+            />
+          </div>
 
           <m.p
             variants={varFade({ durationIn: 0.7 }).inLeft}
