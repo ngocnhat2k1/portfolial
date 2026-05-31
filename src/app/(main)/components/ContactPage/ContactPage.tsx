@@ -17,44 +17,28 @@ import {
   FiSend,
   FiUser,
 } from 'react-icons/fi'
+import { useLocale } from '@/i18n'
+import SectionHeading from '@/components/ui/SectionHeading'
+import Button from '@/components/ui/Button'
+import {
+  contactInfo,
+  profile,
+  ui,
+  sectionTitles,
+} from '@/data/site'
 
-// Thông tin liên hệ từ CV
-const contactInfo = [
-  {
-    icon: <FiMail />,
-    label: 'Email',
-    value: 'ngocnhat2k1@gmail.com',
-    href: 'mailto:ngocnhat2k1@gmail.com',
-  },
-  {
-    icon: <FiPhone />,
-    label: 'Phone',
-    value: '+84 395 115 641',
-    href: 'tel:+84395115641',
-  },
-  {
-    icon: <FiMapPin />,
-    label: 'Location',
-    value: 'Tân Bình, Ho Chi Minh City, Vietnam',
-    href: null,
-  },
-  {
-    icon: <FiLinkedin />,
-    label: 'LinkedIn',
-    value: 'tran-ngoc-nhat-109a06279',
-    href: 'https://www.linkedin.com/in/tran-ngoc-nhat-109a06279/',
-  },
-  {
-    icon: <FiGithub />,
-    label: 'GitHub',
-    value: 'github.com/ngocnhat2k1',
-    href: 'https://github.com/ngocnhat2k1',
-  },
-]
+const contactIconMap: Record<(typeof contactInfo)[number]['type'], React.ReactNode> = {
+  email: <FiMail />,
+  phone: <FiPhone />,
+  location: <FiMapPin />,
+  linkedin: <FiLinkedin />,
+  github: <FiGithub />,
+}
 
 const EMAIL = 'ngocnhat2k1@gmail.com'
 
 const ContactForm = () => {
+  const { t } = useLocale()
   const [name, setName] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
@@ -75,17 +59,17 @@ const ContactForm = () => {
       className="max-w-2xl mx-auto mt-12 space-y-5"
     >
       <h3 className="text-xl font-bold text-[var(--c-text)] mb-2">
-        Send me a message
+        {t(ui.sendMeMessage)}
       </h3>
       <p className="text-sm text-[var(--c-text-muted)] mb-6">
-        Please contact me directly at{' '}
+        {t(ui.contactIntro)}{' '}
         <Link
           href={`mailto:${EMAIL}`}
           className="text-[var(--c-primary)] hover:underline font-medium"
         >
           {EMAIL}
         </Link>{' '}
-        or through this form.
+        {t(ui.contactOrForm)}
       </p>
 
       {/* Name field */}
@@ -98,7 +82,7 @@ const ContactForm = () => {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Your name"
+          placeholder={t(ui.yourName)}
           className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-[var(--c-surface-2)] border border-[var(--c-border)] text-[var(--c-text)] placeholder:text-[var(--c-text-muted)] focus:outline-none focus:border-[var(--c-primary)] focus:shadow-[0_0_0_3px_var(--shadow-primary)] transition-all duration-300 text-sm"
         />
       </div>
@@ -113,7 +97,7 @@ const ContactForm = () => {
           required
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
-          placeholder="Subject"
+          placeholder={t(ui.subject)}
           className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-[var(--c-surface-2)] border border-[var(--c-border)] text-[var(--c-text)] placeholder:text-[var(--c-text-muted)] focus:outline-none focus:border-[var(--c-primary)] focus:shadow-[0_0_0_3px_var(--shadow-primary)] transition-all duration-300 text-sm"
         />
       </div>
@@ -124,7 +108,7 @@ const ContactForm = () => {
           required
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Your message..."
+          placeholder={t(ui.yourMessage)}
           rows={6}
           className="w-full px-4 py-3.5 rounded-xl bg-[var(--c-surface-2)] border border-[var(--c-border)] text-[var(--c-text)] placeholder:text-[var(--c-text-muted)] focus:outline-none focus:border-[var(--c-primary)] focus:shadow-[0_0_0_3px_var(--shadow-primary)] transition-all duration-300 text-sm resize-none"
         />
@@ -144,7 +128,7 @@ const ContactForm = () => {
           <span className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,white_20%,transparent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           <span className="relative flex items-center justify-center gap-2">
             <FiSend className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-            Send Message
+            {t(ui.sendMessage)}
           </span>
         </button>
       </Magnet>
@@ -153,6 +137,7 @@ const ContactForm = () => {
 }
 
 const ContactPage = () => {
+  const { t } = useLocale()
   return (
     <div className="relative w-full rounded-3xl overflow-hidden border border-[var(--c-border)] shadow-sm bg-[var(--c-surface)] py-12 px-4 sm:px-6">
       {/* Animated Particles Background */}
@@ -171,18 +156,13 @@ const ContactPage = () => {
 
       <MotionContainer className="relative z-10 w-full">
         {/* Heading */}
-        <m.div
-          variants={varFade({ durationIn: 0.4 }).inDown}
-          className="text-center mb-10"
-        >
-          <h2 className="font-bold text-4xl lg:text-5xl text-[var(--c-text)]">
-            Get In Touch
-          </h2>
-          <p className="mt-4 text-[var(--c-text-muted)] text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
-            I&apos;m always open to new opportunities, collaborations, or just a
-            friendly chat. Feel free to reach out via any channel below.
-          </p>
-        </m.div>
+        <div className="mb-10">
+          <SectionHeading
+            eyebrow={{ vi: 'Liên hệ', en: 'Contact' }}
+            title={sectionTitles.contact}
+            subtitle={ui.contactLead}
+          />
+        </div>
 
         {/* Two-column layout: Contact info + Form */}
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -192,7 +172,7 @@ const ContactPage = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
               {contactInfo.map((item, index) => (
                 <m.article
-                  key={item.label}
+                  key={item.type}
                   variants={varFade({ durationIn: 0.4 + index * 0.1 }).inUp}
                   className="w-full"
                 >
@@ -205,12 +185,12 @@ const ContactPage = () => {
                         wrapperClassName="flex-shrink-0"
                       >
                         <div className="mb-2 w-12 h-12 flex items-center justify-center rounded-2xl bg-[color-mix(in_srgb,var(--c-primary)_15%,transparent)] text-2xl group-hover:scale-110 transition-transform duration-300 shadow-sm border border-[color-mix(in_srgb,var(--c-primary)_20%,transparent)] group-hover:shadow-[0_0_15px_color-mix(in_srgb,var(--c-primary)_40%,transparent)]">
-                          {item.icon}
+                          {contactIconMap[item.type]}
                         </div>
                       </Magnet>
                       <div className="flex-1 min-w-0">
                         <h4 className="text-xs font-bold uppercase tracking-wider text-[var(--c-text-muted)] mb-1">
-                          {item.label}
+                          {t(item.label)}
                         </h4>
                         {item.href ? (
                           <Link
@@ -244,40 +224,26 @@ const ContactPage = () => {
           className="text-center mt-16"
         >
           <p className="text-[var(--c-text-muted)] mb-6 font-normal text-base">
-            Want to know more about my experience?
+            {t(ui.knowMore)}
           </p>
 
-          <Magnet
-            padding={150}
-            magnetStrength={4}
-            wrapperClassName="inline-block"
-          >
-            <Link
-              href="/resume-v2.pdf"
-              target="_blank"
-              className="group relative inline-flex items-center justify-center gap-2 py-3 px-8 text-[var(--c-primary-content)] font-bold rounded-xl overflow-hidden shadow-[0_4px_20px_color-mix(in_srgb,var(--c-primary)_40%,transparent)] hover:shadow-[0_8px_30px_color-mix(in_srgb,var(--c-primary)_60%,transparent)] transition-all duration-300 outline-none"
+          <Button href={profile.resume} target="_blank" magnet variant="primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <span className="absolute inset-0 bg-[var(--c-primary)] rounded-xl transition-transform duration-300"></span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,white_20%,transparent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="relative flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                Download My Resume
-              </span>
-            </Link>
-          </Magnet>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            {t(ui.downloadResume)}
+          </Button>
         </m.section>
       </MotionContainer>
     </div>

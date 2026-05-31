@@ -705,12 +705,12 @@ const MagicBento: React.FC<BentoProps> = ({
                     </div>
                   )}
 
-                  <div className="card__header flex justify-between items-start gap-3 relative z-10 text-white">
+                  <div className="card__header flex justify-between items-start gap-3 relative z-10 text-[var(--c-text)]">
                     <span className="card__label font-bold text-sm tracking-widest uppercase text-[var(--c-primary)]">
                       {card.label}
                     </span>
                   </div>
-                  <div className="card__content flex flex-col relative text-white mt-auto">
+                  <div className="card__content flex flex-col relative text-[var(--c-text)] mt-auto">
                     <h3
                       className={`card__title font-semibold text-xl m-0 mb-2 ${textAutoHide ? 'text-clamp-1' : ''}`}
                     >
@@ -848,12 +848,12 @@ const MagicBento: React.FC<BentoProps> = ({
                   </div>
                 )}
 
-                <div className="card__header flex justify-between items-start gap-3 relative z-10 text-white">
+                <div className="card__header flex justify-between items-start gap-3 relative z-10 text-[var(--c-text)]">
                   <span className="card__label font-bold text-sm tracking-widest uppercase text-[var(--c-primary)]">
                     {card.label}
                   </span>
                 </div>
-                <div className="card__content flex flex-col relative text-white">
+                <div className="card__content flex flex-col relative text-[var(--c-text)]">
                   <h3
                     className={`card__title font-normal text-base m-0 mb-1 ${textAutoHide ? 'text-clamp-1' : ''}`}
                   >

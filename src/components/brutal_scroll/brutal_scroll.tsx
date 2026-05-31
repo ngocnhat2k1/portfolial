@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { IProject } from '@/app/(main)/components/ProjectsPage/ProjectsPage'
+import { IProject } from '@/data/projects'
+import { useLocale } from '@/i18n'
 import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
@@ -41,6 +42,7 @@ interface ISceneItemDef {
 // BrutalScroll: Component hiệu ứng 3D scroll
 // =============================================
 const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
+  const { t } = useLocale()
   const [itemDefs, setItemDefs] = useState<ISceneItemDef[]>([])
 
   // Ref chứa các DOM node render ra từ React
@@ -49,8 +51,16 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
   const trackRef = useRef<HTMLDivElement>(null)
   const viewportRef = useRef<HTMLDivElement>(null)
   const worldRef = useRef<HTMLDivElement>(null)
+  const progressBarRef = useRef<HTMLDivElement>(null)
 
   const rafIdRef = useRef<number>(0)
+
+  // Bỏ qua hiệu ứng, nhảy thẳng tới phần Liên hệ
+  const handleSkip = useCallback(() => {
+    document
+      .getElementById('contact')
+      ?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
 
   // Track scroll position of the tracking section natively
   const scrollPosRef = useRef(0)
@@ -124,6 +134,14 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
     const textCount = Math.ceil(totalProject / TEXT_INTERVAL)
     const totalItems = totalProject + textCount
     return totalItems * Z_GAP
+  }, [projects.length])
+
+  // Chiều cao track tỉ lệ theo số item (thay cho 800vh cố định)
+  const trackVh = useMemo(() => {
+    const totalProject = projects.length > 0 ? projects.length : 9
+    const textCount = Math.ceil(totalProject / 2)
+    const totalItems = totalProject + textCount
+    return Math.round(100 + totalItems * 30)
   }, [projects.length])
 
   // =============================================
@@ -208,6 +226,13 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
 
         // Cập nhật vị trí cuộn cho update
         scrollPosRef.current = distance
+
+        // Cập nhật thanh tiến trình
+        const maxDist = rect.height - window.innerHeight
+        if (progressBarRef.current && maxDist > 0) {
+          const pct = Math.max(0, Math.min(1, distance / maxDist))
+          progressBarRef.current.style.width = `${pct * 100}%`
+        }
       }
     }
 
@@ -243,12 +268,31 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
   return (
     <div
       ref={trackRef}
-      className="relative w-full h-[800vh] "
-      // style={{
-      //   height: itemDefs.length * 350 + 'px',
-      // }}
+      className="relative w-full"
+      style={{ height: `${trackVh}vh` }}
     >
       <div className="sticky top-0 w-full h-screen overflow-hidden">
+        {/* Skip + progress HUD */}
+        <div className="absolute top-4 left-1/2 z-[5] flex w-[min(90%,420px)] -translate-x-1/2 flex-col items-center gap-2 pointer-events-none">
+          <div className="flex w-full items-center justify-between gap-3 pointer-events-auto">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--c-text-muted)]">
+              {t({ vi: 'Cuộn để khám phá', en: 'Scroll to explore' })}
+            </span>
+            <button
+              onClick={handleSkip}
+              className="rounded-full border border-[var(--c-border)] bg-[color-mix(in_srgb,var(--c-bg)_60%,transparent)] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--c-text)] backdrop-blur-md transition-colors hover:border-[var(--c-primary)] hover:text-[var(--c-primary)]"
+            >
+              {t({ vi: 'Bỏ qua', en: 'Skip' })}
+            </button>
+          </div>
+          <div className="h-[3px] w-full overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--c-text)_12%,transparent)]">
+            <div
+              ref={progressBarRef}
+              className="h-full w-0 rounded-full bg-[var(--c-primary)]"
+            />
+          </div>
+        </div>
+
         {/* Depth mask overlay */}
         <div
           className="absolute inset-0 z-[2] pointer-events-none"
@@ -318,23 +362,42 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
                     {/* Card Content */}
                     <div className="relative w-full h-full p-5 md:p-8 flex flex-col justify-between border border-white/15 rounded hover:border-primary transition-colors">
                       <div className="flex flex-col gap-2">
-                        <span className="font-mono text-xs text-primary border border-primary inline-block px-1.5 py-0.5 self-start uppercase backdrop-blur-md bg-black/50">
-                          {projects[def.projectIndex].category}
-                        </span>
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <span className="font-mono text-xs text-primary border border-primary inline-block px-1.5 py-0.5 uppercase backdrop-blur-md bg-black/50">
+                            {t(projects[def.projectIndex].category)}
+                          </span>
+                          {projects[def.projectIndex].period && (
+                            <span className="font-mono text-[10px] text-white/80 border border-white/20 inline-block px-1.5 py-0.5 backdrop-blur-md bg-black/50">
+                              {projects[def.projectIndex].period}
+                            </span>
+                          )}
+                        </div>
                         <h3 className="text-[2rem] md:text-3xl leading-[1.1] m-0 uppercase font-extrabold tracking-tighter text-white group-hover:text-primary transition-colors">
                           {projects[def.projectIndex].title}
                         </h3>
+                        {projects[def.projectIndex].role && (
+                          <span className="text-[11px] font-semibold uppercase tracking-wider text-primary/90">
+                            {t(projects[def.projectIndex].role!)}
+                          </span>
+                        )}
                       </div>
                       <span className="mt-2">
                         <img
                           src={projects[def.projectIndex].preview}
-                          className="w-full aspect-video rounded-lg"
-                          alt=""
+                          className="w-full aspect-video rounded-lg object-cover"
+                          alt={`${projects[def.projectIndex].title} — ${t(projects[def.projectIndex].category)}`}
+                          loading="lazy"
                         />
                       </span>
                       <div className="mt-auto">
+                        {projects[def.projectIndex].metric && (
+                          <p className="text-primary text-xs font-bold mb-2 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                            {t(projects[def.projectIndex].metric!)}
+                          </p>
+                        )}
                         <p className="text-gray-300 text-sm line-clamp-3 mb-4 drop-shadow-md">
-                          {projects[def.projectIndex].description}
+                          {t(projects[def.projectIndex].description)}
                         </p>
                         <div className="flex flex-wrap gap-1">
                           {projects[def.projectIndex].tech

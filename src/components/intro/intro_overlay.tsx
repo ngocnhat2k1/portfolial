@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useReducedMotion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 import DecryptedText from './decrypted_text'
 
@@ -9,25 +9,70 @@ import DecryptedText from './decrypted_text'
    Lazy load các component nặng – tránh SSR issues với WebGL
    ============================================================ */
 const Particles = dynamic(() => import('./particles'), { ssr: false })
-const IntroModel = dynamic(() => import('./intro_model'), { ssr: false })
+
+const STORAGE_KEY = 'intro-seen'
+
+/* Đọc biến màu theme và chuẩn hoá về hex (cho WebGL particles) */
+const readThemeColors = (): string[] => {
+  if (typeof window === 'undefined') return ['#ffffff']
+  const styles = getComputedStyle(document.documentElement)
+  const toHex = (raw: string): string | null => {
+    const v = raw.trim()
+    if (!v) return null
+    if (v.startsWith('#')) return v
+    const nums = v.match(/\d+(\.\d+)?/g)
+    if (!nums || nums.length < 3) return null
+    const [r, g, b] = nums.map((n) => Math.round(parseFloat(n)))
+    return (
+      '#' +
+      [r, g, b].map((x) => x.toString(16).padStart(2, '0')).join('')
+    )
+  }
+  const colors = ['--c-primary', '--c-secondary', '--c-accent', '--c-light']
+    .map((name) => toHex(styles.getPropertyValue(name)))
+    .filter((c): c is string => Boolean(c))
+  return colors.length ? colors : ['#ffffff']
+}
 
 /* ============================================================
-   IntroOverlay – Màn hình intro fullscreen
-   Hiển thị 3D model + particles + text animation + nút enter
-   Layout: Model bên trái, Text bên phải (giống trang tham khảo)
+   IntroOverlay – Màn hình intro fullscreen (hiển thị 1 lần)
    ============================================================ */
 const IntroOverlay = () => {
-  const [isVisible, setIsVisible] = useState(true)
+  const prefersReducedMotion = useReducedMotion()
+  const [isVisible, setIsVisible] = useState(false)
   const [isExiting, setIsExiting] = useState(false)
   const [showContent, setShowContent] = useState(false)
+  const [particleColors, setParticleColors] = useState<string[]>(['#ffffff'])
+
+  // Quyết định hiển thị: chỉ hiện lần đầu & khi không bật reduced-motion
+  useEffect(() => {
+    let seen = false
+    try {
+      seen = !!localStorage.getItem(STORAGE_KEY)
+    } catch {
+      /* ignore */
+    }
+    if (seen) return
+    if (prefersReducedMotion) {
+      try {
+        localStorage.setItem(STORAGE_KEY, '1')
+      } catch {
+        /* ignore */
+      }
+      return
+    }
+    setParticleColors(readThemeColors())
+    setIsVisible(true)
+  }, [prefersReducedMotion])
 
   // Hiệu ứng fade-in nội dung sau 500ms
   useEffect(() => {
+    if (!isVisible) return
     const timer = setTimeout(() => setShowContent(true), 500)
     return () => clearTimeout(timer)
-  }, [])
+  }, [isVisible])
 
-  // Khoá scroll triệt để khi intro đang hiển thị (cả desktop lẫn mobile)
+  // Khoá scroll triệt để khi intro đang hiển thị
   useEffect(() => {
     const preventScroll = (e: Event) => e.preventDefault()
 
@@ -36,7 +81,6 @@ const IntroOverlay = () => {
       document.documentElement.style.overflow = 'hidden'
       document.body.style.overscrollBehavior = 'none'
       document.documentElement.style.overscrollBehavior = 'none'
-      // Chặn wheel và touchmove trên toàn document
       document.addEventListener('touchmove', preventScroll, { passive: false })
       document.addEventListener('wheel', preventScroll, { passive: false })
     } else {
@@ -56,11 +100,29 @@ const IntroOverlay = () => {
     }
   }, [isVisible])
 
-  // Xử lý khi nhấn nút Enter
+  // Xử lý khi vào trang (nút Enter / Skip / phím)
   const handleEnter = useCallback(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, '1')
+    } catch {
+      /* ignore */
+    }
     setIsExiting(true)
     setTimeout(() => setIsVisible(false), 800)
   }, [])
+
+  // Bàn phím: Enter / Space để vào, Esc để bỏ qua
+  useEffect(() => {
+    if (!isVisible) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') {
+        e.preventDefault()
+        handleEnter()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [isVisible, handleEnter])
 
   if (!isVisible) return null
 
@@ -73,6 +135,8 @@ const IntroOverlay = () => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
+          role="dialog"
+          aria-label="Intro"
           style={{
             position: 'fixed',
             inset: 0,
@@ -89,13 +153,7 @@ const IntroOverlay = () => {
             particleCount={250}
             particleSpread={12}
             speed={0.06}
-            particleColors={[
-              '#1D7874',
-              '#679289',
-              '#F4C095',
-              '#ffffff',
-              '#48CAE4',
-            ]}
+            particleColors={particleColors}
             moveParticlesOnHover={true}
             particleHoverFactor={1.5}
             alphaParticles={true}
@@ -111,12 +169,38 @@ const IntroOverlay = () => {
               position: 'absolute',
               inset: 0,
               background:
-                'radial-gradient(ellipse at 35% 50%, transparent 0%, rgba(3,0,20,0.3) 40%, rgba(3,0,20,0.7) 100%)',
+                'radial-gradient(ellipse at 50% 50%, transparent 0%, color-mix(in srgb, var(--c-dark) 40%, transparent) 50%, color-mix(in srgb, var(--c-dark) 80%, transparent) 100%)',
               pointerEvents: 'none',
             }}
           />
 
-          {/* === Main Content – Split Layout === */}
+          {/* === Skip button === */}
+          <button
+            onClick={handleEnter}
+            aria-label="Bỏ qua intro"
+            style={{
+              position: 'absolute',
+              top: '1.5rem',
+              right: '1.5rem',
+              zIndex: 5,
+              padding: '0.5rem 1.25rem',
+              fontSize: '0.75rem',
+              fontWeight: 600,
+              letterSpacing: '0.15em',
+              textTransform: 'uppercase',
+              color: 'var(--c-light)',
+              background: 'color-mix(in srgb, var(--c-light) 10%, transparent)',
+              border:
+                '1px solid color-mix(in srgb, var(--c-light) 25%, transparent)',
+              borderRadius: '50px',
+              cursor: 'pointer',
+              backdropFilter: 'blur(10px)',
+            }}
+          >
+            Skip →
+          </button>
+
+          {/* === Main Content === */}
           <div
             style={{
               position: 'relative',
@@ -130,20 +214,20 @@ const IntroOverlay = () => {
               padding: '2rem',
             }}
           >
-            {/* --- Right: Text Content --- */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={showContent ? { opacity: 1, x: 0 } : {}}
+              initial={{ opacity: 0, y: 30 }}
+              animate={showContent ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 1, ease: 'easeOut', delay: 0.3 }}
               style={{
-                flex: '1 1 50%',
+                flex: '1 1 100%',
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: '1.5rem',
                 padding: '0 2rem',
+                textAlign: 'center',
               }}
-              className="intro-text-content "
+              className="intro-text-content"
             >
               {/* Greeting */}
               <motion.p
@@ -151,7 +235,7 @@ const IntroOverlay = () => {
                 animate={showContent ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.8, delay: 0.5 }}
                 style={{
-                  color: 'rgba(255,255,255,0.5)',
+                  color: 'color-mix(in srgb, var(--c-light) 55%, transparent)',
                   fontSize: '0.875rem',
                   fontWeight: 400,
                   letterSpacing: '0.3em',
@@ -166,7 +250,7 @@ const IntroOverlay = () => {
                 style={{
                   fontSize: 'clamp(1.5rem, 4vw, 3rem)',
                   fontWeight: 700,
-                  color: '#ffffff',
+                  color: 'var(--c-light)',
                   lineHeight: 1.2,
                 }}
               >
@@ -190,13 +274,13 @@ const IntroOverlay = () => {
                 animate={showContent ? { opacity: 1 } : {}}
                 transition={{ duration: 1, delay: 1.5 }}
                 style={{
-                  color: 'rgba(255,255,255,0.6)',
+                  color: 'color-mix(in srgb, var(--c-light) 65%, transparent)',
                   fontSize: 'clamp(0.875rem, 1.5vw, 1.125rem)',
                   maxWidth: '450px',
                   lineHeight: 1.6,
                 }}
               >
-                Frontend Developer &bull; React/Next.js
+                Frontend Technical Leader &bull; React/Next.js
               </motion.p>
 
               {/* Enter Button */}
@@ -204,10 +288,7 @@ const IntroOverlay = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={showContent ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.8, delay: 2 }}
-                whileHover={{
-                  scale: 1.05,
-                  boxShadow: '0 0 40px rgba(29,120,116,0.5)',
-                }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleEnter}
                 className="intro-enter-btn"
@@ -216,9 +297,10 @@ const IntroOverlay = () => {
                   padding: '0.875rem 2.5rem',
                   fontSize: '1rem',
                   fontWeight: 600,
-                  color: '#ffffff',
+                  color: 'var(--c-light)',
                   background: 'transparent',
-                  border: '1.5px solid rgba(29,120,116,0.6)',
+                  border:
+                    '1.5px solid color-mix(in srgb, var(--c-primary) 60%, transparent)',
                   borderRadius: '50px',
                   cursor: 'pointer',
                   letterSpacing: '0.1em',
@@ -251,7 +333,7 @@ const IntroOverlay = () => {
             <span
               style={{
                 fontSize: '0.75rem',
-                color: 'rgba(255,255,255,0.4)',
+                color: 'color-mix(in srgb, var(--c-light) 40%, transparent)',
                 letterSpacing: '0.15em',
               }}
             >
@@ -268,7 +350,7 @@ const IntroOverlay = () => {
                 width: '2px',
                 height: '20px',
                 background:
-                  'linear-gradient(to bottom, rgba(29,120,116,0.6), transparent)',
+                  'linear-gradient(to bottom, color-mix(in srgb, var(--c-primary) 60%, transparent), transparent)',
                 borderRadius: '1px',
               }}
             />

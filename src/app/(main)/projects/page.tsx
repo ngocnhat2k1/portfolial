@@ -1,4 +1,5 @@
 import ProjectsPage from '../components/ProjectsPage/ProjectsPage'
+import Section from '@/components/ui/Section'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -23,7 +24,11 @@ export const metadata: Metadata = {
 }
 
 const Project = () => {
-  return <ProjectsPage />
+  return (
+    <Section bleed>
+      <ProjectsPage />
+    </Section>
+  )
 }
 
 export default Project
