@@ -14,6 +14,11 @@
   /* Chiều cao nội dung chính = 100vh - header - footer */
   --h-main-content: calc(100vh - var(--h-header) - var(--h-footer));
 
+  /* Fonts */
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-plus-jakarta-sans), -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), monospace;
+
   /* ----------------------------------------------------------
      DESIGN TOKENS (dùng chung mọi theme) — redesign system
      Radius / Shadow / Section rhythm / Overlay
@@ -223,6 +228,41 @@
   --c-circular-stripe: #12091c;
 
   --shadow-primary: rgba(192, 132, 252, 0.25);
+}
+
+/* --- 7. TERMINAL NOIR (Modern Minimalist / Glassmorphic) ------ */
+[data-theme='terminal-noir'] {
+  --c-primary: #c0c1ff;
+  --c-primary-dark: #494bd6;
+  --c-primary-content: #1000a9;
+  --c-secondary: #4cd7f6;
+  --c-accent: #4edea3;
+  --c-dark: #0e0e0e;
+  --c-light: #e5e2e1;
+
+  --c-bg: #131313;
+  --c-surface: #1c1b1b;
+  --c-surface-2: #201f1f;
+  --c-border: rgba(144, 143, 160, 0.15);
+
+  --c-text: #e5e2e1;
+  --c-text-muted: #c7c4d7;
+  --c-text-on-primary: #1000a9;
+
+  --c-danger: #ffb4ab;
+  --c-warning: #ffdad6;
+
+  --c-circular: rgba(192, 193, 255, 0.12);
+  --c-circular-stripe: #131313;
+
+  --shadow-primary: rgba(192, 193, 255, 0.2);
+
+  /* Override border radius tokens for precise, technical shape */
+  --r-sm: 4px;
+  --r-md: 4px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-2xl: 16px;
 }
 
 /* ============================================================
@@ -448,4 +488,118 @@ html {
 .btn-ghost:hover {
   color: var(--c-primary);
   background: color-mix(in srgb, var(--c-primary) 12%, transparent);
+}
+
+/* ============================================================
+   TYPOGRAPHY CONFIGURATION (Terminal Noir)
+   ============================================================ */
+body {
+  font-family: var(--font-sans);
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: var(--font-display);
+}
+
+pre, code, .font-mono {
+  font-family: var(--font-mono);
+}
+
+.code-sm {
+  font-family: var(--font-mono) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+}
+
+/* ============================================================
+   TERMINAL NOIR DESIGN SYSTEM OVERRIDES
+   ============================================================ */
+
+/* 1. Glassmorphic Navigation Bar */
+[data-theme='terminal-noir'] header {
+  background-color: rgba(19, 19, 19, 0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  border-bottom: 1px solid rgba(144, 143, 160, 0.15) !important;
+}
+
+/* 2. Active States Navigation Bar */
+[data-theme='terminal-noir'] .nav-item {
+  background: transparent !important;
+  border-radius: 0 !important;
+  border-bottom: 2px solid transparent !important;
+  padding-left: 1.25rem !important;
+  padding-right: 1.25rem !important;
+  transition: all 0.25s ease !important;
+}
+
+[data-theme='terminal-noir'] .nav-item:hover {
+  background: transparent !important;
+  color: var(--c-primary) !important;
+}
+
+[data-theme='terminal-noir'] .nav-item-active {
+  background: transparent !important;
+  color: var(--c-primary) !important;
+  border-bottom: 2px solid var(--c-primary) !important;
+}
+
+/* 3. Project Cards Hover Border Shift */
+[data-theme='terminal-noir'] article.group:hover {
+  border-color: var(--c-primary) !important;
+  box-shadow: 0 0 20px rgba(192, 193, 255, 0.15) !important;
+}
+
+/* 4. Skill Tags (Tech Badges) */
+[data-theme='terminal-noir'] .tech-badge,
+[data-theme='terminal-noir'] span.inline-flex.border {
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+  color: var(--c-text-muted) !important;
+  border-radius: 4px !important;
+}
+
+[data-theme='terminal-noir'] span.inline-flex.border.text-\[var\(--c-primary\)\] {
+  color: var(--c-primary) !important;
+  background-color: rgba(192, 193, 255, 0.1) !important;
+  border-color: rgba(192, 193, 255, 0.25) !important;
+}
+
+/* 5. Buttons Hover Glow & Outline Invert */
+[data-theme='terminal-noir'] .btn-primary {
+  background-color: var(--c-primary) !important;
+  color: var(--c-primary-content) !important;
+  box-shadow: none !important;
+}
+
+[data-theme='terminal-noir'] .btn-primary:hover {
+  box-shadow: 0 0 20px rgba(192, 193, 255, 0.35) !important;
+  transform: translateY(-2px);
+}
+
+[data-theme='terminal-noir'] .btn-outline {
+  border: 1px solid #ffffff !important;
+  color: #ffffff !important;
+  background: transparent !important;
+}
+
+[data-theme='terminal-noir'] .btn-outline:hover {
+  background-color: #ffffff !important;
+  color: #131313 !important;
+}
+
+/* 6. Contact Form Inputs */
+[data-theme='terminal-noir'] input,
+[data-theme='terminal-noir'] textarea {
+  background-color: #000000 !important;
+  border-radius: var(--r-sm) !important;
+  border: 1px solid rgba(144, 143, 160, 0.3) !important;
+}
+
+[data-theme='terminal-noir'] input:focus,
+[data-theme='terminal-noir'] textarea:focus {
+  border-color: var(--c-secondary) !important;
+  box-shadow: 0 0 12px rgba(76, 215, 246, 0.3) !important;
 }

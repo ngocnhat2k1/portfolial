@@ -25,7 +25,7 @@ const AboutPage = () => {
           {t(sectionTitles.aboutEyebrow)}
         </h2>
         <div className="mx-auto w-full max-w-full break-words font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[var(--c-text)]">
-          <Typewriter
+          {/* <Typewriter
             key={locale}
             options={{
               strings: sectionTitles.aboutTyped.map((s) => t(s)),
@@ -34,7 +34,7 @@ const AboutPage = () => {
               wrapperClassName: 'text-[var(--c-text)]',
               cursorClassName: 'text-[var(--c-primary)]',
             }}
-          />
+          /> */}
         </div>
       </div>
 

@@ -1,9 +1,9 @@
 'use client'
 
-import Link from 'next/link'
-import { FacebookIcon, GithubIcon, LinkedInIcon } from '../icons/icons'
+import { navItems, profile, socials, ui } from '@/data/site'
 import { useLocale } from '@/i18n'
-import { socials, profile, ui, navItems } from '@/data/site'
+import Link from 'next/link'
+import { GithubIcon, LinkedInIcon } from '../icons/icons'
 
 const Footer = () => {
   const { t } = useLocale()
@@ -69,15 +69,6 @@ const Footer = () => {
               className="rounded-full p-2 text-[var(--c-text-muted)] transition-all duration-300 hover:-translate-y-1 hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)]"
             >
               <LinkedInIcon className="text-[28px]" />
-            </Link>
-            <Link
-              href={socials.facebook}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="rounded-full p-2 text-[var(--c-text-muted)] transition-all duration-300 hover:-translate-y-1 hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)]"
-            >
-              <FacebookIcon className="text-[14px]" />
             </Link>
           </div>
         </div>

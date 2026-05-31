@@ -1,18 +1,17 @@
 'use client'
 
 import MotionContainer from '@/components/animate/MotionContainer'
-import { m } from 'framer-motion'
 import { varFade } from '@/components/animate/variants'
-import Image from 'next/image'
-import HomeImage from '../../../../public/HomeImage-2.png'
-import Link from 'next/link'
-import { LinkArrow, GithubIcon, LinkedInIcon, FacebookIcon } from '@/components/icons/icons'
-import Typewriter from 'typewriter-effect'
+import { LinkArrow } from '@/components/icons/icons'
 import Squares from '@/components/Squares'
 import Button from '@/components/ui/Button'
 import TechBadge from '@/components/ui/TechBadge'
+import { heroOverview, heroTyped, profile, ui } from '@/data/site'
 import { useLocale } from '@/i18n'
-import { heroTyped, heroOverview, ui, profile, socials } from '@/data/site'
+import { m } from 'framer-motion'
+import Image from 'next/image'
+import Typewriter from 'typewriter-effect'
+import HomeImage from '../../../../public/HomeImage-2.png'
 
 const HERO_TECH = ['React', 'Next.js', 'TypeScript', 'GraphQL', 'TailwindCSS']
 
@@ -31,9 +30,7 @@ const HomePage = () => {
         />
       </div>
 
-      <h1 className="sr-only">
-        Tran Ngoc Nhat — Frontend Technical Leader
-      </h1>
+      <h1 className="sr-only">Tran Ngoc Nhat — Frontend Technical Leader</h1>
 
       {/* Content Overlay */}
       <section className="relative z-10 flex flex-col-reverse items-center justify-between gap-8 p-6 sm:p-8 md:p-12 lg:flex-row w-full min-h-[600px] bg-gradient-to-br from-transparent to-[color-mix(in_srgb,var(--c-surface)_60%,transparent)]">
@@ -95,7 +92,12 @@ const HomePage = () => {
             variants={varFade({ durationIn: 0.7 }).inUp}
             className="flex flex-wrap items-center gap-4"
           >
-            <Button href={profile.resume} target="_blank" magnet variant="primary">
+            <Button
+              href={profile.resume}
+              target="_blank"
+              magnet
+              variant="primary"
+            >
               {t(ui.resume)}
               <LinkArrow className="w-5 h-5" />
             </Button>
@@ -103,37 +105,6 @@ const HomePage = () => {
             <Button href="mailto:ngocnhat2k1@gmail.com" variant="outline">
               {t(ui.contactMe)}
             </Button>
-
-            {/* Social links */}
-            <div className="flex items-center gap-1 sm:ml-2">
-              <Link
-                href={socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="p-2 rounded-full text-[var(--c-text-muted)] hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)] transition-colors"
-              >
-                <GithubIcon className="text-2xl" />
-              </Link>
-              <Link
-                href={socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="p-2 rounded-full text-[var(--c-text-muted)] hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)] transition-colors"
-              >
-                <LinkedInIcon className="text-2xl" />
-              </Link>
-              <Link
-                href={socials.facebook}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="p-2 rounded-full text-[var(--c-text-muted)] hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)] transition-colors"
-              >
-                <FacebookIcon className="text-base" />
-              </Link>
-            </div>
           </m.div>
         </div>
 

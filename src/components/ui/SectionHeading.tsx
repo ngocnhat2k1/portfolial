@@ -43,7 +43,6 @@ const SectionHeading = ({
     >
       {eyebrow && (
         <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[var(--c-primary)]">
-          <span className="h-px w-6 bg-[var(--c-primary)] opacity-60" />
           {render(eyebrow)}
         </span>
       )}

@@ -4,12 +4,24 @@ import { IntroOverlay } from '@/components/intro'
 import { LocaleProvider } from '@/i18n'
 import { Analytics } from '@vercel/analytics/next'
 import { Metadata } from 'next'
-import { Montserrat } from 'next/font/google'
+import { Plus_Jakarta_Sans, Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
-const montserrat = Montserrat({
-  weight: ['400', '500', '700'],
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['vietnamese'],
-  variable: '--font-montserrat',
+  variable: '--font-plus-jakarta-sans',
+  weight: ['400', '500', '600', '700', '800'],
+})
+
+const inter = Inter({
+  subsets: ['vietnamese'],
+  variable: '--font-inter',
+  weight: ['400', '500', '600', '700'],
+})
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['vietnamese'],
+  variable: '--font-jetbrains-mono',
+  weight: ['400', '500', '700'],
 })
 
 export const metadata: Metadata = {
@@ -73,15 +85,15 @@ export const metadata: Metadata = {
 // Đọc theme từ localStorage và set data-theme + class 'dark' trên <html>
 const INIT_THEME_SCRIPT = `
 (function() {
-  var darkThemes = ['dark', 'ocean', 'forest', 'sunset', 'cyberpunk'];
+  var darkThemes = ['dark', 'ocean', 'forest', 'sunset', 'cyberpunk', 'terminal-noir'];
   try {
-    var saved = localStorage.getItem('portfolio-theme') || 'light';
+    var saved = localStorage.getItem('portfolio-theme') || 'terminal-noir';
     document.documentElement.setAttribute('data-theme', saved);
     if (darkThemes.indexOf(saved) !== -1) {
       document.documentElement.classList.add('dark');
     }
   } catch(e) {
-    document.documentElement.setAttribute('data-theme', 'light');
+    document.documentElement.setAttribute('data-theme', 'terminal-noir');
   }
 })();
 `
@@ -152,7 +164,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${montserrat.className} flex min-h-screen flex-col transition-colors`}
+        className={`${plusJakartaSans.variable} ${inter.variable} ${jetbrainsMono.variable} flex min-h-screen flex-col transition-colors`}
         style={{ background: 'var(--c-bg)', color: 'var(--c-text)' }}
       >
         <Analytics />

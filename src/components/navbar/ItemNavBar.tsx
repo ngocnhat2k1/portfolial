@@ -31,10 +31,10 @@ const ItemNavBar = ({ name, href, css, toggle, isActive }: Props) => {
 
   return (
     <m.div
-      className={`mx-auto px-8 rounded-full ease-in transition-colors hover:bg-[var(--c-primary)] hover:text-[var(--c-primary-content)]
-      ${isActive ? 'bg-[var(--c-primary)] text-[var(--c-primary-content)]' : 'text-[var(--c-text)]'} ${css} `}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.8 }}
+      className={`nav-item mx-auto px-8 rounded-full ease-in transition-colors hover:bg-[var(--c-primary)] hover:text-[var(--c-primary-content)]
+      ${isActive ? 'nav-item-active bg-[var(--c-primary)] text-[var(--c-primary-content)]' : 'text-[var(--c-text)]'} ${css} `}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
     >
       <Link href={`${href}`} onClick={handleClick} className="block">
         {name}
