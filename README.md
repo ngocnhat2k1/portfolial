@@ -1,34 +1,68 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio — Tran Ngoc Nhat
 
-## Getting Started
+Personal portfolio of **Tran Ngoc Nhat — Frontend Technical Leader**, live at
+**[ngocnhat.info](https://ngocnhat.info)**.
 
-First, run the development server:
+A high-performance, animated, **bilingual (Vietnamese / English)** single-page
+portfolio built with Next.js 15 and the React 19 ecosystem.
+
+## Tech stack
+
+- **Framework:** Next.js 15 (App Router, Turbopack) + React 19 + TypeScript
+- **Styling:** Tailwind CSS 3 with a CSS-variable theme system (6 themes)
+- **Animation:** Framer Motion, GSAP (ScrollTrigger), Lenis smooth scroll
+- **3D / effects:** Three.js, @react-three/fiber, Spline, custom canvas particles
+- **Analytics:** Vercel Analytics
+- **Deploy:** Vercel (standalone output)
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+npm install --legacy-peer-deps   # peer deps required by @react-three/drei
+npm run dev                       # http://localhost:3000
+npm run build && npm start        # production build
+npm run lint                      # eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+src/
+├── app/
+│   ├── layout.tsx              # root layout: metadata, JSON-LD, theme + LocaleProvider
+│   ├── globals.css             # 6 theme definitions (CSS variables)
+│   └── (main)/
+│       ├── page.tsx            # homepage composing all sections
+│       ├── about|projects|contact/  # standalone routes (SEO)
+│       └── components/         # section components (Home, About, Skills,
+│                               #   Experience, Awards, Projects, Contact)
+├── data/                       # 🟢 ALL CONTENT LIVES HERE (bilingual)
+│   ├── site.ts                 # profile, stats, nav, contact, UI strings
+│   ├── skills.ts               # skill groups
+│   ├── experience.ts           # work / education + awards
+│   └── projects.ts             # project list (role, period, metrics)
+├── i18n/                       # lightweight VI/EN context (useLocale, t())
+├── components/                 # reusable UI (navbar, footer, cards, effects)
+└── hook/                       # theme engine, scroll spy, etc.
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Editing content
 
-## Learn More
+All text is centralized and **bilingual** in `src/data/*`. Translatable values use
+`{ vi: string; en: string }` (the `Localized` type from `src/i18n`).
 
-To learn more about Next.js, take a look at the following resources:
+- Change wording, stats, projects, skills, experience, awards → edit `src/data/`.
+- Add a project → append to `projects` in `src/data/projects.ts` and drop preview
+  images into `public/projects/{name}.png` and `{name}_mobile.png`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Internationalization
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Default language: **Vietnamese** (`vi`). Toggle VI/EN lives in the navbar.
+- The choice is persisted in `localStorage('portfolio-locale')`.
+- Components read text via `const { t } = useLocale()` and `t(localizedValue)`.
 
-## Deploy on Vercel
+## Theming
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Six themes (light, dark, ocean, forest, sunset, cyberpunk) are defined as CSS
+variables in `src/app/globals.css` and managed by `src/hook/useThemeEngine.ts`.
+The active theme is persisted in `localStorage('portfolio-theme')`.

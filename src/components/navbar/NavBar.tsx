@@ -5,22 +5,19 @@ import Logo from './Logo'
 import ItemNavBar from './ItemNavBar'
 import { m, useScroll, useMotionValueEvent } from 'framer-motion'
 import ThemePicker from '@/components/theme_picker/theme_picker'
+import LanguageToggle from './LanguageToggle'
 import { useScrollSpy } from '@/hook/useScrollSpy'
-
-const ItemNavBars = [
-  { name: 'Home', href: '#home', id: 'home' },
-  { name: 'About', href: '#about', id: 'about' },
-  { name: 'Projects', href: '#project', id: 'project' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
-]
+import { useLocale } from '@/i18n'
+import { navItems } from '@/data/site'
 
 type Props = {}
 
 function NavBar({}: Props) {
+  const { t } = useLocale()
   const [isOpen, setIsOpen] = React.useState(false)
 
   // Use scroll spy to track the active section
-  const sectionIds = ItemNavBars.map((item) => item.id)
+  const sectionIds = navItems.map((item) => item.id)
   const activeSectionId = useScrollSpy(sectionIds)
 
   // Auto-hide header logic
@@ -73,10 +70,10 @@ function NavBar({}: Props) {
       {/* Desktop Nav */}
       <div>
         <nav className="grid-cols-4 gap-1 h-fit hidden lg:grid">
-          {ItemNavBars.map((item, index) => (
+          {navItems.map((item, index) => (
             <ItemNavBar
               key={index}
-              name={item.name}
+              name={t(item.label)}
               href={item.href}
               isActive={activeSectionId === item.id}
             />
@@ -111,10 +108,10 @@ function NavBar({}: Props) {
             style={{ background: 'var(--c-surface)' }}
           >
             <nav>
-              {ItemNavBars.map((item, index) => (
+              {navItems.map((item, index) => (
                 <ItemNavBar
                   key={index}
-                  name={item.name}
+                  name={t(item.label)}
                   href={item.href}
                   css="my-6 min-w-[40vw] text-center"
                   toggle={handleClick}
@@ -125,7 +122,9 @@ function NavBar({}: Props) {
           </m.div>
         </>
       )}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
+        {/* Language toggle */}
+        <LanguageToggle />
         {/* Theme picker */}
         <ThemePicker />
         {/* Hamburger Button (Mobile) */}

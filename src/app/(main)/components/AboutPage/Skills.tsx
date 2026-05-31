@@ -10,53 +10,33 @@ import {
   FaPaintBrush,
   FaTools,
 } from 'react-icons/fa'
+import { useLocale } from '@/i18n'
+import { skillGroups, SkillGroup } from '@/data/skills'
+import { sectionTitles } from '@/data/site'
 
-type Props = {}
+const iconMap: Record<SkillGroup['iconKey'], React.ReactNode> = {
+  code: <FaCode />,
+  react: <FaReact />,
+  database: <FaDatabase />,
+  network: <FaNetworkWired />,
+  paint: <FaPaintBrush />,
+  tools: <FaTools />,
+}
 
-const skillCardsData: BentoCardProps[] = [
-  {
-    title: 'Frontend Core',
-    description: 'TypeScript, JavaScript, HTML5, CSS3 / SCSS',
-    label: 'Core Languages',
-    icon: <FaCode />,
-  },
-  {
-    title: 'Frameworks',
-    description: 'Next.js, React.js, Vite, Electron',
-    label: 'Libraries',
-    icon: <FaReact />,
-  },
-  {
-    title: 'State Management',
-    description: 'Zustand, Redux, Context API',
-    label: 'State',
-    icon: <FaDatabase />,
-  },
-  {
-    title: 'Data & APIs',
-    description: 'TanStack Query, GraphQL, REST',
-    label: 'Networking',
-    icon: <FaNetworkWired />,
-  },
-  {
-    title: 'UI & Animation',
-    description: 'TailwindCSS, MaterialUI, Ant Design, Framer Motion',
-    label: 'Styling',
-    icon: <FaPaintBrush />,
-  },
-  {
-    title: 'Tools & Workflow',
-    description: 'Git, Docker, Jest, Figma',
-    label: 'Ecosystem',
-    icon: <FaTools />,
-  },
-]
+const Skills = () => {
+  const { t } = useLocale()
 
-const Skills = (props: Props) => {
+  const skillCardsData: BentoCardProps[] = skillGroups.map((g) => ({
+    title: t(g.title),
+    description: g.description,
+    label: t(g.label),
+    icon: iconMap[g.iconKey],
+  }))
+
   return (
     <>
       <h3 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
-        Skills & Expertise
+        {t(sectionTitles.skills)}
       </h3>
       <div className="w-full relative flex items-center justify-center py-4 xl:py-10 min-h-[60vh]">
         <MagicBento

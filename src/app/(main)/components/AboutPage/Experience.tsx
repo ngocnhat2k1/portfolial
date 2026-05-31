@@ -6,48 +6,14 @@ import { varFade } from '@/components/animate/variants'
 import SpotlightCard from '@/components/SpotlightCard'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLocale } from '@/i18n'
+import { experiences, ExperienceItem as IExperience } from '@/data/experience'
+import { sectionTitles, ui } from '@/data/site'
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger)
 }
-
-// Dữ liệu kinh nghiệm, học vấn từ CV thực tế
-type IExperience = {
-  company: string
-  role: string
-  period: string
-  type: 'work' | 'education'
-  highlights: string[]
-}
-
-const experiences: IExperience[] = [
-  {
-    company: 'Mona Media',
-    role: 'Frontend Team Leader – Retail Solution',
-    period: 'Sep 2023 – Present',
-    type: 'work',
-    highlights: [
-      'Lead a frontend team: task management, work distribution, progress tracking',
-      'Develop high-performance web apps using React.js, Next.js (App/Pages Router)',
-      'Apply OOP & S.O.L.I.D principles to build highly reusable components',
-      'Research & develop E-commerce, ERP, and E-learning systems',
-      'Optimize SEO performance and Google Lighthouse scores',
-      'Conduct code reviews and maintain code quality standards',
-    ],
-  },
-  {
-    company: 'University of Transport HCM City (UTH)',
-    role: 'Bachelor of Information Technology – GPA 3.2 / Distinction',
-    period: '2019 – 2023',
-    type: 'education',
-    highlights: [
-      'Major: Information Technology',
-      'GPA: 3.2 – Classification: Good',
-      'TOEIC Certificate: 500',
-    ],
-  },
-]
 
 const ExperienceItem = ({
   item,
@@ -56,6 +22,7 @@ const ExperienceItem = ({
   item: IExperience
   index: number
 }) => {
+  const { t } = useLocale()
   const isWork = item.type === 'work'
 
   return (
@@ -74,34 +41,37 @@ const ExperienceItem = ({
         <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
           <div>
             <span
-              className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mr-3
-              \${isWork ? 'bg-[color-mix(in_srgb,var(--c-primary)_15%,transparent)] text-[var(--c-primary)] border border-[color-mix(in_srgb,var(--c-primary)_20%,transparent)]' : 'bg-green-500/15 text-green-500 border border-green-500/20'}`}
+              className={`text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mr-3 ${
+                isWork
+                  ? 'bg-[color-mix(in_srgb,var(--c-primary)_15%,transparent)] text-[var(--c-primary)] border border-[color-mix(in_srgb,var(--c-primary)_20%,transparent)]'
+                  : 'bg-green-500/15 text-green-500 border border-green-500/20'
+              }`}
             >
-              {isWork ? 'Work' : 'Education'}
+              {isWork ? t(ui.work) : t(ui.education)}
             </span>
             <h4 className="inline font-bold text-xl md:text-2xl text-[var(--c-text)]">
-              {item.company}
+              {t(item.company)}
             </h4>
           </div>
           <span className="text-sm md:text-base text-[var(--c-text-muted)] font-medium whitespace-nowrap bg-[color-mix(in_srgb,var(--c-surface-2)_40%,transparent)] px-3 py-1 rounded-md">
-            {item.period}
+            {t(item.period)}
           </span>
         </div>
 
         {/* Vai trò */}
         <p className="text-lg font-semibold text-[color-mix(in_srgb,var(--c-primary)_80%,white)] mb-4">
-          {item.role}
+          {t(item.role)}
         </p>
 
         {/* Highlights */}
         <ul className="space-y-3">
-          {item.highlights.map((h) => (
+          {item.highlights.map((h, i) => (
             <li
-              key={h}
+              key={i}
               className="text-base text-[var(--c-text-muted)] flex items-start gap-3 leading-relaxed"
             >
               <span className="mt-[8px] w-2 h-2 rounded-sm bg-[var(--c-primary)] flex-shrink-0 opacity-80" />
-              {h}
+              {t(h)}
             </li>
           ))}
         </ul>
@@ -111,6 +81,7 @@ const ExperienceItem = ({
 }
 
 const Experience = () => {
+  const { t } = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
   const fillRef = useRef<HTMLDivElement>(null)
 
@@ -148,7 +119,7 @@ const Experience = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--c-primary)] opacity-5 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
       <h3 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
-        Experience & Education
+        {t(sectionTitles.experience)}
       </h3>
 
       <div className="relative max-w-3xl mx-auto lg:px-8 px-4 z-10">
@@ -164,7 +135,7 @@ const Experience = () => {
 
           <div className="flex flex-col">
             {experiences.map((item, index) => (
-              <ExperienceItem key={item.company} item={item} index={index} />
+              <ExperienceItem key={index} item={item} index={index} />
             ))}
           </div>
         </div>

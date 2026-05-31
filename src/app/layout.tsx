@@ -1,6 +1,7 @@
 import MotionLazyContainer from '@/components/animate/MotionLazyContainer'
 import { ScriptClient } from '@/components/common/script_client'
 import { IntroOverlay } from '@/components/intro'
+import { LocaleProvider } from '@/i18n'
 import { Analytics } from '@vercel/analytics/next'
 import { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
@@ -12,35 +13,40 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ngocnhat.info'),
   title: {
-    default: 'Tran Ngoc Nhat – Frontend Team Leader & Software Engineer',
+    default: 'Tran Ngoc Nhat – Frontend Technical Leader',
     template: '%s | Tran Ngoc Nhat',
   },
   description:
-    'Frontend Developer with 3+ years of experience specializing in React/Next.js. Team Leader at Mona Media. Expert in e-commerce platforms, ERP dashboards, and e-learning systems.',
+    'Frontend Technical Leader with 4+ years of experience designing scalable frontend architectures and leading engineering teams. Tech Lead at Mona Media, building e-commerce, ERP, and e-learning platforms with React/Next.js.',
   keywords: [
+    'Frontend Technical Leader',
+    'Frontend Team Lead',
     'Frontend Developer',
     'React Developer',
     'Next.js Developer',
     'TypeScript',
-    'Team Leader',
+    'Tech Lead',
     'Mona Media',
     'Portfolio',
     'Ho Chi Minh City',
+    'Lập trình Frontend',
+    'Trưởng nhóm Frontend',
     'ngocnhat2k1',
-    'Ngoc Nhat',
     'Tran Ngoc Nhat',
-    'Tran Ngoc Nhat Mona',
+    'Trần Ngọc Nhật',
   ],
   authors: [{ name: 'Tran Ngoc Nhat', url: 'https://github.com/ngocnhat2k1' }],
   creator: 'Tran Ngoc Nhat',
   openGraph: {
     type: 'website',
-    locale: 'en_US',
+    locale: 'vi_VN',
+    alternateLocale: ['en_US'],
     siteName: 'Tran Ngoc Nhat – Portfolio',
-    title: 'Tran Ngoc Nhat – Frontend Team Leader & Software Engineer',
+    title: 'Tran Ngoc Nhat – Frontend Technical Leader',
     description:
-      'Portfolio of Tran Ngoc Nhat – Frontend Developer with 3+ years building e-commerce, ERP, and e-learning systems.',
+      'Portfolio of Tran Ngoc Nhat – Frontend Technical Leader with 4+ years building e-commerce, ERP, and e-learning platforms with React/Next.js.',
     images: [
       {
         url: '/og-image.jpg',
@@ -53,9 +59,9 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Tran Ngoc Nhat – Frontend Team Leader',
+    title: 'Tran Ngoc Nhat – Frontend Technical Leader',
     description:
-      'Frontend Developer with 3+ years experience. Team Leader at Mona Media.',
+      'Frontend Technical Leader with 4+ years experience. Tech Lead at Mona Media.',
     images: ['/og-image.jpg'],
   },
   verification: {
@@ -86,7 +92,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="vi" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <script dangerouslySetInnerHTML={{ __html: INIT_THEME_SCRIPT }} />
@@ -103,7 +109,8 @@ export default function RootLayout({
                   name: 'Trần Ngọc Nhật',
                   alternateName: 'Tran Ngoc Nhat',
                   description:
-                    'Frontend Developer with 3+ years of experience specializing in React/Next.js. Team Leader at Mona Media.',
+                    'Frontend Technical Leader with 4+ years of experience specializing in React/Next.js. Tech Lead at Mona Media.',
+                  inLanguage: ['vi', 'en'],
                   publisher: {
                     '@id': 'https://ngocnhat.info/#person',
                   },
@@ -112,13 +119,27 @@ export default function RootLayout({
                   '@type': 'Person',
                   '@id': 'https://ngocnhat.info/#person',
                   name: 'Tran Ngoc Nhat',
+                  alternateName: 'Trần Ngọc Nhật',
                   url: 'https://ngocnhat.info',
                   image: 'https://ngocnhat.info/og-image.jpg',
-                  jobTitle: 'Frontend Team Leader & Software Engineer',
+                  jobTitle: 'Frontend Technical Leader',
                   worksFor: {
                     '@type': 'Organization',
                     name: 'Mona Media',
                   },
+                  alumniOf: {
+                    '@type': 'CollegeOrUniversity',
+                    name: 'Ho Chi Minh City University of Transport',
+                  },
+                  award: 'Employee of the Year 2025 – Mona Media',
+                  knowsAbout: [
+                    'React.js',
+                    'Next.js',
+                    'TypeScript',
+                    'Frontend Architecture',
+                    'Web Performance',
+                    'GraphQL',
+                  ],
                   sameAs: [
                     'https://github.com/ngocnhat2k1',
                     'https://www.linkedin.com/in/tran-ngoc-nhat-109a06279/',
@@ -136,8 +157,10 @@ export default function RootLayout({
       >
         <Analytics />
         <ScriptClient />
-        <IntroOverlay />
-        <MotionLazyContainer>{children}</MotionLazyContainer>
+        <LocaleProvider>
+          <IntroOverlay />
+          <MotionLazyContainer>{children}</MotionLazyContainer>
+        </LocaleProvider>
       </body>
     </html>
   )

@@ -4,7 +4,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Contact',
   description:
-    'Get in touch with Tran Ngoc Nhat – Frontend Team Leader. Available via email (ngocnhat2k1@gmail.com), LinkedIn, or GitHub. Based in Ho Chi Minh City, Vietnam.',
+    'Get in touch with Tran Ngoc Nhat – Frontend Technical Leader. Available via email (ngocnhat2k1@gmail.com), LinkedIn, or GitHub. Based in Ho Chi Minh City, Vietnam.',
   keywords: [
     'Contact Tran Ngoc Nhat',
     'Hire Frontend Developer',

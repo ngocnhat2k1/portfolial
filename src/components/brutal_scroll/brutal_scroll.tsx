@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 'use client'
 
-import { IProject } from '@/app/(main)/components/ProjectsPage/ProjectsPage'
+import { IProject } from '@/data/projects'
+import { useLocale } from '@/i18n'
 import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
@@ -41,6 +42,7 @@ interface ISceneItemDef {
 // BrutalScroll: Component hiệu ứng 3D scroll
 // =============================================
 const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
+  const { t } = useLocale()
   const [itemDefs, setItemDefs] = useState<ISceneItemDef[]>([])
 
   // Ref chứa các DOM node render ra từ React
@@ -318,12 +320,24 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
                     {/* Card Content */}
                     <div className="relative w-full h-full p-5 md:p-8 flex flex-col justify-between border border-white/15 rounded hover:border-primary transition-colors">
                       <div className="flex flex-col gap-2">
-                        <span className="font-mono text-xs text-primary border border-primary inline-block px-1.5 py-0.5 self-start uppercase backdrop-blur-md bg-black/50">
-                          {projects[def.projectIndex].category}
-                        </span>
+                        <div className="flex flex-wrap items-center gap-1.5">
+                          <span className="font-mono text-xs text-primary border border-primary inline-block px-1.5 py-0.5 uppercase backdrop-blur-md bg-black/50">
+                            {t(projects[def.projectIndex].category)}
+                          </span>
+                          {projects[def.projectIndex].period && (
+                            <span className="font-mono text-[10px] text-white/80 border border-white/20 inline-block px-1.5 py-0.5 backdrop-blur-md bg-black/50">
+                              {projects[def.projectIndex].period}
+                            </span>
+                          )}
+                        </div>
                         <h3 className="text-[2rem] md:text-3xl leading-[1.1] m-0 uppercase font-extrabold tracking-tighter text-white group-hover:text-primary transition-colors">
                           {projects[def.projectIndex].title}
                         </h3>
+                        {projects[def.projectIndex].role && (
+                          <span className="text-[11px] font-semibold uppercase tracking-wider text-primary/90">
+                            {t(projects[def.projectIndex].role!)}
+                          </span>
+                        )}
                       </div>
                       <span className="mt-2">
                         <img
@@ -333,8 +347,14 @@ const BrutalScroll = ({ projects = [] }: { projects?: IProject[] }) => {
                         />
                       </span>
                       <div className="mt-auto">
+                        {projects[def.projectIndex].metric && (
+                          <p className="text-primary text-xs font-bold mb-2 flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                            {t(projects[def.projectIndex].metric!)}
+                          </p>
+                        )}
                         <p className="text-gray-300 text-sm line-clamp-3 mb-4 drop-shadow-md">
-                          {projects[def.projectIndex].description}
+                          {t(projects[def.projectIndex].description)}
                         </p>
                         <div className="flex flex-wrap gap-1">
                           {projects[def.projectIndex].tech

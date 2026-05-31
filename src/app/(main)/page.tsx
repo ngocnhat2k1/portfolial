@@ -3,28 +3,30 @@ import HomePage from './components/HomePage'
 import AboutPage from './components/AboutPage/AboutPage'
 import Skills from './components/AboutPage/Skills'
 import Experience from './components/AboutPage/Experience'
+import Awards from './components/AboutPage/Awards'
 import ProjectsPage from './components/ProjectsPage/ProjectsPage'
 import ContactPage from './components/ContactPage/ContactPage'
 import ScrollToTopButton from '@/components/ScrollToTopButton'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Tran Ngoc Nhat – Frontend Team Leader & Software Engineer',
+  title: 'Tran Ngoc Nhat – Frontend Technical Leader',
   description:
-    'Frontend Developer with 3+ years of experience specializing in React/Next.js. Currently Team Leader at Mona Media, building e-commerce, ERP dashboards, and e-learning systems.',
+    'Frontend Technical Leader with 4+ years of experience specializing in React/Next.js. Tech Lead at Mona Media, building e-commerce, ERP dashboards, and e-learning systems.',
   keywords: [
+    'Frontend Technical Leader',
     'Frontend Developer',
     'React',
     'Next.js',
     'TypeScript',
-    'Team Leader',
+    'Tech Lead',
     'Portfolio',
     'Tran Ngoc Nhat',
   ],
   openGraph: {
-    title: 'Tran Ngoc Nhat – Frontend Team Leader',
+    title: 'Tran Ngoc Nhat – Frontend Technical Leader',
     description:
-      'Portfolio of Tran Ngoc Nhat – 3+ years Frontend Developer. Team Leader at Mona Media.',
+      'Portfolio of Tran Ngoc Nhat – Frontend Technical Leader with 4+ years experience. Tech Lead at Mona Media.',
     images: [
       {
         url: '/og-image.jpg',
@@ -50,6 +52,7 @@ export default function Home() {
         <AboutPage />
         <Skills />
         <Experience />
+        <Awards />
       </section>
 
       <section id="project" className="w-full pt-10 md:pt-12 xl:pt-16">

@@ -10,8 +10,11 @@ import { LinkArrow } from '@/components/icons/icons'
 import Typewriter from 'typewriter-effect'
 import Squares from '@/components/Squares'
 import Magnet from '@/components/Magnet'
+import { useLocale } from '@/i18n'
+import { heroTyped, heroOverview, ui, profile } from '@/data/site'
 
 const HomePage = () => {
+  const { t, locale } = useLocale()
   return (
     <MotionContainer className="relative overflow-hidden w-full rounded-3xl border border-[var(--c-border)] shadow-sm bg-[var(--c-surface)]">
       {/* Animated Squares Background */}
@@ -36,11 +39,9 @@ const HomePage = () => {
             className="text-[var(--c-text)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold min-h-[100px] sm:min-h-[120px] lg:min-h-[140px] leading-tight"
           >
             <Typewriter
+              key={locale}
               options={{
-                strings: [
-                  'Turning Vision Into Reality With Code.',
-                  'Frontend Team Leader & Software Engineer.',
-                ],
+                strings: heroTyped.map((s) => t(s)),
                 autoStart: true,
                 loop: true,
                 delay: 70,
@@ -53,10 +54,7 @@ const HomePage = () => {
             variants={varFade({ durationIn: 0.7 }).inLeft}
             className="py-6 text-[var(--c-text-muted)] text-base md:text-lg leading-10 max-w-2xl"
           >
-            Frontend Developer with 3+ years of experience specializing in the
-            React/Next.js ecosystem. Experienced in building high-performance
-            e-commerce platforms, complex Admin Dashboards (ERP), and E-learning
-            systems. Currently serving as Frontend Team Leader at Mona Media.
+            {t(heroOverview)}
           </m.p>
 
           <m.div
@@ -65,14 +63,14 @@ const HomePage = () => {
           >
             <Magnet padding={50} magnetStrength={3}>
               <Link
-                href="/resume-v2.pdf"
+                href={profile.resume}
                 className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 md:px-8 text-[var(--c-primary-content)] font-bold rounded-xl overflow-hidden shadow-[0_4px_15px_color-mix(in_srgb,var(--c-primary)_30%,transparent)] hover:shadow-[0_8px_25px_color-mix(in_srgb,var(--c-primary)_50%,transparent)] transition-all duration-300 outline-none"
                 target="_blank"
                 passHref
               >
                 <span className="absolute inset-0 bg-[var(--c-primary)] rounded-xl transition-transform duration-300 group-hover:scale-105"></span>
                 <span className="relative flex items-center gap-2">
-                  Resume
+                  {t(ui.resume)}
                   <LinkArrow className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                 </span>
               </Link>
@@ -84,7 +82,7 @@ const HomePage = () => {
               className="relative group font-bold text-[var(--c-text)] hover:text-[var(--c-primary)] transition-colors duration-300"
               passHref
             >
-              Contact Me
+              {t(ui.contactMe)}
               <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[var(--c-primary)] group-hover:w-full transition-all duration-300"></span>
             </Link>
           </m.div>
