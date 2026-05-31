@@ -39,7 +39,7 @@ const ScrollToTopButton = () => {
           exit={{ opacity: 0, y: 20 }}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-primary text-white shadow-lg flex items-center justify-center hover:opacity-90 transition-opacity"
+          className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-50 p-3.5 sm:p-4 rounded-full bg-[var(--c-primary)] text-[var(--c-primary-content)] shadow-[var(--shadow-lg)] flex items-center justify-center hover:opacity-90 transition-opacity"
           aria-label="Scroll to top"
         >
           <FaArrowUp className="w-5 h-5" />

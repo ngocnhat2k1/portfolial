@@ -2,6 +2,7 @@ import AboutPage from '../components/AboutPage/AboutPage'
 import Skills from '../components/AboutPage/Skills'
 import Experience from '../components/AboutPage/Experience'
 import Awards from '../components/AboutPage/Awards'
+import Section from '@/components/ui/Section'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -24,10 +25,12 @@ const About = () => {
   return (
     <>
       <h1 className="sr-only">Who is Tran Ngoc Nhat?</h1>
-      <AboutPage />
-      <Skills />
-      <Experience />
-      <Awards />
+      <Section containerClassName="flex flex-col gap-[var(--section-py)]">
+        <AboutPage />
+        <Skills />
+        <Experience />
+        <Awards />
+      </Section>
     </>
   )
 }

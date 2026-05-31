@@ -1,4 +1,3 @@
-import HireMe from '@/components/HireMe'
 import HomePage from './components/HomePage'
 import AboutPage from './components/AboutPage/AboutPage'
 import Skills from './components/AboutPage/Skills'
@@ -7,6 +6,7 @@ import Awards from './components/AboutPage/Awards'
 import ProjectsPage from './components/ProjectsPage/ProjectsPage'
 import ContactPage from './components/ContactPage/ContactPage'
 import ScrollToTopButton from '@/components/ScrollToTopButton'
+import Section from '@/components/ui/Section'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -40,34 +40,27 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="w-full relative min-h-[var(--h-main-content)] max-lg:my-10">
-      <section
-        id="home"
-        className="container mx-auto lg:h-[var(--h-main-content)]"
-      >
+    <div className="relative w-full">
+      <Section id="home" noPadding className="pt-6 sm:pt-10">
         <HomePage />
-      </section>
+      </Section>
 
-      <section id="about" className="container mx-auto pt-10 md:pt-12 xl:pt-16">
+      <Section id="about" containerClassName="flex flex-col gap-[var(--section-py)]">
         <AboutPage />
         <Skills />
         <Experience />
         <Awards />
-      </section>
+      </Section>
 
-      <section id="project" className="w-full pt-10 md:pt-12 xl:pt-16">
+      <Section id="project" bleed>
         <ProjectsPage />
-      </section>
+      </Section>
 
-      <section
-        id="contact"
-        className="container mx-auto pt-10 md:pt-12 xl:pt-16"
-      >
+      <Section id="contact">
         <ContactPage />
-      </section>
+      </Section>
 
       <ScrollToTopButton />
-      {/* <HireMe /> */}
     </div>
   )
 }

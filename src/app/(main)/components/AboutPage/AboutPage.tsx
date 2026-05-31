@@ -18,7 +18,7 @@ const AboutPage = () => {
   const { t, locale } = useLocale()
 
   return (
-    <div className="w-full flex flex-col pt-10 pb-20">
+    <div className="w-full flex flex-col">
       {/* Header Section */}
       <div className="w-full text-center pb-12">
         <h2 className="text-xl md:text-2xl text-[var(--c-primary)] font-medium mb-2 uppercase tracking-wider">

@@ -8,17 +8,19 @@ import { FaTrophy } from 'react-icons/fa'
 import { useLocale } from '@/i18n'
 import { awards } from '@/data/experience'
 import { sectionTitles } from '@/data/site'
+import SectionHeading from '@/components/ui/SectionHeading'
 
 const Awards = () => {
   const { t } = useLocale()
 
   return (
-    <div className="relative py-8 md:py-12">
-      <h3 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center my-4 md:my-6 xl:my-8">
-        {t(sectionTitles.awards)}
-      </h3>
+    <div className="relative">
+      <SectionHeading
+        eyebrow={{ vi: 'Ghi nhận', en: 'Recognition' }}
+        title={sectionTitles.awards}
+      />
 
-      <div className="max-w-3xl mx-auto px-4 grid grid-cols-1 gap-6">
+      <div className="max-w-3xl mx-auto px-4 grid grid-cols-1 gap-6 mt-12">
         {awards.map((award, index) => (
           <m.div
             key={index}

@@ -6,17 +6,20 @@ import { varFade } from '@/components/animate/variants'
 import Image from 'next/image'
 import HomeImage from '../../../../public/HomeImage-2.png'
 import Link from 'next/link'
-import { LinkArrow } from '@/components/icons/icons'
+import { LinkArrow, GithubIcon, LinkedInIcon, FacebookIcon } from '@/components/icons/icons'
 import Typewriter from 'typewriter-effect'
 import Squares from '@/components/Squares'
-import Magnet from '@/components/Magnet'
+import Button from '@/components/ui/Button'
+import TechBadge from '@/components/ui/TechBadge'
 import { useLocale } from '@/i18n'
-import { heroTyped, heroOverview, ui, profile } from '@/data/site'
+import { heroTyped, heroOverview, ui, profile, socials } from '@/data/site'
+
+const HERO_TECH = ['React', 'Next.js', 'TypeScript', 'GraphQL', 'TailwindCSS']
 
 const HomePage = () => {
   const { t, locale } = useLocale()
   return (
-    <MotionContainer className="relative overflow-hidden w-full rounded-3xl border border-[var(--c-border)] shadow-sm bg-[var(--c-surface)]">
+    <MotionContainer className="relative overflow-hidden w-full rounded-[var(--r-2xl)] border border-[var(--c-border)] shadow-[var(--shadow-md)] bg-[var(--c-surface)]">
       {/* Animated Squares Background */}
       <div className="absolute inset-0 z-0 opacity-40">
         <Squares
@@ -28,12 +31,31 @@ const HomePage = () => {
         />
       </div>
 
-      <h1 className="sr-only">Tran Ngoc Nhat</h1>
+      <h1 className="sr-only">
+        Tran Ngoc Nhat — Frontend Technical Leader
+      </h1>
 
       {/* Content Overlay */}
       <section className="relative z-10 flex flex-col-reverse items-center justify-between gap-8 p-6 sm:p-8 md:p-12 lg:flex-row w-full min-h-[600px] bg-gradient-to-br from-transparent to-[color-mix(in_srgb,var(--c-surface)_60%,transparent)]">
         {/* Text Column */}
-        <div className="w-full lg:w-[55%] flex flex-col justify-center">
+        <div className="w-full lg:w-[58%] flex flex-col justify-center">
+          {/* Status + role eyebrow */}
+          <m.div
+            variants={varFade({ durationIn: 0.4 }).inDown}
+            className="flex flex-wrap items-center gap-3 mb-5"
+          >
+            <span className="inline-flex items-center gap-2 rounded-full border border-[var(--c-border)] bg-[color-mix(in_srgb,var(--c-text)_5%,transparent)] px-3 py-1 text-xs font-semibold text-[var(--c-text-muted)]">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+              </span>
+              {t(ui.availableForWork)}
+            </span>
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[var(--c-primary)]">
+              {t(profile.title)}
+            </span>
+          </m.div>
+
           <m.div
             variants={varFade({ durationIn: 0.5 }).inDown}
             className="text-[var(--c-text)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold min-h-[100px] sm:min-h-[120px] lg:min-h-[140px] leading-tight"
@@ -52,45 +74,72 @@ const HomePage = () => {
 
           <m.p
             variants={varFade({ durationIn: 0.7 }).inLeft}
-            className="py-6 text-[var(--c-text-muted)] text-base md:text-lg leading-10 max-w-2xl"
+            className="py-6 text-[var(--c-text-muted)] text-base md:text-lg leading-8 max-w-2xl"
           >
             {t(heroOverview)}
           </m.p>
 
+          {/* Tech badges */}
           <m.div
             variants={varFade({ durationIn: 0.7 }).inUp}
-            className="flex flex-wrap items-center gap-6 mt-4"
+            className="flex flex-wrap gap-2 mb-6"
           >
-            <Magnet padding={50} magnetStrength={3}>
-              <Link
-                href={profile.resume}
-                className="group relative inline-flex items-center justify-center gap-2 py-3 px-6 md:px-8 text-[var(--c-primary-content)] font-bold rounded-xl overflow-hidden shadow-[0_4px_15px_color-mix(in_srgb,var(--c-primary)_30%,transparent)] hover:shadow-[0_8px_25px_color-mix(in_srgb,var(--c-primary)_50%,transparent)] transition-all duration-300 outline-none"
-                target="_blank"
-                passHref
-              >
-                <span className="absolute inset-0 bg-[var(--c-primary)] rounded-xl transition-transform duration-300 group-hover:scale-105"></span>
-                <span className="relative flex items-center gap-2">
-                  {t(ui.resume)}
-                  <LinkArrow className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                </span>
-              </Link>
-            </Magnet>
+            {HERO_TECH.map((tech) => (
+              <TechBadge key={tech} accent>
+                {tech}
+              </TechBadge>
+            ))}
+          </m.div>
 
-            <Link
-              href="mailto:ngocnhat2k1@gmail.com"
-              target="_blank"
-              className="relative group font-bold text-[var(--c-text)] hover:text-[var(--c-primary)] transition-colors duration-300"
-              passHref
-            >
+          <m.div
+            variants={varFade({ durationIn: 0.7 }).inUp}
+            className="flex flex-wrap items-center gap-4"
+          >
+            <Button href={profile.resume} target="_blank" magnet variant="primary">
+              {t(ui.resume)}
+              <LinkArrow className="w-5 h-5" />
+            </Button>
+
+            <Button href="mailto:ngocnhat2k1@gmail.com" variant="outline">
               {t(ui.contactMe)}
-              <span className="absolute left-0 -bottom-1 h-[2px] w-0 bg-[var(--c-primary)] group-hover:w-full transition-all duration-300"></span>
-            </Link>
+            </Button>
+
+            {/* Social links */}
+            <div className="flex items-center gap-1 sm:ml-2">
+              <Link
+                href={socials.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="p-2 rounded-full text-[var(--c-text-muted)] hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)] transition-colors"
+              >
+                <GithubIcon className="text-2xl" />
+              </Link>
+              <Link
+                href={socials.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="p-2 rounded-full text-[var(--c-text-muted)] hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)] transition-colors"
+              >
+                <LinkedInIcon className="text-2xl" />
+              </Link>
+              <Link
+                href={socials.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Facebook"
+                className="p-2 rounded-full text-[var(--c-text-muted)] hover:text-[var(--c-primary)] hover:bg-[color-mix(in_srgb,var(--c-primary)_10%,transparent)] transition-colors"
+              >
+                <FacebookIcon className="text-base" />
+              </Link>
+            </div>
           </m.div>
         </div>
 
         {/* Image Column */}
         <m.div
-          className="w-[70%] sm:w-[50%] lg:w-[40%] max-w-[450px] relative"
+          className="w-[70%] sm:w-[50%] lg:w-[38%] max-w-[440px] relative"
           variants={varFade({ durationIn: 0.7 }).inRight}
         >
           {/* Decorative glow behind image */}

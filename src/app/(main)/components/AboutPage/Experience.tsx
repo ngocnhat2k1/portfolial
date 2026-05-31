@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLocale } from '@/i18n'
 import { experiences, ExperienceItem as IExperience } from '@/data/experience'
 import { sectionTitles, ui } from '@/data/site'
+import SectionHeading from '@/components/ui/SectionHeading'
 
 // Register ScrollTrigger
 if (typeof window !== 'undefined') {
@@ -81,7 +82,6 @@ const ExperienceItem = ({
 }
 
 const Experience = () => {
-  const { t } = useLocale()
   const containerRef = useRef<HTMLDivElement>(null)
   const fillRef = useRef<HTMLDivElement>(null)
 
@@ -114,15 +114,16 @@ const Experience = () => {
   }, [])
 
   return (
-    <div className="relative py-8 md:py-12 xl:py-16 overflow-hidden">
+    <div className="relative overflow-hidden">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[var(--c-primary)] opacity-5 blur-[120px] rounded-full pointer-events-none z-0"></div>
 
-      <h3 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
-        {t(sectionTitles.experience)}
-      </h3>
+      <SectionHeading
+        eyebrow={{ vi: 'Hành trình', en: 'Journey' }}
+        title={sectionTitles.experience}
+      />
 
-      <div className="relative max-w-3xl mx-auto lg:px-8 px-4 z-10">
+      <div className="relative max-w-3xl mx-auto lg:px-8 px-4 z-10 mt-12">
         <div ref={containerRef} className="relative">
           {/* Continuous Timeline Base Line */}
           <div className="absolute left-[0px] top-4 bottom-4 w-[2px] bg-[color-mix(in_srgb,var(--c-surface-2)_80%,transparent)]">

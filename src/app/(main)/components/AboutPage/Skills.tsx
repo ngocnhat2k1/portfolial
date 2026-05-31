@@ -13,6 +13,7 @@ import {
 import { useLocale } from '@/i18n'
 import { skillGroups, SkillGroup } from '@/data/skills'
 import { sectionTitles } from '@/data/site'
+import SectionHeading from '@/components/ui/SectionHeading'
 
 const iconMap: Record<SkillGroup['iconKey'], React.ReactNode> = {
   code: <FaCode />,
@@ -34,11 +35,16 @@ const Skills = () => {
   }))
 
   return (
-    <>
-      <h3 className="font-bold text-3xl md:text-4xl xl:text-5xl w-full text-center  my-4 md:my-6 xl:my-8">
-        {t(sectionTitles.skills)}
-      </h3>
-      <div className="w-full relative flex items-center justify-center py-4 xl:py-10 min-h-[60vh]">
+    <div>
+      <SectionHeading
+        eyebrow={{ vi: 'Năng lực', en: 'Capabilities' }}
+        title={sectionTitles.skills}
+        subtitle={{
+          vi: 'Bộ công nghệ và quy trình tôi dùng để xây dựng sản phẩm frontend chất lượng cao.',
+          en: 'The stack and practices I use to build high-quality frontend products.',
+        }}
+      />
+      <div className="w-full relative flex items-center justify-center pt-8 xl:pt-12">
         <MagicBento
           cardsData={skillCardsData}
           glowColor="var(--c-primary)"
@@ -50,7 +56,7 @@ const Skills = () => {
           particleCount={15}
         />
       </div>
-    </>
+    </div>
   )
 }
 

@@ -18,6 +18,8 @@ import {
   FiUser,
 } from 'react-icons/fi'
 import { useLocale } from '@/i18n'
+import SectionHeading from '@/components/ui/SectionHeading'
+import Button from '@/components/ui/Button'
 import {
   contactInfo,
   profile,
@@ -154,17 +156,13 @@ const ContactPage = () => {
 
       <MotionContainer className="relative z-10 w-full">
         {/* Heading */}
-        <m.div
-          variants={varFade({ durationIn: 0.4 }).inDown}
-          className="text-center mb-10"
-        >
-          <h2 className="font-bold text-4xl lg:text-5xl text-[var(--c-text)]">
-            {t(sectionTitles.contact)}
-          </h2>
-          <p className="mt-4 text-[var(--c-text-muted)] text-base lg:text-lg max-w-xl mx-auto leading-relaxed">
-            {t(ui.contactLead)}
-          </p>
-        </m.div>
+        <div className="mb-10">
+          <SectionHeading
+            eyebrow={{ vi: 'Liên hệ', en: 'Contact' }}
+            title={sectionTitles.contact}
+            subtitle={ui.contactLead}
+          />
+        </div>
 
         {/* Two-column layout: Contact info + Form */}
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -229,37 +227,23 @@ const ContactPage = () => {
             {t(ui.knowMore)}
           </p>
 
-          <Magnet
-            padding={150}
-            magnetStrength={4}
-            wrapperClassName="inline-block"
-          >
-            <Link
-              href={profile.resume}
-              target="_blank"
-              className="group relative inline-flex items-center justify-center gap-2 py-3 px-8 text-[var(--c-primary-content)] font-bold rounded-xl overflow-hidden shadow-[0_4px_20px_color-mix(in_srgb,var(--c-primary)_40%,transparent)] hover:shadow-[0_8px_30px_color-mix(in_srgb,var(--c-primary)_60%,transparent)] transition-all duration-300 outline-none"
+          <Button href={profile.resume} target="_blank" magnet variant="primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
             >
-              <span className="absolute inset-0 bg-[var(--c-primary)] rounded-xl transition-transform duration-300"></span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[color-mix(in_srgb,white_20%,transparent)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="relative flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                {t(ui.downloadResume)}
-              </span>
-            </Link>
-          </Magnet>
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            {t(ui.downloadResume)}
+          </Button>
         </m.section>
       </MotionContainer>
     </div>

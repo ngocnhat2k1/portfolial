@@ -1,4 +1,5 @@
 import ContactPage from '../components/ContactPage/ContactPage'
+import Section from '@/components/ui/Section'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -17,7 +18,9 @@ const Contact = () => {
   return (
     <>
       <h1 className="sr-only">Contact Tran Ngoc Nhat - Frontend Developer</h1>
-      <ContactPage />
+      <Section>
+        <ContactPage />
+      </Section>
     </>
   )
 }
