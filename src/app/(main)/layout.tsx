@@ -9,7 +9,7 @@ export default function MainLayout({
   return (
     <div className="flex flex-col gap-6 lg:gap-10">
       <NavBar />
-      <main className="w-full">{children}</main>
+      <main className="w-full overflow-x-clip">{children}</main>
       <Footer />
     </div>
   )

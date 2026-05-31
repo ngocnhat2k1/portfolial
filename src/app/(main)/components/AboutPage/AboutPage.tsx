@@ -21,22 +21,20 @@ const AboutPage = () => {
     <div className="w-full flex flex-col">
       {/* Header Section */}
       <div className="w-full text-center pb-12">
-        <h2 className="text-xl md:text-2xl text-[var(--c-primary)] font-medium mb-2 uppercase tracking-wider">
+        <h2 className="text-base sm:text-xl md:text-2xl text-[var(--c-primary)] font-medium mb-2 uppercase tracking-wider">
           {t(sectionTitles.aboutEyebrow)}
         </h2>
-        <div className="w-fit mx-auto">
-          <div className="w-full font-bold text-3xl md:text-5xl lg:text-6xl text-[var(--c-text)]">
-            <Typewriter
-              key={locale}
-              options={{
-                strings: sectionTitles.aboutTyped.map((s) => t(s)),
-                autoStart: true,
-                loop: true,
-                wrapperClassName: 'text-[var(--c-text)]',
-                cursorClassName: 'text-[var(--c-primary)]',
-              }}
-            />
-          </div>
+        <div className="mx-auto w-full max-w-full break-words font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[var(--c-text)]">
+          <Typewriter
+            key={locale}
+            options={{
+              strings: sectionTitles.aboutTyped.map((s) => t(s)),
+              autoStart: true,
+              loop: true,
+              wrapperClassName: 'text-[var(--c-text)]',
+              cursorClassName: 'text-[var(--c-primary)]',
+            }}
+          />
         </div>
       </div>
 

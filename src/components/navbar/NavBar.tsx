@@ -96,15 +96,10 @@ function NavBar({}: Props) {
             }}
           ></div>
           <m.div
-            initial={{
-              opacity: 0,
-              scale: 0.95,
-              translateX: '-50%',
-              translateY: '-50%',
-            }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="min-w-[70vw] max-h-[85vh] flex flex-col justify-between items-center fixed top-1/2 left-1/2 lg:hidden rounded-2xl gap-2 z-10 overflow-y-auto py-8 shadow-[var(--shadow-lg)] border border-[var(--c-border)]"
+            initial={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
+            animate={{ opacity: 1, scale: 1, x: '-50%', y: '-50%' }}
+            exit={{ opacity: 0, scale: 0.95, x: '-50%', y: '-50%' }}
+            className="min-w-[70vw] max-w-[90vw] max-h-[85vh] flex flex-col justify-between items-center fixed top-1/2 left-1/2 lg:hidden rounded-2xl gap-2 z-10 overflow-y-auto py-8 shadow-[var(--shadow-lg)] border border-[var(--c-border)]"
             style={{ background: 'var(--c-surface)' }}
           >
             <nav>
