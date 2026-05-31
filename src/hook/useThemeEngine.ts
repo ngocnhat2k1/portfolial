@@ -5,7 +5,11 @@ import { useEffect, useState, useCallback } from 'react'
 // =============================================
 // Danh sách tất cả themes có sẵn
 // =============================================
-export type ThemeName = 'dark' | 'ocean' | 'forest' | 'sunset' | 'cyberpunk'
+export type ThemeName =
+  | 'terminal-noir'
+  | 'cyber-midnight'
+  | 'amber-noir'
+  | 'light-minimal'
 
 export interface IThemeConfig {
   name: ThemeName
@@ -21,59 +25,49 @@ export interface IThemeConfig {
 
 export const THEMES: IThemeConfig[] = [
   {
-    name: 'dark',
-    label: 'Dark',
+    name: 'terminal-noir',
+    label: 'Terminal Noir',
     previewColors: {
-      bg: '#0f172a',
-      surface: '#1e293b',
-      primary: '#38bdf8',
-      text: '#f8fafc',
+      bg: '#080808',
+      surface: '#111111',
+      primary: '#9ECEF9',
+      text: '#E2E2E5',
     },
   },
   {
-    name: 'ocean',
-    label: 'Ocean',
+    name: 'cyber-midnight',
+    label: 'Cyber Midnight',
     previewColors: {
-      bg: '#0f111a',
-      surface: '#1a1e2e',
-      primary: '#818cf8',
-      text: '#e0e7ff',
+      bg: '#0A0512',
+      surface: '#140C20',
+      primary: '#D946EF',
+      text: '#F5F3FF',
     },
   },
   {
-    name: 'forest',
-    label: 'Forest',
+    name: 'amber-noir',
+    label: 'Amber Noir',
     previewColors: {
-      bg: '#0e1511',
-      surface: '#18241d',
-      primary: '#34d399',
-      text: '#d1fae5',
+      bg: '#0A0806',
+      surface: '#14110F',
+      primary: '#F59E0B',
+      text: '#FDF6E2',
     },
   },
   {
-    name: 'sunset',
-    label: 'Sunset',
+    name: 'light-minimal',
+    label: 'Light Minimal',
     previewColors: {
-      bg: '#1a1412',
-      surface: '#2a201d',
-      primary: '#fb923c',
-      text: '#ffedd5',
-    },
-  },
-  {
-    name: 'cyberpunk',
-    label: 'Cyberpunk',
-    previewColors: {
-      bg: '#12091c',
-      surface: '#201132',
-      primary: '#c084fc',
-      text: '#f3e8ff',
+      bg: '#F9F9FB',
+      surface: '#FFFFFF',
+      primary: '#111111',
+      text: '#111111',
     },
   },
 ]
 
 const STORAGE_KEY = 'portfolio-theme'
-const DEFAULT_THEME: ThemeName = 'dark'
+const DEFAULT_THEME: ThemeName = 'terminal-noir'
 
 // =============================================
 // useThemeEngine hook
@@ -89,14 +83,8 @@ const useThemeEngine = () => {
     // Xóa tất cả theme class cũ và set data-theme mới
     root.setAttribute('data-theme', newTheme)
 
-    // Tương thích ngược với darkMode class của Tailwind
-    if (
-      newTheme === 'dark' ||
-      newTheme === 'ocean' ||
-      newTheme === 'forest' ||
-      newTheme === 'sunset' ||
-      newTheme === 'cyberpunk'
-    ) {
+    // Tương thích ngược với darkMode class của Tailwind (tất cả các theme ngoại trừ light-minimal đều là dark)
+    if (newTheme !== 'light-minimal') {
       root.classList.add('dark')
     } else {
       root.classList.remove('dark')

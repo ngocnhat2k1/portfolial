@@ -4,6 +4,7 @@ import React from 'react'
 import Typewriter from 'typewriter-effect'
 import CountUp from 'react-countup'
 import ProfileCard from '@/components/ProfileCard'
+import BlurText from '@/components/blur_text'
 import { useLocale } from '@/i18n'
 import {
   stats,
@@ -25,16 +26,16 @@ const AboutPage = () => {
           {t(sectionTitles.aboutEyebrow)}
         </h2>
         <div className="mx-auto w-full max-w-full break-words font-bold text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-[var(--c-text)]">
-          {/* <Typewriter
-            key={locale}
-            options={{
-              strings: sectionTitles.aboutTyped.map((s) => t(s)),
-              autoStart: true,
-              loop: true,
-              wrapperClassName: 'text-[var(--c-text)]',
-              cursorClassName: 'text-[var(--c-primary)]',
-            }}
-          /> */}
+          <BlurText
+            text={t({
+              vi: 'Kiến tạo trải nghiệm số vượt trội',
+              en: 'Crafting Exceptional Digital Experiences'
+            })}
+            delay={40}
+            animateBy="words"
+            direction="bottom"
+            className="justify-center font-display"
+          />
         </div>
       </div>
 

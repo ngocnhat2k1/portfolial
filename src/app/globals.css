@@ -59,205 +59,134 @@
   --c-particle-3: var(--c-accent);
 }
 
-/* --- 1. LIGHT (default) ------------------------------------ */
-[data-theme='light'],
-:root {
-  --c-primary: #0ea5e9;
-  --c-primary-dark: #0284c7;
+/* --- 1. LIGHT MINIMAL (Swiss Design Inspired) --------------- */
+[data-theme='light-minimal'] {
+  --c-primary: #111111;
+  --c-primary-dark: #000000;
   --c-primary-content: #ffffff;
-  --c-secondary: #38bdf8;
-  --c-accent: #bae6fd;
-  --c-dark: #0f172a;
-  --c-light: #f8fafc;
+  --c-secondary: #4b5563;
+  --c-accent: #2563eb;
+  --c-dark: #18181b;
+  --c-light: #ffffff;
 
-  --c-bg: #f8fafc;
+  --c-bg: #f9f9fb;
   --c-surface: #ffffff;
-  --c-surface-2: #f1f5f9;
-  --c-border: rgba(15, 23, 42, 0.1);
+  --c-surface-2: #f1f1f4;
+  --c-border: rgba(17, 17, 17, 0.08);
 
-  --c-text: #0f172a;
-  --c-text-muted: rgba(15, 23, 42, 0.6);
+  --c-text: #111111;
+  --c-text-muted: #6b7280;
   --c-text-on-primary: #ffffff;
+
+  --c-danger: #dc2626;
+  --c-warning: #d97706;
+
+  /* Circular background pattern */
+  --c-circular: rgba(17, 17, 17, 0.05);
+  --c-circular-stripe: #f1f1f4;
+
+  /* Shadow */
+  --shadow-primary: rgba(17, 17, 17, 0.05);
+}
+
+/* --- 2. TERMINAL NOIR (Signature Tech Theme) ---------------- */
+[data-theme='terminal-noir'] {
+  --c-primary: #9ecef9;
+  --c-primary-dark: #3b82f6;
+  --c-primary-content: #040d1a;
+  --c-secondary: #a5f3fc;
+  --c-accent: #c3c7ff;
+  --c-dark: #080808;
+  --c-light: #e2e2e5;
+
+  --c-bg: #080808;
+  --c-surface: #111111;
+  --c-surface-2: #181818;
+  --c-border: rgba(255, 255, 255, 0.08);
+
+  --c-text: #e2e2e5;
+  --c-text-muted: #8e8e93;
+  --c-text-on-primary: #040d1a;
+
+  --c-danger: #f87171;
+  --c-warning: #fbbf24;
+
+  --c-circular: rgba(158, 206, 249, 0.08);
+  --c-circular-stripe: #080808;
+
+  --shadow-primary: rgba(158, 206, 249, 0.15);
+
+  /* Override border radius tokens for precise, technical shape */
+  --r-sm: 4px;
+  --r-md: 4px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-2xl: 16px;
+}
+
+/* --- 3. CYBER MIDNIGHT (Obsidian & Neon Accent) ------------- */
+[data-theme='cyber-midnight'] {
+  --c-primary: #d946ef;
+  --c-primary-dark: #a21caf;
+  --c-primary-content: #ffffff;
+  --c-secondary: #06b6d4;
+  --c-accent: #a855f7;
+  --c-dark: #0a0512;
+  --c-light: #f5f3ff;
+
+  --c-bg: #0a0512;
+  --c-surface: #140c20;
+  --c-surface-2: #1e1230;
+  --c-border: rgba(217, 70, 239, 0.12);
+
+  --c-text: #f5f3ff;
+  --c-text-muted: #9382a9;
+  --c-text-on-primary: #ffffff;
+
+  --c-danger: #f43f5e;
+  --c-warning: #fbbf24;
+
+  --c-circular: rgba(217, 70, 239, 0.08);
+  --c-circular-stripe: #0a0512;
+
+  --shadow-primary: rgba(217, 70, 239, 0.2);
+
+  /* Precise curves matching technical look */
+  --r-sm: 4px;
+  --r-md: 4px;
+  --r-lg: 8px;
+  --r-xl: 12px;
+  --r-2xl: 16px;
+}
+
+/* --- 4. AMBER NOIR (Retro-Future CRT Amber) ----------------- */
+[data-theme='amber-noir'] {
+  --c-primary: #f59e0b;
+  --c-primary-dark: #b45309;
+  --c-primary-content: #1e0f00;
+  --c-secondary: #d97706;
+  --c-accent: #f87171;
+  --c-dark: #0a0806;
+  --c-light: #fdf6e2;
+
+  --c-bg: #0a0806;
+  --c-surface: #14110f;
+  --c-surface-2: #1e1a17;
+  --c-border: rgba(245, 158, 11, 0.1);
+
+  --c-text: #fdf6e2;
+  --c-text-muted: #968b7a;
+  --c-text-on-primary: #1e0f00;
 
   --c-danger: #ef4444;
   --c-warning: #f59e0b;
 
-  /* Circular background pattern */
-  --c-circular: rgba(15, 23, 42, 0.1);
-  --c-circular-stripe: #e2e8f0;
+  --c-circular: rgba(245, 158, 11, 0.08);
+  --c-circular-stripe: #0a0806;
 
-  /* Shadow */
-  --shadow-primary: rgba(14, 165, 233, 0.25);
-}
+  --shadow-primary: rgba(245, 158, 11, 0.15);
 
-/* --- 2. DARK ----------------------------------------------- */
-[data-theme='dark'] {
-  --c-primary: #38bdf8;
-  --c-primary-dark: #0284c7;
-  --c-primary-content: #ffffff;
-  --c-secondary: #0ea5e9;
-  --c-accent: #7dd3fc;
-  --c-dark: #020617;
-  --c-light: #f8fafc;
-
-  --c-bg: #0f172a;
-  --c-surface: #1e293b;
-  --c-surface-2: #334155;
-  --c-border: rgba(255, 255, 255, 0.1);
-
-  --c-text: #f8fafc;
-  --c-text-muted: rgba(248, 250, 252, 0.6);
-  --c-text-on-primary: #ffffff;
-
-  --c-danger: #f87171;
-  --c-warning: #fbbf24;
-
-  --c-circular: rgba(255, 255, 255, 0.1);
-  --c-circular-stripe: #0f172a;
-
-  --shadow-primary: rgba(56, 189, 248, 0.25);
-}
-
-/* --- 3. OCEAN (Muted Navy/Indigo) ---------------------------- */
-[data-theme='ocean'] {
-  --c-primary: #818cf8;
-  --c-primary-dark: #4f46e5;
-  --c-primary-content: #ffffff;
-  --c-secondary: #6366f1;
-  --c-accent: #a5b4fc;
-  --c-dark: #020617;
-  --c-light: #e0e7ff;
-
-  --c-bg: #0f111a;
-  --c-surface: #1a1e2e;
-  --c-surface-2: #262c40;
-  --c-border: rgba(129, 140, 248, 0.15);
-
-  --c-text: #e0e7ff;
-  --c-text-muted: rgba(224, 231, 255, 0.6);
-  --c-text-on-primary: #ffffff;
-
-  --c-danger: #fb7185;
-  --c-warning: #fbbf24;
-
-  --c-circular: rgba(129, 140, 248, 0.2);
-  --c-circular-stripe: #0f111a;
-
-  --shadow-primary: rgba(129, 140, 248, 0.25);
-}
-
-/* --- 4. FOREST (Soft Pine/Emerald) --------------------------- */
-[data-theme='forest'] {
-  --c-primary: #34d399;
-  --c-primary-dark: #059669;
-  --c-primary-content: #ffffff;
-  --c-secondary: #10b981;
-  --c-accent: #6ee7b7;
-  --c-dark: #022c22;
-  --c-light: #d1fae5;
-
-  --c-bg: #0e1511;
-  --c-surface: #18241d;
-  --c-surface-2: #24362b;
-  --c-border: rgba(52, 211, 153, 0.15);
-
-  --c-text: #d1fae5;
-  --c-text-muted: rgba(209, 250, 229, 0.6);
-  --c-text-on-primary: #ffffff;
-
-  --c-danger: #f87171;
-  --c-warning: #fbbf24;
-
-  --c-circular: rgba(52, 211, 153, 0.15);
-  --c-circular-stripe: #0e1511;
-
-  --shadow-primary: rgba(52, 211, 153, 0.25);
-}
-
-/* --- 5. SUNSET (Warm Mocha/Orange) --------------------------- */
-[data-theme='sunset'] {
-  --c-primary: #fb923c;
-  --c-primary-dark: #ea580c;
-  --c-primary-content: #ffffff;
-  --c-secondary: #f97316;
-  --c-accent: #fdba74;
-  --c-dark: #431407;
-  --c-light: #ffedd5;
-
-  --c-bg: #1a1412;
-  --c-surface: #2a201d;
-  --c-surface-2: #3a2c28;
-  --c-border: rgba(251, 146, 60, 0.15);
-
-  --c-text: #ffedd5;
-  --c-text-muted: rgba(255, 237, 213, 0.6);
-  --c-text-on-primary: #ffffff;
-
-  --c-danger: #f43f5e;
-  --c-warning: #fcd34d;
-
-  --c-circular: rgba(251, 146, 60, 0.15);
-  --c-circular-stripe: #1a1412;
-
-  --shadow-primary: rgba(251, 146, 60, 0.25);
-}
-
-/* --- 6. CYBERPUNK (Deep Plum/Purple) ------------------------- */
-[data-theme='cyberpunk'] {
-  --c-primary: #c084fc;
-  --c-primary-dark: #9333ea;
-  --c-primary-content: #ffffff;
-  --c-secondary: #a855f7;
-  --c-accent: #d8b4fe;
-  --c-dark: #3b0764;
-  --c-light: #f3e8ff;
-
-  --c-bg: #12091c;
-  --c-surface: #201132;
-  --c-surface-2: #301a4a;
-  --c-border: rgba(192, 132, 252, 0.15);
-
-  --c-text: #f3e8ff;
-  --c-text-muted: rgba(243, 232, 255, 0.6);
-  --c-text-on-primary: #ffffff;
-
-  --c-danger: #fb7185;
-  --c-warning: #fde047;
-
-  --c-circular: rgba(192, 132, 252, 0.2);
-  --c-circular-stripe: #12091c;
-
-  --shadow-primary: rgba(192, 132, 252, 0.25);
-}
-
-/* --- 7. TERMINAL NOIR (Modern Minimalist / Glassmorphic) ------ */
-[data-theme='terminal-noir'] {
-  --c-primary: #c0c1ff;
-  --c-primary-dark: #494bd6;
-  --c-primary-content: #1000a9;
-  --c-secondary: #4cd7f6;
-  --c-accent: #4edea3;
-  --c-dark: #0e0e0e;
-  --c-light: #e5e2e1;
-
-  --c-bg: #131313;
-  --c-surface: #1c1b1b;
-  --c-surface-2: #201f1f;
-  --c-border: rgba(144, 143, 160, 0.15);
-
-  --c-text: #e5e2e1;
-  --c-text-muted: #c7c4d7;
-  --c-text-on-primary: #1000a9;
-
-  --c-danger: #ffb4ab;
-  --c-warning: #ffdad6;
-
-  --c-circular: rgba(192, 193, 255, 0.12);
-  --c-circular-stripe: #131313;
-
-  --shadow-primary: rgba(192, 193, 255, 0.2);
-
-  /* Override border radius tokens for precise, technical shape */
+  /* Precise curves matching technical look */
   --r-sm: 4px;
   --r-md: 4px;
   --r-lg: 8px;
@@ -513,18 +442,22 @@ pre, code, .font-mono {
 }
 
 /* ============================================================
-   TERMINAL NOIR DESIGN SYSTEM OVERRIDES
+   PREMIUM DESIGN SYSTEM OVERRIDES FOR DARK THEMES
    ============================================================ */
 
 /* 1. Glassmorphic Navigation Bar */
-[data-theme='terminal-noir'] header {
-  background-color: rgba(19, 19, 19, 0.6) !important;
+[data-theme='terminal-noir'] header,
+[data-theme='cyber-midnight'] header,
+[data-theme='amber-noir'] header {
+  background-color: color-mix(in srgb, var(--c-bg) 60%, transparent) !important;
   backdrop-filter: blur(12px) !important;
-  border-bottom: 1px solid rgba(144, 143, 160, 0.15) !important;
+  border-bottom: 1px solid var(--c-border) !important;
 }
 
 /* 2. Active States Navigation Bar */
-[data-theme='terminal-noir'] .nav-item {
+[data-theme='terminal-noir'] .nav-item,
+[data-theme='cyber-midnight'] .nav-item,
+[data-theme='amber-noir'] .nav-item {
   background: transparent !important;
   border-radius: 0 !important;
   border-bottom: 2px solid transparent !important;
@@ -533,26 +466,36 @@ pre, code, .font-mono {
   transition: all 0.25s ease !important;
 }
 
-[data-theme='terminal-noir'] .nav-item:hover {
+[data-theme='terminal-noir'] .nav-item:hover,
+[data-theme='cyber-midnight'] .nav-item:hover,
+[data-theme='amber-noir'] .nav-item:hover {
   background: transparent !important;
   color: var(--c-primary) !important;
 }
 
-[data-theme='terminal-noir'] .nav-item-active {
+[data-theme='terminal-noir'] .nav-item-active,
+[data-theme='cyber-midnight'] .nav-item-active,
+[data-theme='amber-noir'] .nav-item-active {
   background: transparent !important;
   color: var(--c-primary) !important;
   border-bottom: 2px solid var(--c-primary) !important;
 }
 
 /* 3. Project Cards Hover Border Shift */
-[data-theme='terminal-noir'] article.group:hover {
+[data-theme='terminal-noir'] article.group:hover,
+[data-theme='cyber-midnight'] article.group:hover,
+[data-theme='amber-noir'] article.group:hover {
   border-color: var(--c-primary) !important;
-  box-shadow: 0 0 20px rgba(192, 193, 255, 0.15) !important;
+  box-shadow: 0 0 20px color-mix(in srgb, var(--c-primary) 15%, transparent) !important;
 }
 
 /* 4. Skill Tags (Tech Badges) */
 [data-theme='terminal-noir'] .tech-badge,
-[data-theme='terminal-noir'] span.inline-flex.border {
+[data-theme='cyber-midnight'] .tech-badge,
+[data-theme='amber-noir'] .tech-badge,
+[data-theme='terminal-noir'] span.inline-flex.border,
+[data-theme='cyber-midnight'] span.inline-flex.border,
+[data-theme='amber-noir'] span.inline-flex.border {
   font-family: var(--font-mono) !important;
   font-size: 13px !important;
   background-color: rgba(255, 255, 255, 0.05) !important;
@@ -561,45 +504,63 @@ pre, code, .font-mono {
   border-radius: 4px !important;
 }
 
-[data-theme='terminal-noir'] span.inline-flex.border.text-\[var\(--c-primary\)\] {
+[data-theme='terminal-noir'] span.inline-flex.border.text-\[var\(--c-primary\)\],
+[data-theme='cyber-midnight'] span.inline-flex.border.text-\[var\(--c-primary\)\],
+[data-theme='amber-noir'] span.inline-flex.border.text-\[var\(--c-primary\)\] {
   color: var(--c-primary) !important;
-  background-color: rgba(192, 193, 255, 0.1) !important;
-  border-color: rgba(192, 193, 255, 0.25) !important;
+  background-color: color-mix(in srgb, var(--c-primary) 10%, transparent) !important;
+  border-color: color-mix(in srgb, var(--c-primary) 25%, transparent) !important;
 }
 
 /* 5. Buttons Hover Glow & Outline Invert */
-[data-theme='terminal-noir'] .btn-primary {
+[data-theme='terminal-noir'] .btn-primary,
+[data-theme='cyber-midnight'] .btn-primary,
+[data-theme='amber-noir'] .btn-primary {
   background-color: var(--c-primary) !important;
   color: var(--c-primary-content) !important;
   box-shadow: none !important;
 }
 
-[data-theme='terminal-noir'] .btn-primary:hover {
-  box-shadow: 0 0 20px rgba(192, 193, 255, 0.35) !important;
+[data-theme='terminal-noir'] .btn-primary:hover,
+[data-theme='cyber-midnight'] .btn-primary:hover,
+[data-theme='amber-noir'] .btn-primary:hover {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--c-primary) 35%, transparent) !important;
   transform: translateY(-2px);
 }
 
-[data-theme='terminal-noir'] .btn-outline {
-  border: 1px solid #ffffff !important;
-  color: #ffffff !important;
+[data-theme='terminal-noir'] .btn-outline,
+[data-theme='cyber-midnight'] .btn-outline,
+[data-theme='amber-noir'] .btn-outline {
+  border: 1px solid var(--c-light) !important;
+  color: var(--c-light) !important;
   background: transparent !important;
 }
 
-[data-theme='terminal-noir'] .btn-outline:hover {
-  background-color: #ffffff !important;
-  color: #131313 !important;
+[data-theme='terminal-noir'] .btn-outline:hover,
+[data-theme='cyber-midnight'] .btn-outline:hover,
+[data-theme='amber-noir'] .btn-outline:hover {
+  background-color: var(--c-light) !important;
+  color: var(--c-bg) !important;
 }
 
 /* 6. Contact Form Inputs */
 [data-theme='terminal-noir'] input,
-[data-theme='terminal-noir'] textarea {
+[data-theme='cyber-midnight'] input,
+[data-theme='amber-noir'] input,
+[data-theme='terminal-noir'] textarea,
+[data-theme='cyber-midnight'] textarea,
+[data-theme='amber-noir'] textarea {
   background-color: #000000 !important;
   border-radius: var(--r-sm) !important;
-  border: 1px solid rgba(144, 143, 160, 0.3) !important;
+  border: 1px solid var(--c-border) !important;
 }
 
 [data-theme='terminal-noir'] input:focus,
-[data-theme='terminal-noir'] textarea:focus {
+[data-theme='cyber-midnight'] input:focus,
+[data-theme='amber-noir'] input:focus,
+[data-theme='terminal-noir'] textarea:focus,
+[data-theme='cyber-midnight'] textarea:focus,
+[data-theme='amber-noir'] textarea:focus {
   border-color: var(--c-secondary) !important;
-  box-shadow: 0 0 12px rgba(76, 215, 246, 0.3) !important;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--c-secondary) 30%, transparent) !important;
 }

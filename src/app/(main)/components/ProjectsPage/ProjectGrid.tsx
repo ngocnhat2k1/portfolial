@@ -14,6 +14,8 @@ import { projects as allProjects, type IProject } from '@/data/projects'
 // Đọc cùng nguồn dữ liệu với hiệu ứng 3D; có lọc theo category.
 // =============================================
 
+import TiltedCard from '@/components/tilted_card'
+
 const ProjectCard = ({ project }: { project: IProject }) => {
   const { t } = useLocale()
   const href = project.link || '#'
@@ -24,34 +26,53 @@ const ProjectCard = ({ project }: { project: IProject }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.4, ease: 'easeOut' }}
-      className="group flex h-full flex-col overflow-hidden rounded-[var(--r-xl)] border border-[var(--c-border)] bg-[var(--c-surface)] shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-lg)] hover:border-[color-mix(in_srgb,var(--c-primary)_40%,transparent)]"
+      className="group flex h-full flex-col overflow-hidden rounded-[var(--r-xl)] border border-[var(--c-border)] bg-[var(--c-surface)] shadow-[var(--shadow-sm)] transition-all duration-300 hover:shadow-[var(--shadow-lg)] hover:border-[color-mix(in_srgb,var(--c-primary)_40%,transparent)]"
     >
-      {/* Ảnh preview */}
-      <Link
-        href={href}
-        target={project.link ? '_blank' : undefined}
-        rel={project.link ? 'noopener noreferrer' : undefined}
-        className="relative block aspect-[16/10] overflow-hidden bg-[var(--c-surface-2)]"
-      >
-        {project.preview && (
-          <Image
-            src={project.preview}
-            alt={`${project.title} — ${t(project.category)}`}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            loading="lazy"
-            className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
-          />
+      {/* Ảnh preview với hiệu ứng TiltedCard 3D */}
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[var(--c-surface-2)]">
+        {project.preview ? (
+          <Link
+            href={href}
+            target={project.link ? '_blank' : undefined}
+            rel={project.link ? 'noopener noreferrer' : undefined}
+            className="block w-full h-full"
+          >
+            <TiltedCard
+              imageSrc={project.preview}
+              altText={`${project.title} — ${t(project.category)}`}
+              containerHeight="100%"
+              containerWidth="100%"
+              imageHeight="100%"
+              imageWidth="100%"
+              scaleOnHover={1.05}
+              rotateAmplitude={12}
+              showTooltip={true}
+              captionText={project.title}
+              displayOverlayContent={true}
+              showMobileWarning={false}
+              className="w-full h-full"
+              overlayContent={
+                <div className="absolute inset-0 flex flex-col justify-between p-3 pointer-events-none w-full h-full">
+                  <div className="flex justify-between items-start w-full">
+                    <span className="inline-flex rounded-full bg-[color-mix(in_srgb,var(--c-bg)_80%,transparent)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--c-primary)] backdrop-blur-md shadow-sm">
+                      {t(project.category)}
+                    </span>
+                    {project.period && (
+                      <span className="inline-flex rounded-full bg-[color-mix(in_srgb,var(--c-bg)_80%,transparent)] px-2.5 py-1 text-[11px] font-medium text-[var(--c-text-muted)] backdrop-blur-md shadow-sm">
+                        {project.period}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              }
+            />
+          </Link>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-[var(--c-text-muted)]">
+            Chưa có hình ảnh
+          </div>
         )}
-        <span className="absolute left-3 top-3 inline-flex rounded-full bg-[color-mix(in_srgb,var(--c-bg)_70%,transparent)] px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-[var(--c-primary)] backdrop-blur-md">
-          {t(project.category)}
-        </span>
-        {project.period && (
-          <span className="absolute right-3 top-3 inline-flex rounded-full bg-[color-mix(in_srgb,var(--c-bg)_70%,transparent)] px-2.5 py-1 text-[11px] font-medium text-[var(--c-text-muted)] backdrop-blur-md">
-            {project.period}
-          </span>
-        )}
-      </Link>
+      </div>
 
       {/* Nội dung */}
       <div className="flex flex-1 flex-col gap-3 p-5">

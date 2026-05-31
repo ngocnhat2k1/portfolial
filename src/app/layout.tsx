@@ -85,7 +85,7 @@ export const metadata: Metadata = {
 // Đọc theme từ localStorage và set data-theme + class 'dark' trên <html>
 const INIT_THEME_SCRIPT = `
 (function() {
-  var darkThemes = ['dark', 'ocean', 'forest', 'sunset', 'cyberpunk', 'terminal-noir'];
+  var darkThemes = ['terminal-noir', 'cyber-midnight', 'amber-noir'];
   try {
     var saved = localStorage.getItem('portfolio-theme') || 'terminal-noir';
     document.documentElement.setAttribute('data-theme', saved);

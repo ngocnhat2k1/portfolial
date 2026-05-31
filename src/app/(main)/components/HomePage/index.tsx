@@ -4,6 +4,7 @@ import MotionContainer from '@/components/animate/MotionContainer'
 import { varFade } from '@/components/animate/variants'
 import { LinkArrow } from '@/components/icons/icons'
 import Squares from '@/components/Squares'
+import BlurText from '@/components/blur_text'
 import Button from '@/components/ui/Button'
 import TechBadge from '@/components/ui/TechBadge'
 import { heroOverview, heroTyped, profile, ui } from '@/data/site'
@@ -19,7 +20,7 @@ const HomePage = () => {
   const { t, locale } = useLocale()
   return (
     <MotionContainer className="relative overflow-hidden w-full rounded-[var(--r-2xl)] border border-[var(--c-border)] shadow-[var(--shadow-md)] bg-[var(--c-surface)]">
-      {/* Animated Squares Background */}
+      {/* Background Squares hoạt hình */}
       <div className="absolute inset-0 z-0 opacity-40">
         <Squares
           direction="diagonal"
@@ -30,13 +31,11 @@ const HomePage = () => {
         />
       </div>
 
-      <h1 className="sr-only">Tran Ngoc Nhat — Frontend Technical Leader</h1>
-
       {/* Content Overlay */}
       <section className="relative z-10 flex flex-col-reverse items-center justify-between gap-8 p-6 sm:p-8 md:p-12 lg:flex-row w-full min-h-[600px] bg-gradient-to-br from-transparent to-[color-mix(in_srgb,var(--c-surface)_60%,transparent)]">
-        {/* Text Column */}
+        {/* Cột văn bản */}
         <div className="w-full lg:w-[58%] flex flex-col justify-center">
-          {/* Status + role eyebrow */}
+          {/* Trạng thái công việc + Eyebrow role */}
           <m.div
             variants={varFade({ durationIn: 0.4 }).inDown}
             className="flex flex-wrap items-center gap-3 mb-5"
@@ -53,9 +52,21 @@ const HomePage = () => {
             </span>
           </m.div>
 
+          {/* Tiêu đề chính hiển thị với hiệu ứng BlurText nghệ thuật */}
+          <h1 className="text-[var(--c-text)] text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-2">
+            <BlurText
+              text="Tran Ngoc Nhat"
+              delay={80}
+              animateBy="letters"
+              direction="bottom"
+              className="justify-start font-display"
+            />
+          </h1>
+
+          {/* Dòng chữ chạy giới thiệu vai trò */}
           <m.div
             variants={varFade({ durationIn: 0.5 }).inDown}
-            className="text-[var(--c-text)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold min-h-[100px] sm:min-h-[120px] lg:min-h-[140px] leading-tight"
+            className="text-[var(--c-primary)] text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold min-h-[50px] sm:min-h-[60px] leading-tight mb-4"
           >
             <Typewriter
               key={locale}
@@ -69,17 +80,21 @@ const HomePage = () => {
             />
           </m.div>
 
-          <m.p
-            variants={varFade({ durationIn: 0.7 }).inLeft}
-            className="py-6 text-[var(--c-text-muted)] text-base md:text-lg leading-8 max-w-2xl"
-          >
-            {t(heroOverview)}
-          </m.p>
+          {/* Đoạn giới thiệu tổng quan với hiệu ứng BlurText theo từng từ */}
+          <div className="py-2 text-[var(--c-text-muted)] text-base md:text-lg leading-8 max-w-2xl">
+            <BlurText
+              text={t(heroOverview)}
+              delay={25}
+              animateBy="words"
+              direction="top"
+              className="justify-start text-left text-[var(--c-text-muted)]"
+            />
+          </div>
 
-          {/* Tech badges */}
+          {/* Các Badge công nghệ */}
           <m.div
             variants={varFade({ durationIn: 0.7 }).inUp}
-            className="flex flex-wrap gap-2 mb-6"
+            className="flex flex-wrap gap-2 mb-6 mt-6"
           >
             {HERO_TECH.map((tech) => (
               <TechBadge key={tech} accent>
@@ -88,6 +103,7 @@ const HomePage = () => {
             ))}
           </m.div>
 
+          {/* Các nút hành động */}
           <m.div
             variants={varFade({ durationIn: 0.7 }).inUp}
             className="flex flex-wrap items-center gap-4"
@@ -108,12 +124,12 @@ const HomePage = () => {
           </m.div>
         </div>
 
-        {/* Image Column */}
+        {/* Cột hình ảnh */}
         <m.div
           className="w-[70%] sm:w-[50%] lg:w-[38%] max-w-[440px] relative"
           variants={varFade({ durationIn: 0.7 }).inRight}
         >
-          {/* Decorative glow behind image */}
+          {/* Vùng phát sáng trang trí phía sau hình ảnh */}
           <div className="absolute inset-0 bg-[var(--c-primary)] blur-[80px] opacity-20 rounded-full animate-pulse"></div>
 
           <Image
